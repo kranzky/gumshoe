@@ -10,7 +10,7 @@ jobs:
       COVERALLS_REPO_TOKEN: "${{secrets.COVERALLS_REPO_TOKEN}}"
       IPSTACK_ACCESS_KEY: "${{secrets.IPSTACK_ACCESS_KEY}}"
       USERSTACK_API_KEY: "${{secrets.USERSTACK_API_KEY}}"
-      DATABASE_URL: "postgres://postgres:postgres@localhost/lets_punk_test"
+      DATABASE_URL: "postgres://postgres:postgres@localhost/gumshoe_test"
 
     services:
       postgres:
