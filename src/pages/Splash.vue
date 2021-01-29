@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Punk! logo" src="~assets/punk_logo.png" />
+    <img alt="Gumshoe logo" src="~assets/punk_logo.png" />
   </q-page>
 </template>
 
@@ -8,7 +8,7 @@
 import { TitleMixin } from "../mixins/TitleMixin.js";
 export default {
   name: "Splash",
-  title: "Punk! is Loading...",
+  title: "Gumshoe is Loading...",
   mixins: [TitleMixin],
   created() {
     this.$q.loading.show();

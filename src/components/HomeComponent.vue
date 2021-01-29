@@ -1,5 +1,5 @@
 <template>
-  <h1>Let's Punk!</h1>
+  <h1>Gumshoe</h1>
 </template>
 
 <script>

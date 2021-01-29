@@ -79,7 +79,7 @@ module.exports = function(ctx) {
       open: true,
       proxy: {
         "/": {
-          target: "http://lets-punk.test",
+          target: "http://gumshoe.test",
           changeOrigin: true
         }
       }
@@ -97,9 +97,9 @@ module.exports = function(ctx) {
         clientsClaim: true
       },
       manifest: {
-        name: "Let's Punk!",
-        short_name: "Let's Punk!",
-        description: "An omakase web framework for rapid prototyping",
+        name: "Gumshoe",
+        short_name: "Gumshoe",
+        description: "Procedural noir detective world",
         icons: [
           {
             src: "icons/icon-128x128.png",

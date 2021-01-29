@@ -38,7 +38,7 @@ VCR.configure do |c|
   c.configure_rspec_metadata!
 end
 
-PUNK.init(task: 'spec', config: { app: { name: 'Punk Test' } }).exec
+PUNK.init(task: 'spec', config: { app: { name: 'Gumshow Test' } }).exec
 
 Sidekiq.logger = SemanticLogger['PUNK::SKQ']
 

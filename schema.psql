@@ -190,25 +190,6 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO jason;
 
 --
--- Name: widgets; Type: TABLE; Schema: public; Owner: jason
---
-
-CREATE TABLE public.widgets (
-    id uuid DEFAULT gen_random_uuid() NOT NULL,
-    tenant_id uuid NOT NULL,
-    user_id uuid NOT NULL,
-    state public.punk_state DEFAULT 'created'::public.punk_state NOT NULL,
-    name text NOT NULL,
-    icon text,
-    data jsonb DEFAULT '{}'::jsonb,
-    created_at timestamp with time zone,
-    updated_at timestamp with time zone
-);
-
-
-ALTER TABLE public.widgets OWNER TO jason;
-
---
 -- Name: groups groups_pkey; Type: CONSTRAINT; Schema: public; Owner: jason
 --
 
@@ -289,14 +270,6 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: widgets widgets_pkey; Type: CONSTRAINT; Schema: public; Owner: jason
---
-
-ALTER TABLE ONLY public.widgets
-    ADD CONSTRAINT widgets_pkey PRIMARY KEY (id);
-
-
---
 -- Name: groups_users_group_id_user_id_index; Type: INDEX; Schema: public; Owner: jason
 --
 
@@ -308,13 +281,6 @@ CREATE INDEX groups_users_group_id_user_id_index ON public.groups_users USING bt
 --
 
 CREATE INDEX tenants_users_tenant_id_user_id_index ON public.tenants_users USING btree (tenant_id, user_id);
-
-
---
--- Name: widgets_tenant_id_user_id_index; Type: INDEX; Schema: public; Owner: jason
---
-
-CREATE INDEX widgets_tenant_id_user_id_index ON public.widgets USING btree (tenant_id, user_id);
 
 
 --
@@ -371,22 +337,6 @@ ALTER TABLE ONLY public.tenants_users
 
 ALTER TABLE ONLY public.tenants_users
     ADD CONSTRAINT tenants_users_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
-
-
---
--- Name: widgets widgets_tenant_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: jason
---
-
-ALTER TABLE ONLY public.widgets
-    ADD CONSTRAINT widgets_tenant_id_fkey FOREIGN KEY (tenant_id) REFERENCES public.tenants(id);
-
-
---
--- Name: widgets widgets_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: jason
---
-
-ALTER TABLE ONLY public.widgets
-    ADD CONSTRAINT widgets_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --

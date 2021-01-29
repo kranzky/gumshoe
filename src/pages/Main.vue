@@ -11,7 +11,7 @@
 import { TitleMixin } from "../mixins/TitleMixin.js"
 export default {
   name: "Main",
-  title: "Let's Punk! v" + process.env.PACKAGE_VERSION,
+  title: "Gumshoe v" + process.env.PACKAGE_VERSION,
   mixins: [TitleMixin],
   data () {
     return {

@@ -12,7 +12,7 @@
 import { TitleMixin } from "../mixins/TitleMixin.js";
 export default {
   name: "Error404",
-  title: "Sad Punk :(",
+  title: "Clueless :(",
   mixins: [TitleMixin]
 };
 </script>
