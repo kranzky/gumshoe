@@ -1,3 +1,4 @@
 export default {
-  title: "Undefined"
-};
+  title: "Undefined",
+  tab: 'find'
+}

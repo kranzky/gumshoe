@@ -1,10 +1,10 @@
 <template>
-  <h1>Gumshoe</h1>
+  <h3>Talk</h3>
 </template>
 
 <script>
 export default {
-  name: "HomeComponent"
+  name: "TalkComponent"
 }
 </script>
 

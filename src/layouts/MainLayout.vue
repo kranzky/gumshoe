@@ -3,27 +3,33 @@
     <q-layout view="lHh Lpr lFf">
       <q-header elevated>
         <q-toolbar>
-          <q-toolbar-title>{{ pageTitle }}</q-toolbar-title>
+          <q-btn dense flat round icon="psychology" @click="left = !left" />
+          <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
+          <q-btn dense flat round icon="luggage" @click="right = !right" />
         </q-toolbar>
       </q-header>
       <q-page-container>
         <div class="row justify-center bg-accent">
-          <router-view class="col bg-grey-2 shadow-12" />
+          <router-view class="gumshoe-view col bg-grey-2 shadow-12" />
         </div>
       </q-page-container>
+      <q-footer elevated>
+        <q-tabs v-model="tab" align="center">
+          <q-tab name="find" icon="remove_red_eye" />
+          <q-tab name="talk" icon="forum" />
+          <q-tab name="read" icon="local_library" />
+        </q-tabs>
+      </q-footer>
     </q-layout>
   </div>
 </template>
 
 <script>
 import { LoggerMixin } from "../mixins/LoggerMixin.js"
+import { TabMixin } from "../mixins/TabMixin.js"
 export default {
   name: "MainLayout",
-  mixins: [LoggerMixin],
-  data() {
-    return {
-    }
-  },
+  mixins: [LoggerMixin, TabMixin],
   methods: {
   },
   created() {
@@ -42,5 +48,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.gumshoe-view {
+  width: 100%;
+  max-width: 720px;
+  min-width: 320px;
+}
 </style>
