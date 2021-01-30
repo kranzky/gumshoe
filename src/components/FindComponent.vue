@@ -22,7 +22,7 @@
       <q-page-sticky position="top-right" :offset="[18, 64]">
         <q-btn fab icon="explore" color="secondary" />
       </q-page-sticky>
-      <q-page-sticky position="bottom-left" :offset="[18, 18]">
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
         <q-btn fab icon="construction" color="secondary" />
       </q-page-sticky>
     </q-page>
