@@ -3,7 +3,9 @@
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
       <q-tab name="stuff" icon="cases" />
       <q-tab name="notes" icon="bookmarks" />
-      <q-tab name="cases" icon="task" />
+      <q-tab name="cases" icon="task">
+        <q-badge color="negative" floating>1</q-badge>
+      </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
       <q-tab-panel name="stuff" style="padding: 0;"><stuff /></q-tab-panel>

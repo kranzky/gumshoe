@@ -3,8 +3,9 @@
     <q-toolbar position="top" class="bg-accent text-white">
       <q-toolbar-title>Abilities</q-toolbar-title>
     </q-toolbar>
-    <q-list bordered separator>
+    <q-list bordered class="rounded-borders text-primary">
     </q-list>
+    <p class="text-body1 text-center">... nothing ...</p>
   </div>
 </template>
 

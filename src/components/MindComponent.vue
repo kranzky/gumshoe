@@ -3,7 +3,9 @@
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
       <q-tab name="settings" icon="settings" />
       <q-tab name="skills" icon="self_improvement" />
-      <q-tab name="people" icon="groups" />
+      <q-tab name="people" icon="groups">
+        <q-badge color="negative" floating>1</q-badge>
+      </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
       <q-tab-panel name="settings" style="padding: 0;"><settings /></q-tab-panel>
