@@ -16,7 +16,7 @@ end
 
 # Testing
 group :test do
-  gem 'capybara', '~> 3.35.1'
+  gem 'capybara', '~> 3.35.3'
   gem 'coveralls', '~> 0.8.23'
   gem 'factory_bot', '~> 6.1.0'
   gem 'faker', '~> 2.15.1'
