@@ -14,13 +14,11 @@
           </q-breadcrumbs>
         </q-toolbar>
       </q-page-sticky>
-      <q-scroll-area>
-        <h4>Somewhere</h4>
-        <p class="text-body1">Slowly arising from nothingness, you imagine yourself sprawled in a chair. But something is amiss. This place feels different, but is still enshrouded in blackness.</p>
-        <p class="text-body1">You need to pull yourself together.</p>
-        <p class="text-body1">Although you see nothing, hear nothing and smell nothing, you somehow know that those abilities are now available to you.</p>
-        <p class="text-body1">What will you do?</p>
-      </q-scroll-area>
+      <h4>Somewhere</h4>
+      <p class="text-body1">Slowly arising from nothingness, you imagine yourself sprawled in a chair. But something is amiss. This place feels different, but is still enshrouded in blackness.</p>
+      <p class="text-body1">You need to pull yourself together.</p>
+      <p class="text-body1">Although you see nothing, hear nothing and smell nothing, you somehow know that those abilities are now available to you.</p>
+      <p class="text-body1">What will you do?</p>
       <q-page-sticky position="top-right" :offset="[18, 64]">
         <q-btn fab icon="explore" color="secondary" />
       </q-page-sticky>
