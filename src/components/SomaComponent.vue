@@ -6,9 +6,9 @@
       <q-tab name="cases" icon="task" />
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
-      <q-tab-panel name="stuff"><stuff /></q-tab-panel>
-      <q-tab-panel name="notes"><notes /></q-tab-panel>
-      <q-tab-panel name="cases"><cases /></q-tab-panel>
+      <q-tab-panel name="stuff" style="padding: 0;"><stuff /></q-tab-panel>
+      <q-tab-panel name="notes" style="padding: 0;"><notes /></q-tab-panel>
+      <q-tab-panel name="cases" style="padding: 0;"><cases /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>

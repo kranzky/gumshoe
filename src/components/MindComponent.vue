@@ -6,9 +6,9 @@
       <q-tab name="people" icon="groups" />
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
-      <q-tab-panel name="settings"><settings /></q-tab-panel>
-      <q-tab-panel name="skills"><skills /></q-tab-panel>
-      <q-tab-panel name="people"><people /></q-tab-panel>
+      <q-tab-panel name="settings" style="padding: 0;"><settings /></q-tab-panel>
+      <q-tab-panel name="skills" style="padding: 0;"><skills /></q-tab-panel>
+      <q-tab-panel name="people" style="padding: 0;"><people /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>

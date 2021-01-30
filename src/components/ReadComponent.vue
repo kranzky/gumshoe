@@ -5,13 +5,14 @@
     </q-timeline-entry>
 
     <q-timeline-entry
-      title="Nothingness"
+      title="Somewhere?"
       subtitle="Sunday, 11:00 AM"
       side="left"
     >
       <div>
         I emerged somewhere from nothingness. I have no memory of what came
-        before. Something is wrong.
+        before, apart from a fleeting vision of utter chaos. Something is very
+        wrong.
       </div>
     </q-timeline-entry>
   </q-timeline>

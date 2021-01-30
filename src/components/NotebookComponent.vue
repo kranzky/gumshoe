@@ -1,5 +1,11 @@
 <template>
-  <h4>Notebook</h4>
+  <div>
+    <q-toolbar position="top" class="bg-accent text-white">
+      <q-toolbar-title>Notebook</q-toolbar-title>
+    </q-toolbar>
+    <q-list bordered separator>
+    </q-list>
+  </div>
 </template>
 
 <script>
