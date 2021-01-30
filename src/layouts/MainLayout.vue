@@ -9,8 +9,10 @@
         </q-toolbar>
       </q-header>
       <q-drawer show-if-above v-model="left" side="left" bordered>
+        <mind />
       </q-drawer>
       <q-drawer show-if-above v-model="right" side="right" bordered>
+        <soma />
       </q-drawer>
       <q-page-container>
         <div class="row justify-center bg-accent">
@@ -54,6 +56,10 @@ export default {
         return this.$store.state.page.title
       }
     }
+  },
+  components: {
+    'mind': () => import("components/MindComponent.vue"),
+    'soma': () => import("components/SomaComponent.vue")
   }
 }
 </script>

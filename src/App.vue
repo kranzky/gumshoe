@@ -8,6 +8,7 @@
 export default {
   name: "gumshoe",
   mounted() {
+    this.$q.dark.set(true)
   }
 };
 </script>

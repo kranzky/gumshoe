@@ -1,6 +1,5 @@
 <template>
-  <div class="q-pa-md row justify-center">
-    <div style="width: 100%; max-width: 400px">
+  <q-page>
       <q-chat-message
         label="Sunday, 11:00 AM"
       />
@@ -22,8 +21,10 @@
         :text="['where am i?']"
         stamp="2 minutes ago"
       />
-    </div>
-  </div>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-btn fab icon="chat" color="secondary" />
+    </q-page-sticky>
+  </q-page>
 </template>
 
 <script>

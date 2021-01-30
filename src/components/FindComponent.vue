@@ -14,8 +14,8 @@
           </q-breadcrumbs>
         </q-toolbar>
       </q-page-sticky>
-      <h4 class="text-weight-thin">Somewhere</h4>
-      <p class="text-body1">Slowly rising from nothingness, you imagine yourself sprawled in a chair. But something is amiss. This place feels different, but is still enshrouded in blackness.</p>
+      <h4>Somewhere</h4>
+      <p class="text-body1">Slowly arising from nothingness, you imagine yourself sprawled in a chair. But something is amiss. This place feels different, but is still enshrouded in blackness.</p>
       <p class="text-body1">You need to pull yourself together.</p>
       <p class="text-body1">Although you see nothing, hear nothing and smell nothing, you somehow know that those abilities are now available to you.</p>
       <p class="text-body1">What will you do?</p>
