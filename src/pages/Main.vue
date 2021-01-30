@@ -2,10 +2,10 @@
   <q-page>
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <splash v-if="showSplash" />
-      <q-tab-panels v-model="tab" animated v-else>
+      <q-tab-panels v-model="tab" animated v-else style="height: 100%;">
+        <q-tab-panel name="read"><read /></q-tab-panel>
         <q-tab-panel name="find"><find /></q-tab-panel>
         <q-tab-panel name="talk"><talk /></q-tab-panel>
-        <q-tab-panel name="read"><read /></q-tab-panel>
       </q-tab-panels>
     </transition>
   </q-page>
