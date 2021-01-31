@@ -1,16 +1,26 @@
 <template>
   <div>
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
-      <q-tab name="stuff" icon="cases" />
-      <q-tab name="notes" icon="bookmarks" />
-      <q-tab name="cases" icon="task">
-        <q-badge color="negative" floating>1</q-badge>
+      <q-tab name="inventory" icon="cases">
+        <q-badge color="negative" floating v-if="badge.inventory > 0">
+          {{ badge.inventory }}
+        </q-badge>
+      </q-tab>
+      <q-tab name="notebook" icon="bookmarks">
+        <q-badge color="negative" floating v-if="badge.notebook > 0">
+          {{ badge.notebook }}
+        </q-badge>
+      </q-tab>
+      <q-tab name="quests" icon="task">
+        <q-badge color="negative" floating v-if="badge.quests > 0">
+          {{ badge.quests }}
+        </q-badge>
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
-      <q-tab-panel name="stuff" style="padding: 0;"><stuff /></q-tab-panel>
-      <q-tab-panel name="notes" style="padding: 0;"><notes /></q-tab-panel>
-      <q-tab-panel name="cases" style="padding: 0;"><cases /></q-tab-panel>
+      <q-tab-panel name="inventory" style="padding: 0;"><inventory /></q-tab-panel>
+      <q-tab-panel name="notebook" style="padding: 0;"><notebook /></q-tab-panel>
+      <q-tab-panel name="quests" style="padding: 0;"><quests /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -20,13 +30,24 @@ export default {
   name: "SomaComponent",
   data () {
     return {
-      tab: 'stuff'
+      tab: 'inventory'
+    }
+  },
+  computed: {
+    badge: {
+      get () {
+        return {
+          inventory: 0,
+          notebook: 0,
+          quests: this.$store.getters['quests/badgeCount']
+        }
+      }
     }
   },
   components: {
-    "stuff": () => import("components/InventoryComponent.vue"),
-    "notes": () => import("components/NotebookComponent.vue"),
-    "cases": () => import("components/QuestsComponent.vue")
+    "inventory": () => import("components/InventoryComponent.vue"),
+    "notebook": () => import("components/NotebookComponent.vue"),
+    "quests": () => import("components/QuestsComponent.vue")
   }
 }
 </script>

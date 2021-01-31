@@ -1,7 +1,3 @@
 export const badgeCount = state => {
-  return state.items.length
-}
-
-export const showBadge = state => {
-  return state.items.length == 0
+  return _.filter(state.items, (item) => { return !item.seen }).length
 }

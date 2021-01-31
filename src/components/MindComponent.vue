@@ -2,13 +2,19 @@
   <div>
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
       <q-tab name="settings" icon="settings">
-        <q-badge color="negative" floating>{{ this.$store.state.settings.badge }}</q-badge>
+        <q-badge color="negative" floating v-if="badge.settings > 0">
+          {{ badge.settings }}
+        </q-badge>
       </q-tab>
       <q-tab name="skills" icon="self_improvement">
-        <q-badge color="negative" floating>{{ this.$store.state.skills.badge }}</q-badge>
+        <q-badge color="negative" floating v-if="badge.skills > 0">
+          {{ badge.skills }}
+        </q-badge>
       </q-tab>
       <q-tab name="people" icon="groups">
-        <q-badge color="negative" floating v-if="this.$store.getters['people/showBadge']">{{ this.$store.getters['people/badgeCount'] }}</q-badge>
+        <q-badge color="negative" floating v-if="badge.people > 0">
+          {{ badge.people }}
+        </q-badge>
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
@@ -25,6 +31,17 @@ export default {
   data () {
     return {
       tab: 'people'
+    }
+  },
+  computed: {
+    badge: {
+      get () {
+        return {
+          settings: 0,
+          skills: 0,
+          people: this.$store.getters['people/badgeCount']
+        }
+      }
     }
   },
   components: {
