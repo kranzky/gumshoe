@@ -7,7 +7,7 @@
         <p class="text-body1">You need to pull yourself together.</p>
         <p class="text-body1">Although you <i>feel</i> nothing, <i>hear</i> nothing and <i>smell</i> nothing, you somehow know that those abilities are now available to you.</p>
       </div>
-      <q-btn color="secondary" icon="construction" label="What Now?">
+      <q-btn color="secondary" icon="navigate_next" label="What now?">
         <q-menu content-class="bg-primary">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup>
