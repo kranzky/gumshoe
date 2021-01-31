@@ -17,10 +17,10 @@
         </q-badge>
       </q-tab>
     </q-tabs>
-    <q-tab-panels v-model="tab" style="height: 100%;">
+    <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-left" transition-next="slide-right" style="height: 100%;">
       <q-tab-panel name="exits" style="padding: 0;"><exits /></q-tab-panel>
-      <q-tab-panel name="objects" style="padding: 0;"><objects /></q-tab-panel>
       <q-tab-panel name="people" style="padding: 0;"><people /></q-tab-panel>
+      <q-tab-panel name="objects" style="padding: 0;"><objects /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -30,7 +30,7 @@ export default {
   name: "MindComponent",
   data () {
     return {
-      tab: 'people'
+      tab: 'objects'
     }
   },
   computed: {
