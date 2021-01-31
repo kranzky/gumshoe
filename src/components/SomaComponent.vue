@@ -17,7 +17,7 @@
         </q-badge>
       </q-tab>
     </q-tabs>
-    <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-left" transition-next="slide-right" style="height: 100%;">
+    <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
       <q-tab-panel name="inventory" style="padding: 0;"><inventory /></q-tab-panel>
       <q-tab-panel name="notebook" style="padding: 0;"><notebook /></q-tab-panel>
       <q-tab-panel name="quests" style="padding: 0;"><quests /></q-tab-panel>
