@@ -6,7 +6,7 @@
           {{ badge.inventory }}
         </q-badge>
       </q-tab>
-      <q-tab name="notebook" icon="bookmarks">
+      <q-tab name="notebook" icon="bookmark">
         <q-badge color="negative" floating transparent v-if="badge.notebook > 0">
           {{ badge.notebook }}
         </q-badge>

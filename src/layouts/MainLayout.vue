@@ -3,13 +3,13 @@
     <q-layout view="lHr LpR fFf">
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat round icon="psychology" @click="left = !left">
+          <q-btn dense flat round icon="home" @click="left = !left">
             <q-badge color="negative" floating transparent v-if="badge.mind > 0 && !left">
               {{ badge.mind }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
-          <q-btn dense flat round icon="luggage" @click="right = !right">
+          <q-btn dense flat round icon="person" @click="right = !right">
             <q-badge color="negative" floating transparent v-if="badge.soma > 0 && !right">
               {{ badge.soma }}
             </q-badge>

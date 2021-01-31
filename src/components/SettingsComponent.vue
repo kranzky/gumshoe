@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-toolbar position="top" class="bg-accent text-white">
-      <q-toolbar-title>Properties</q-toolbar-title>
+      <q-toolbar-title>Map</q-toolbar-title>
     </q-toolbar>
     <q-list bordered class="rounded-borders text-primary">
     </q-list>
