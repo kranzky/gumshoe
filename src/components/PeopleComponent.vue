@@ -3,20 +3,33 @@
     <q-toolbar position="top" class="bg-accent text-white">
       <q-toolbar-title>Characters</q-toolbar-title>
     </q-toolbar>
-    <q-list bordered class="rounded-borders text-primary">
-      <q-item clickable v-ripple>
+    <q-list bordered separator v-if="this.$store.getters['people/hasItems']" class="rounded-borders text-primary">
+      <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item)">
         <q-item-section avatar>
-          <q-icon name="person" />
+          <q-icon :name="item.icon" />
         </q-item-section>
-        <q-item-section>Limbic System</q-item-section>
+        <q-item-section>{{ item.name }}</q-item-section>
       </q-item>
     </q-list>
+    <p v-else class="text-body1 text-center">... nothing ...</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: "PeopleComponent"
+  name: "PeopleComponent",
+  computed: {
+    items: {
+      get () {
+        return this.$store.state.people.items
+      }
+    }
+  },
+  methods: {
+    show (item) {
+      this.$store.dispatch('people/seen', item.id)
+    }
+  }
 }
 </script>
 

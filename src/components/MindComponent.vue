@@ -1,10 +1,14 @@
 <template>
   <div>
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
-      <q-tab name="settings" icon="settings" />
-      <q-tab name="skills" icon="self_improvement" />
+      <q-tab name="settings" icon="settings">
+        <q-badge color="negative" floating>{{ this.$store.state.settings.badge }}</q-badge>
+      </q-tab>
+      <q-tab name="skills" icon="self_improvement">
+        <q-badge color="negative" floating>{{ this.$store.state.skills.badge }}</q-badge>
+      </q-tab>
       <q-tab name="people" icon="groups">
-        <q-badge color="negative" floating>1</q-badge>
+        <q-badge color="negative" floating v-if="this.$store.getters['people/showBadge']">{{ this.$store.getters['people/badgeCount'] }}</q-badge>
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" style="height: 100%;">
