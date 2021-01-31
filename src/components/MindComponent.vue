@@ -2,17 +2,17 @@
   <div>
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
       <q-tab name="settings" icon="settings">
-        <q-badge color="negative" floating v-if="badge.settings > 0">
+        <q-badge color="negative" floating transparent v-if="badge.settings > 0">
           {{ badge.settings }}
         </q-badge>
       </q-tab>
       <q-tab name="skills" icon="self_improvement">
-        <q-badge color="negative" floating v-if="badge.skills > 0">
+        <q-badge color="negative" floating transparent v-if="badge.skills > 0">
           {{ badge.skills }}
         </q-badge>
       </q-tab>
       <q-tab name="people" icon="groups">
-        <q-badge color="negative" floating v-if="badge.people > 0">
+        <q-badge color="negative" floating transparent v-if="badge.people > 0">
           {{ badge.people }}
         </q-badge>
       </q-tab>

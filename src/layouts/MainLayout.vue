@@ -3,15 +3,23 @@
     <q-layout view="lHr LpR fFf">
       <q-header elevated>
         <q-toolbar>
-          <q-btn flat round icon="psychology" @click="left = !left" />
+          <q-btn dense flat round icon="psychology" @click="left = !left">
+            <q-badge color="negative" floating transparent v-if="badge.mind > 0 && !left">
+              {{ badge.mind }}
+            </q-badge>
+          </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
-          <q-btn flat round icon="luggage" @click="right = !right" />
+          <q-btn dense flat round icon="luggage" @click="right = !right">
+            <q-badge color="negative" floating transparent v-if="badge.soma > 0 && !right">
+              {{ badge.soma }}
+            </q-badge>
+          </q-btn>
         </q-toolbar>
       </q-header>
-      <q-drawer show-if-above v-model="left" side="left" bordered>
+      <q-drawer :show-if-above="false" v-model="left" side="left" bordered>
         <mind />
       </q-drawer>
-      <q-drawer show-if-above v-model="right" side="right" bordered>
+      <q-drawer :show-if-above="false" v-model="right" side="right" bordered>
         <soma />
       </q-drawer>
       <q-page-container>
@@ -42,8 +50,6 @@ export default {
       right: false
     }
   },
-  methods: {
-  },
   created() {
     this.registerPunk()
   },
@@ -54,6 +60,14 @@ export default {
     pageTitle: {
       get() {
         return this.$store.state.page.title
+      }
+    },
+    badge: {
+      get() {
+        return {
+          mind: this.$store.getters['people/badgeCount'],
+          soma: this.$store.getters['quests/badgeCount']
+        }
       }
     }
   },
