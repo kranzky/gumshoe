@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "SettingsComponent"
+  name: "ExitsComponent"
 }
 </script>
 

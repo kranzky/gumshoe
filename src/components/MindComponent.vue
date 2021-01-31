@@ -45,8 +45,8 @@ export default {
     }
   },
   components: {
-    "exits": () => import("components/SettingsComponent.vue"),
-    "objects": () => import("components/SkillsComponent.vue"),
+    "exits": () => import("components/ExitsComponent.vue"),
+    "objects": () => import("components/ObjectsComponent.vue"),
     "people": () => import("components/PeopleComponent.vue")
   }
 }

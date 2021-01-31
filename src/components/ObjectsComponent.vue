@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: "SkillsComponent"
+  name: "ObjectsComponent"
 }
 </script>
 
