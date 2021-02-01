@@ -6,21 +6,21 @@
           {{ badge.inventory }}
         </q-badge>
       </q-tab>
-      <q-tab name="notebook" icon="cloud">
+      <q-tab name="notebook" icon="description">
         <q-badge color="negative" floating transparent v-if="badge.notebook > 0">
           {{ badge.notebook }}
         </q-badge>
       </q-tab>
-      <q-tab name="quests" icon="lightbulb">
+      <q-tab name="quests" icon="fmd_bad">
         <q-badge color="negative" floating transparent v-if="badge.quests > 0">
           {{ badge.quests }}
         </q-badge>
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="inventory" style="padding: 0;"><drawer title="Possessions" module="quests" /></q-tab-panel>
-      <q-tab-panel name="notebook" style="padding: 0;"><drawer title="Thoughts" module="quests" /></q-tab-panel>
-      <q-tab-panel name="quests" style="padding: 0;"><drawer title="Ideas" module="quests" /></q-tab-panel>
+      <q-tab-panel name="inventory" style="padding: 0;"><drawer title="Inventory" module="quests" /></q-tab-panel>
+      <q-tab-panel name="notebook" style="padding: 0;"><drawer title="Notebook" module="quests" /></q-tab-panel>
+      <q-tab-panel name="quests" style="padding: 0;"><drawer title="Quests" module="quests" /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>

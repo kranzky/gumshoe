@@ -18,9 +18,9 @@
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="exits" style="padding: 0;"><drawer title="Scenes" module="people" /></q-tab-panel>
-      <q-tab-panel name="people" style="padding: 0;"><drawer title="Cast" module="people" /></q-tab-panel>
-      <q-tab-panel name="objects" style="padding: 0;"><drawer title="Props" module="people" /></q-tab-panel>
+      <q-tab-panel name="exits" style="padding: 0;"><drawer title="Locations" module="people" /></q-tab-panel>
+      <q-tab-panel name="people" style="padding: 0;"><drawer title="People" module="people" /></q-tab-panel>
+      <q-tab-panel name="objects" style="padding: 0;"><drawer title="Objects" module="people" /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
