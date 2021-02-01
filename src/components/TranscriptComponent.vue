@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: "ReadComponent",
+  name: "TranscriptComponent",
   computed: {
     layout () {
       return this.$q.screen.lt.sm ? 'dense' : (this.$q.screen.lt.md ? 'comfortable' : 'loose')

@@ -3,9 +3,9 @@
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <splash v-if="showSplash" />
       <q-tab-panels animated swipeable transition-prev="slide-right" transition-next="slide-left" v-model="tab" v-else style="top: 50px; margin-bottom: 50px; height: calc(100% - 2px);">
-        <q-tab-panel name="read"><read /></q-tab-panel>
-        <q-tab-panel name="find"><find /></q-tab-panel>
-        <q-tab-panel name="talk"><talk /></q-tab-panel>
+        <q-tab-panel name="transcript"><transcript /></q-tab-panel>
+        <q-tab-panel name="viewport"><viewport /></q-tab-panel>
+        <q-tab-panel name="dialogue"><dialogue /></q-tab-panel>
       </q-tab-panels>
     </transition>
     <q-page-sticky position="top" class="bg-accent text-white">
@@ -39,9 +39,9 @@ export default {
   },
   components: {
     "splash": () => import("components/SplashComponent.vue"),
-    "find": () => import("components/FindComponent.vue"),
-    "talk": () => import("components/TalkComponent.vue"),
-    "read": () => import("components/ReadComponent.vue")
+    "transcript": () => import("components/TranscriptComponent.vue"),
+    "viewport": () => import("components/ViewportComponent.vue"),
+    "dialogue": () => import("components/DialogueComponent.vue")
   }
 }
 </script>

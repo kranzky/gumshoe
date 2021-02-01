@@ -33,14 +33,14 @@ export default {
     this.$store.dispatch("quests/clear")
     this.$store.dispatch("quests/items", { id: 1, name: 'Wake Up!', icon: 'task', seen: false })
 
-//  this.$store.dispatch("book/clear")
+//  this.$store.dispatch("transcript/clear")
 
-//  this.$store.dispatch("game/clear")
-//  this.$store.dispatch("game/object", { id: 1, name: "Nothingness." })
-//  this.$store.dispatch("game/text", { body: "A lingering memory of chaos intrudes upon the void." })
-//  this.$store.dispatch("game/choice", { id: 1, name: "What is there to do but wait?" })
+//  this.$store.dispatch("viewport/clear")
+//  this.$store.dispatch("viewport/object", { id: 1, name: "Nothingness." })
+//  this.$store.dispatch("viewport/text", { body: "A lingering memory of chaos intrudes upon the void." })
+//  this.$store.dispatch("viewport/choice", { id: 1, name: "What is there to do but wait?" })
 
-//  this.$store.dispatch("chat/clear")
+//  this.$store.dispatch("dialogue/clear")
   }
 };
 </script>

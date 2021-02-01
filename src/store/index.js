@@ -4,8 +4,6 @@ import Vuex from "vuex";
 import page from "./page";
 import people from "./people";
 import quests from "./quests";
-import settings from "./settings";
-import skills from "./skills";
 
 Vue.use(Vuex);
 
@@ -13,10 +11,15 @@ export default function() {
   const Store = new Vuex.Store({
     modules: {
       page,
+//    places,
       people,
+//    objects,
+//    inventory,
+//    notebook,
       quests,
-      settings,
-      skills
+//    transcript,
+//    viewport,
+//    dialogue
     },
     strict: process.env.DEV
   });

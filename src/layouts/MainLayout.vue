@@ -29,9 +29,9 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="read" icon="local_library" />
-          <q-tab name="find" icon="remove_red_eye" />
-          <q-tab name="talk" icon="forum" />
+          <q-tab name="transcript" icon="local_library" />
+          <q-tab name="viewport" icon="remove_red_eye" />
+          <q-tab name="dialogue" icon="forum" />
         </q-tabs>
       </q-footer>
     </q-layout>
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     hide () {
-      if (this.$q.screen.width < 1024) {
+      if (this.$q.screen.lt.md) {
         this.left = false
         this.right = false
       }
