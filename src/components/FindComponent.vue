@@ -1,35 +1,24 @@
 <template>
   <div>
-    <q-page>
-      <div>
-        <h4>Somewhere?</h4>
-        <p class="text-body1">Slowly arising from nothingness, you imagine yourself sprawled in a chair. But something is amiss. This place feels different, but is still enshrouded in blackness.</p>
-        <p class="text-body1">You need to pull yourself together.</p>
-        <p class="text-body1">Although you <i>feel</i> nothing, <i>hear</i> nothing and <i>smell</i> nothing, you somehow know that those abilities are now available to you.</p>
-      </div>
-      <q-btn color="secondary" icon="navigate_next" label="What now?">
-        <q-menu content-class="bg-primary">
-          <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup>
-              <q-item-section>Focus on your feelings</q-item-section>
-            </q-item>
-            <q-item clickable v-close-popup>
-              <q-item-section>Listen intently to the world around you</q-item-section>
-            </q-item>
-            <q-item clickable v-close-popup>
-              <q-item-section>Inhale deeply through your nostrils</q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-      </q-btn>
-      <q-page-sticky position="top" class="bg-accent text-white">
-        <q-toolbar>
-          <q-chip icon="today" color="primary">SUN 11:00</q-chip>
-          <q-chip icon="person" color="primary">Yourself</q-chip>
-          <q-chip icon="star" color="primary">0 / 100</q-chip>
-        </q-toolbar>
-      </q-page-sticky>
-    </q-page>
+    <h4>Somewhere?</h4>
+    <p class="text-body1">Slowly arising from nothingness, you imagine yourself sprawled in a chair. But something is amiss. This place feels different, but is still enshrouded in blackness.</p>
+    <p class="text-body1">You need to pull yourself together.</p>
+    <p class="text-body1">Although you <i>feel</i> nothing, <i>hear</i> nothing and <i>smell</i> nothing, you somehow know that those abilities are now available to you.</p>
+    <q-btn color="secondary" icon="navigate_next" label="What now?">
+      <q-menu content-class="bg-primary">
+        <q-list style="min-width: 100px">
+          <q-item clickable v-close-popup>
+            <q-item-section>Focus on your feelings</q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup>
+            <q-item-section>Listen intently to the world around you</q-item-section>
+          </q-item>
+          <q-item clickable v-close-popup>
+            <q-item-section>Inhale deeply through your nostrils</q-item-section>
+          </q-item>
+        </q-list>
+      </q-menu>
+    </q-btn>
   </div>
 </template>
 

@@ -2,12 +2,21 @@
   <q-page>
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <splash v-if="showSplash" />
-      <q-tab-panels v-model="tab" v-else style="height: 100%;">
+      <q-tab-panels animated swipeable transition-prev="slide-right"
+      transition-next="slide-left" v-model="tab" v-else style="top: 50px;
+      margin-bottom: 50px; height: calc(100% - 2px);">
         <q-tab-panel name="read"><read /></q-tab-panel>
         <q-tab-panel name="find"><find /></q-tab-panel>
         <q-tab-panel name="talk"><talk /></q-tab-panel>
       </q-tab-panels>
     </transition>
+    <q-page-sticky position="top" class="bg-accent text-white">
+      <q-toolbar>
+        <q-chip icon="today" color="primary">SUN 11:00</q-chip>
+        <q-chip icon="person" color="primary">Yourself</q-chip>
+        <q-chip icon="star" color="primary">0 / 100</q-chip>
+      </q-toolbar>
+    </q-page-sticky>
   </q-page>
 </template>
 
