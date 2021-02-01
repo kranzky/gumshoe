@@ -1,6 +1,6 @@
 <template>
-  <div style="height: calc(100% - 48px);">
-    <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
+  <div style="height: calc(100% - 50px);">
+    <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" style="height: 50px;">
       <q-tab name="inventory" icon="work">
         <q-badge color="negative" floating transparent v-if="badge.inventory > 0">
           {{ badge.inventory }}

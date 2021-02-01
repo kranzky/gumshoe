@@ -17,10 +17,10 @@
           </q-btn>
         </q-toolbar>
       </q-header>
-      <q-drawer :show-if-above="false" v-model="left" side="left" bordered>
+      <q-drawer show-if-above no-swipe-open no-swipe-close v-model="left" side="left" elevated>
         <world />
       </q-drawer>
-      <q-drawer :show-if-above="false" v-model="right" side="right" bordered>
+      <q-drawer show-if-above no-swipe-open no-swipe-close v-model="right" side="right" elevated>
         <player />
       </q-drawer>
       <q-page-container>
