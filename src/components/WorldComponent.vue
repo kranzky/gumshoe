@@ -1,9 +1,9 @@
 <template>
   <div style="height: calc(100% - 48px);">
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
-      <q-tab name="exits" icon="map">
-        <q-badge color="negative" floating transparent v-if="badge.exits > 0">
-          {{ badge.exits }}
+      <q-tab name="places" icon="map">
+        <q-badge color="negative" floating transparent v-if="badge.places > 0">
+          {{ badge.places }}
         </q-badge>
       </q-tab>
       <q-tab name="people" icon="groups">
@@ -18,9 +18,9 @@
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="exits" style="padding: 0;"><drawer title="Locations" module="people" /></q-tab-panel>
+      <q-tab-panel name="places" style="padding: 0;"><drawer title="Locations" module="places" /></q-tab-panel>
       <q-tab-panel name="people" style="padding: 0;"><drawer title="People" module="people" /></q-tab-panel>
-      <q-tab-panel name="objects" style="padding: 0;"><drawer title="Objects" module="people" /></q-tab-panel>
+      <q-tab-panel name="objects" style="padding: 0;"><drawer title="Objects" module="objects" /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -37,9 +37,9 @@ export default {
     badge: {
       get () {
         return {
-          exits: this.$store.getters['people/badgeCount'],
-          objects: this.$store.getters['people/badgeCount'],
-          people: this.$store.getters['people/badgeCount']
+          places: this.$store.getters['places/badgeCount'],
+          people: this.$store.getters['people/badgeCount'],
+          objects: this.$store.getters['objects/badgeCount']
         }
       }
     }

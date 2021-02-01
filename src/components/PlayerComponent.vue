@@ -18,8 +18,8 @@
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="inventory" style="padding: 0;"><drawer title="Inventory" module="quests" /></q-tab-panel>
-      <q-tab-panel name="notebook" style="padding: 0;"><drawer title="Notebook" module="quests" /></q-tab-panel>
+      <q-tab-panel name="inventory" style="padding: 0;"><drawer title="Inventory" module="inventory" /></q-tab-panel>
+      <q-tab-panel name="notebook" style="padding: 0;"><drawer title="Notebook" module="notebook" /></q-tab-panel>
       <q-tab-panel name="quests" style="padding: 0;"><drawer title="Quests" module="quests" /></q-tab-panel>
     </q-tab-panels>
   </div>
@@ -37,8 +37,8 @@ export default {
     badge: {
       get () {
         return {
-          inventory: this.$store.getters['quests/badgeCount'],
-          notebook: this.$store.getters['quests/badgeCount'],
+          inventory: this.$store.getters['inventory/badgeCount'],
+          notebook: this.$store.getters['notebook/badgeCount'],
           quests: this.$store.getters['quests/badgeCount']
         }
       }

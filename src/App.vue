@@ -10,25 +10,27 @@ export default {
   mounted() {
     this.$q.dark.set(true)
 
-//  this.$store.dispatch("places/clear")
-//  this.$store.dispatch("places/items", { id: 1, name: 'Chaos', icon: 'place' })
-//  this.$store.dispatch("places/items", { id: 2, name: 'Nothingness.', icon: 'place' })
-//  this.$store.dispatch("places/items", { id: 3, name: 'Somewhere?', icon: 'place' })
+    this.$store.dispatch("places/clear")
+    this.$store.dispatch("places/items", { id: 1, name: 'Chaos', icon: 'place', seen: false })
+    this.$store.dispatch("places/items", { id: 2, name: 'Nothingness.', icon: 'place', seen: false })
+    this.$store.dispatch("places/items", { id: 3, name: 'Somewhere?', icon: 'place', seen: false })
 
     this.$store.dispatch("people/clear")
-    this.$store.dispatch("people/items", { id: 1, name: 'Limbic System 1', icon: 'face', seen: false })
+    this.$store.dispatch("people/items", { id: 1, name: 'Limbic System', icon: 'face', seen: false })
 
-//  this.$store.dispatch("objects/clear")
-//  this.$store.dispatch("objects/items", { id: 1, name: 'Desk', icon: 'label' })
-//  this.$store.dispatch("objects/items", { id: 2, name: 'Chair', icon: 'label' })
+    this.$store.dispatch("objects/clear")
+    this.$store.dispatch("objects/items", { id: 1, name: 'Desk', icon: 'label', seen: false })
+    this.$store.dispatch("objects/items", { id: 2, name: 'Chair', icon: 'label', seen: false })
+    this.$store.dispatch("objects/items", { id: 3, name: 'Door', icon: 'label', seen: false })
+    this.$store.dispatch("objects/items", { id: 4, name: 'Window', icon: 'label', seen: false })
 
-//  this.$store.dispatch("inventory/clear")
-//  this.$store.dispatch("inventory/items", { id: 1, name: 'Gun', icon: 'label' })
+    this.$store.dispatch("inventory/clear")
+    this.$store.dispatch("inventory/items", { id: 1, name: 'Gun', icon: 'label', seen: false })
 
-//  this.$store.dispatch("notebook/clear")
-//  this.$store.dispatch("notebook/items", { id: 1, name: 'Hat', icon: 'label' })
-//  this.$store.dispatch("notebook/items", { id: 2, name: 'Office', icon: 'place' })
-//  this.$store.dispatch("notebook/items", { id: 3, name: 'Gloria', icon: 'face' })
+    this.$store.dispatch("notebook/clear")
+    this.$store.dispatch("notebook/items", { id: 1, name: 'Hat', icon: 'label', seen: false })
+    this.$store.dispatch("notebook/items", { id: 2, name: 'Office', icon: 'place', seen: false })
+    this.$store.dispatch("notebook/items", { id: 3, name: 'Gloria', icon: 'face', seen: false })
 
     this.$store.dispatch("quests/clear")
     this.$store.dispatch("quests/items", { id: 1, name: 'Wake Up!', icon: 'task', seen: false })

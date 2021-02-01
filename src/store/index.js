@@ -1,28 +1,27 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from "vue"
+import Vuex from "vuex"
 
-import page from "./page";
-import people from "./people";
-import quests from "./quests";
+import page from "./page"
+import list from "./list"
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default function() {
   const Store = new Vuex.Store({
     modules: {
       page,
-//    places,
-      people,
-//    objects,
-//    inventory,
-//    notebook,
-      quests,
+      places: list('places'),
+      people: list('people'),
+      objects: list('objects'),
+      inventory: list('inventory'),
+      notebook: list('notebook'),
+      quests: list('quests'),
 //    transcript,
 //    viewport,
 //    dialogue
     },
     strict: process.env.DEV
-  });
+  })
 
-  return Store;
+  return Store
 }

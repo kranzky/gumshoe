@@ -77,8 +77,8 @@ export default {
     badge: {
       get() {
         return {
-          world: this.$store.getters['people/badgeCount'],
-          player: this.$store.getters['quests/badgeCount']
+          world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
+          player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount']
         }
       }
     }
