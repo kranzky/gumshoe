@@ -27,6 +27,7 @@ export default {
   },
   methods: {
     show (item) {
+      this.$root.$emit("item:clicked")
       this.$store.dispatch('quests/seen', item.id)
     }
   }

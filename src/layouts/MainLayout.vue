@@ -50,10 +50,22 @@ export default {
       right: false
     }
   },
-  created() {
+  methods: {
+    hide () {
+      if (this.$q.screen.width < 1024) {
+        this.left = false
+        this.right = false
+      }
+    }
+  },
+  created () {
     this.registerPunk()
   },
-  beforeDestroy() {
+  mounted () {
+    this.$root.$on("item:clicked", this.hide);
+  },
+  beforeDestroy () {
+    this.$root.$off("item:clicked", this.hide);
     this.deregisterPunk()
   },
   computed: {
