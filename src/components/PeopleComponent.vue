@@ -7,7 +7,7 @@
       <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item)">
         <q-item-section avatar>
           <q-icon :name="item.icon">
-            <q-badge color="negative" class="absolute-bottom-right" style="border-radius: 4px; width: 8px; height: 8px; padding: 0;" v-if="!item.seen" />
+            <q-badge color="negative" floating style="border-radius: 4px; width: 8px; height: 8px; padding: 0;" v-if="!item.seen" />
           </q-icon>
         </q-item-section>
         <q-item-section>{{ item.name }}</q-item-section>
