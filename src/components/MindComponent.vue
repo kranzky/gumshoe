@@ -18,9 +18,9 @@
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="exits" style="padding: 0;"><exits /></q-tab-panel>
-      <q-tab-panel name="people" style="padding: 0;"><people /></q-tab-panel>
-      <q-tab-panel name="objects" style="padding: 0;"><objects /></q-tab-panel>
+      <q-tab-panel name="exits" style="padding: 0;"><drawer title="Scenes" module="people" /></q-tab-panel>
+      <q-tab-panel name="people" style="padding: 0;"><drawer title="Cast" module="people" /></q-tab-panel>
+      <q-tab-panel name="objects" style="padding: 0;"><drawer title="Props" module="people" /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -37,17 +37,15 @@ export default {
     badge: {
       get () {
         return {
-          exits: 0,
-          objects: 0,
+          exits: this.$store.getters['people/badgeCount'],
+          objects: this.$store.getters['people/badgeCount'],
           people: this.$store.getters['people/badgeCount']
         }
       }
     }
   },
   components: {
-    "exits": () => import("components/ExitsComponent.vue"),
-    "objects": () => import("components/ObjectsComponent.vue"),
-    "people": () => import("components/PeopleComponent.vue")
+    "drawer": () => import("components/DrawerComponent.vue")
   }
 }
 </script>

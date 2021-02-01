@@ -18,9 +18,9 @@
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="inventory" style="padding: 0;"><inventory /></q-tab-panel>
-      <q-tab-panel name="notebook" style="padding: 0;"><notebook /></q-tab-panel>
-      <q-tab-panel name="quests" style="padding: 0;"><quests /></q-tab-panel>
+      <q-tab-panel name="inventory" style="padding: 0;"><drawer title="Possessions" module="quests" /></q-tab-panel>
+      <q-tab-panel name="notebook" style="padding: 0;"><drawer title="Thoughts" module="quests" /></q-tab-panel>
+      <q-tab-panel name="quests" style="padding: 0;"><drawer title="Ideas" module="quests" /></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
@@ -37,17 +37,15 @@ export default {
     badge: {
       get () {
         return {
-          inventory: 0,
-          notebook: 0,
+          inventory: this.$store.getters['quests/badgeCount'],
+          notebook: this.$store.getters['quests/badgeCount'],
           quests: this.$store.getters['quests/badgeCount']
         }
       }
     }
   },
   components: {
-    "inventory": () => import("components/InventoryComponent.vue"),
-    "notebook": () => import("components/NotebookComponent.vue"),
-    "quests": () => import("components/QuestsComponent.vue")
+    "drawer": () => import("components/DrawerComponent.vue")
   }
 }
 </script>
