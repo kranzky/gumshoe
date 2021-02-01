@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-toolbar position="top" class="bg-accent text-white">
-      <q-toolbar-title>NPCs</q-toolbar-title>
+      <q-toolbar-title>Others</q-toolbar-title>
     </q-toolbar>
     <q-list bordered separator v-if="items.length > 0" class="rounded-borders text-primary">
       <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item)">
@@ -11,7 +11,7 @@
         <q-item-section>{{ item.name }}</q-item-section>
       </q-item>
     </q-list>
-    <p v-else class="text-body1 text-center">... nothing ...</p>
+    <p v-else class="text-body1 text-center" style="padding-top: 10px;">...  emptiness ...</p>
   </div>
 </template>
 

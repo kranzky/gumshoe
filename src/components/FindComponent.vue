@@ -24,15 +24,9 @@
       </q-btn>
       <q-page-sticky position="top" class="bg-accent text-white">
         <q-toolbar>
-          <q-breadcrumbs>
-            <template v-slot:separator>
-              <q-icon size="1.2em" name="arrow_forward" />
-            </template>
-            <q-breadcrumbs-el label="..." />
-            <q-breadcrumbs-el label="Chaos" />
-            <q-breadcrumbs-el label="Nothingness" />
-            <q-breadcrumbs-el label="Somewhere" />
-          </q-breadcrumbs>
+          <q-chip icon="today" color="primary">SUN 11:00</q-chip>
+          <q-chip icon="person" color="primary">Yourself</q-chip>
+          <q-chip icon="star" color="primary">0 / 100</q-chip>
         </q-toolbar>
       </q-page-sticky>
     </q-page>

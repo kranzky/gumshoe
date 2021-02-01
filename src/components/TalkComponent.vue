@@ -10,13 +10,13 @@
         stamp="7 minutes ago"
       />
       <q-chat-message
-        name="Self"
+        name="Yourself"
         sent
         :text="['huh?']"
         stamp="4 minutes ago"
       />
       <q-chat-message
-        name="Self"
+        name="Yourself"
         sent
         :text="['where am i?']"
         stamp="2 minutes ago"
