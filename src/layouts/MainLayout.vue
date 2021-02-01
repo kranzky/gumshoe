@@ -47,7 +47,7 @@ export default {
   mixins: [LoggerMixin, TabMixin],
   data () {
     return {
-      showSplash: process.env.DEV,
+      showSplash: !process.env.DEV,
       left: false,
       right: false
     }
