@@ -3,7 +3,7 @@
     <q-layout view="lHr LpR fFf">
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat round icon="home" @click="left = !left">
+          <q-btn dense flat round icon="theater_comedy" @click="left = !left">
             <q-badge color="negative" floating transparent v-if="badge.mind > 0 && !left">
               {{ badge.mind }}
             </q-badge>

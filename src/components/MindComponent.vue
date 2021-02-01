@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: calc(100% - 48px);">
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
       <q-tab name="exits" icon="map">
         <q-badge color="negative" floating transparent v-if="badge.exits > 0">
@@ -11,7 +11,7 @@
           {{ badge.people }}
         </q-badge>
       </q-tab>
-      <q-tab name="objects" icon="list">
+      <q-tab name="objects" icon="category">
         <q-badge color="negative" floating transparent v-if="badge.objects > 0">
           {{ badge.objects }}
         </q-badge>

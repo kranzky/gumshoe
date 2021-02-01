@@ -1,12 +1,14 @@
 <template>
   <div>
     <q-toolbar position="top" class="bg-accent text-white">
-      <q-toolbar-title>Others</q-toolbar-title>
+      <q-toolbar-title>Cast</q-toolbar-title>
     </q-toolbar>
     <q-list bordered separator v-if="items.length > 0" class="rounded-borders text-primary">
       <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item)">
         <q-item-section avatar>
-          <q-icon :name="item.icon" />
+          <q-icon :name="item.icon">
+            <q-badge color="negative" class="absolute-bottom-right" style="border-radius: 4px; width: 8px; height: 8px; padding: 0;" v-if="!item.seen" />
+          </q-icon>
         </q-item-section>
         <q-item-section>{{ item.name }}</q-item-section>
       </q-item>

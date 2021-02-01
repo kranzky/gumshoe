@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div style="height: calc(100% - 48px);">
     <q-tabs v-model="tab" align="center" class="bg-primary text-white shadow-2" >
-      <q-tab name="inventory" icon="cases">
+      <q-tab name="inventory" icon="work">
         <q-badge color="negative" floating transparent v-if="badge.inventory > 0">
           {{ badge.inventory }}
         </q-badge>
       </q-tab>
-      <q-tab name="notebook" icon="bookmark">
+      <q-tab name="notebook" icon="cloud">
         <q-badge color="negative" floating transparent v-if="badge.notebook > 0">
           {{ badge.notebook }}
         </q-badge>
       </q-tab>
-      <q-tab name="quests" icon="task">
+      <q-tab name="quests" icon="lightbulb">
         <q-badge color="negative" floating transparent v-if="badge.quests > 0">
           {{ badge.quests }}
         </q-badge>
