@@ -129,8 +129,8 @@ module.exports = function(ctx) {
         ],
         display: "fullscreen",
         orientation: "portrait-primary",
-        background_color: "#ffffff",
-        theme_color: "#f28433",
+        background_color: "#212121",
+        theme_color: "#00796b",
         categories: ["entertainment", "games"]
       }
     },

@@ -1,6 +1,7 @@
 <template>
-  <div class="bg-grey-2">
-    <q-layout view="lHr LpR fFf">
+  <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+    <splash v-if="showSplash" />
+    <q-layout view="lHr LpR fFf" v-else>
       <q-header elevated>
         <q-toolbar>
           <q-btn dense flat round icon="public" @click="left = !left">
@@ -35,7 +36,7 @@
         </q-tabs>
       </q-footer>
     </q-layout>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -46,6 +47,7 @@ export default {
   mixins: [LoggerMixin, TabMixin],
   data () {
     return {
+      showSplash: process.env.DEV,
       left: false,
       right: false
     }
@@ -62,10 +64,15 @@ export default {
     this.registerPunk()
   },
   mounted () {
-    this.$root.$on("item:clicked", this.hide);
+    this.$root.$on("item:clicked", this.hide)
+    if (this.showSplash) {
+      setTimeout(() => {
+        this.showSplash = false
+      }, 1500)
+    }
   },
   beforeDestroy () {
-    this.$root.$off("item:clicked", this.hide);
+    this.$root.$off("item:clicked", this.hide)
     this.deregisterPunk()
   },
   computed: {
@@ -84,6 +91,7 @@ export default {
     }
   },
   components: {
+    'splash': () => import("components/SplashComponent.vue"),
     'world': () => import("components/WorldComponent.vue"),
     'player': () => import("components/PlayerComponent.vue")
   }
