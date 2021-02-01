@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "MindComponent",
+  name: "WorldComponent",
   data () {
     return {
       tab: 'objects'

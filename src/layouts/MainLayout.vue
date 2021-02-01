@@ -4,23 +4,23 @@
       <q-header elevated>
         <q-toolbar>
           <q-btn dense flat round icon="theater_comedy" @click="left = !left">
-            <q-badge color="negative" floating transparent v-if="badge.mind > 0 && !left">
-              {{ badge.mind }}
+            <q-badge color="negative" floating transparent v-if="badge.world > 0 && !left">
+              {{ badge.world }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
           <q-btn dense flat round icon="person" @click="right = !right">
-            <q-badge color="negative" floating transparent v-if="badge.soma > 0 && !right">
-              {{ badge.soma }}
+            <q-badge color="negative" floating transparent v-if="badge.player > 0 && !right">
+              {{ badge.player }}
             </q-badge>
           </q-btn>
         </q-toolbar>
       </q-header>
       <q-drawer :show-if-above="false" v-model="left" side="left" bordered>
-        <mind />
+        <world />
       </q-drawer>
       <q-drawer :show-if-above="false" v-model="right" side="right" bordered>
-        <soma />
+        <player />
       </q-drawer>
       <q-page-container>
         <div class="row justify-center bg-accent">
@@ -77,15 +77,15 @@ export default {
     badge: {
       get() {
         return {
-          mind: this.$store.getters['people/badgeCount'],
-          soma: this.$store.getters['quests/badgeCount']
+          world: this.$store.getters['people/badgeCount'],
+          player: this.$store.getters['quests/badgeCount']
         }
       }
     }
   },
   components: {
-    'mind': () => import("components/MindComponent.vue"),
-    'soma': () => import("components/SomaComponent.vue")
+    'world': () => import("components/WorldComponent.vue"),
+    'player': () => import("components/PlayerComponent.vue")
   }
 }
 </script>

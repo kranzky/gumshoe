@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "SomaComponent",
+  name: "PlayerComponent",
   data () {
     return {
       tab: 'inventory'
