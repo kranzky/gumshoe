@@ -11,7 +11,7 @@ export default {
     this.$q.dark.set(true)
 
     this.$store.dispatch("places/clear")
-    this.$store.dispatch("places/items", { id: 1, name: 'Chaos', icon: 'place', seen: false })
+    this.$store.dispatch("places/items", { id: 1, name: 'Chaos', detail: "(do not enter)", icon: 'place', seen: false })
     this.$store.dispatch("places/items", { id: 2, name: 'Nothingness.', icon: 'place', seen: false })
     this.$store.dispatch("places/items", { id: 3, name: 'Somewhere?', icon: 'place', seen: false })
 
@@ -21,7 +21,7 @@ export default {
     this.$store.dispatch("objects/clear")
     this.$store.dispatch("objects/items", { id: 1, name: 'Desk', icon: 'label', seen: false })
     this.$store.dispatch("objects/items", { id: 2, name: 'Chair', icon: 'label', seen: false })
-    this.$store.dispatch("objects/items", { id: 3, name: 'Door', icon: 'label', seen: false })
+    this.$store.dispatch("objects/items", { id: 3, name: 'Door', detail: '(closed)', icon: 'label', seen: false })
     this.$store.dispatch("objects/items", { id: 4, name: 'Window', icon: 'label', seen: false })
 
     this.$store.dispatch("inventory/clear")

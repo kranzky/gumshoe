@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-grey-10 text-white">
     <q-toolbar position="top" class="bg-accent text-white">
       <q-toolbar-title>{{ title }}</q-toolbar-title>
     </q-toolbar>
@@ -10,7 +10,10 @@
             <q-badge color="negative" floating style="border-radius: 4px; width: 8px; height: 8px; padding: 0;" v-if="!item.seen" />
           </q-icon>
         </q-item-section>
-        <q-item-label header>{{ item.name }}</q-item-label>
+        <q-item-section>
+          <q-item-label>{{ item.name }}</q-item-label>
+          <q-item-label caption>{{ item.detail }}</q-item-label>
+        </q-item-section>
       </q-item>
     </q-list>
     <p v-else class="text-body1 text-center" style="padding-top: 10px;">...  emptiness ...</p>
