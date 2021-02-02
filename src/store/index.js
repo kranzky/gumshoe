@@ -3,6 +3,7 @@ import Vuex from "vuex"
 
 import page from "./page"
 import list from "./list"
+import stats from "./stats"
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default function() {
       inventory: list('inventory'),
       notebook: list('notebook'),
       quests: list('quests'),
+      stats
 //    transcript,
 //    viewport,
 //    dialogue

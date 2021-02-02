@@ -10,6 +10,12 @@ export default {
   mounted() {
     this.$q.dark.set(true)
 
+    setTimeout(() => {
+      this.$store.dispatch("stats/time", "SUN 11:00")
+      this.$store.dispatch("stats/player", "Yourself")
+      this.$store.dispatch("stats/score", "1 / 100")
+    }, 2000)
+
     this.$store.dispatch("places/clear")
     this.$store.dispatch("places/items", { id: 1, name: 'Chaos', detail: "(do not enter)", icon: 'place', seen: false })
     this.$store.dispatch("places/items", { id: 2, name: 'Nothingness.', icon: 'place', seen: false })

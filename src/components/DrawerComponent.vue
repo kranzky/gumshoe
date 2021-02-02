@@ -41,6 +41,7 @@ export default {
   methods: {
     show (item) {
       this.$root.$emit("item:clicked")
+      this.$root.$emit("punk:success", `You clicked ${item.name}!`)
       this.$store.dispatch(`${this.module}/seen`, item.id)
     }
   }

@@ -7,9 +7,9 @@
     </q-tab-panels>
     <q-page-sticky position="top" class="bg-accent text-white">
       <q-toolbar>
-        <q-chip icon="today" color="primary">SUN 11:00</q-chip>
-        <q-chip icon="face" color="primary">Yourself</q-chip>
-        <q-chip icon="star" color="primary">0 / 100</q-chip>
+        <q-chip icon="today" color="primary" v-if="show.time">{{ stats.time }}</q-chip>
+        <q-chip icon="face" color="primary" v-if="show.player">{{ stats.player }}</q-chip>
+        <q-chip icon="star" color="primary" v-if="show.score">{{ stats.score }}</q-chip>
       </q-toolbar>
     </q-page-sticky>
   </q-page>
@@ -22,6 +22,26 @@ export default {
   name: "Main",
   title: "Gumshoe v" + process.env.PACKAGE_VERSION,
   mixins: [TitleMixin, TabMixin],
+  computed:  {
+    stats: {
+      get () {
+        return {
+          time: this.$store.state.stats.time,
+          player: this.$store.state.stats.player,
+          score: this.$store.state.stats.score
+        }
+      }
+    },
+    show: {
+      get () {
+        return {
+          time: this.$store.getters['stats/showTime'],
+          player: this.$store.getters['stats/showPlayer'],
+          score: this.$store.getters['stats/showScore']
+        }
+      }
+    }
+  },
   components: {
     "transcript": () => import("components/TranscriptComponent.vue"),
     "viewport": () => import("components/ViewportComponent.vue"),
