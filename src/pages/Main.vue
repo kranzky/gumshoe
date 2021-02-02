@@ -5,7 +5,7 @@
       <q-tab-panel name="viewport"><viewport /></q-tab-panel>
       <q-tab-panel name="dialogue"><dialogue /></q-tab-panel>
     </q-tab-panels>
-    <q-page-sticky position="top" class="bg-accent text-white">
+    <q-page-sticky position="top" class="bg-accent text-white shadow-2">
       <q-toolbar>
         <q-chip icon="today" color="primary" v-if="show.time">{{ stats.time }}</q-chip>
         <q-chip icon="face" color="primary" v-if="show.player">{{ stats.player }}</q-chip>

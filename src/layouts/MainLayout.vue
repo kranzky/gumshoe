@@ -25,7 +25,7 @@
       </q-drawer>
       <q-page-container>
         <div class="row justify-center bg-accent">
-          <router-view class="gumshoe-view col bg-grey-2 shadow-12" />
+          <router-view class="gumshoe-view col bg-dark shadow-12" />
         </div>
       </q-page-container>
       <q-footer elevated>
