@@ -24,8 +24,8 @@
         <player />
       </q-drawer>
       <q-page-container>
-        <div class="row justify-center bg-accent">
-          <router-view class="gumshoe-view col bg-dark shadow-12" />
+        <div class="row justify-center gumshoe-page">
+          <router-view class="gumshoe-view col shadow-12" />
         </div>
       </q-page-container>
       <q-footer elevated>
@@ -98,9 +98,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+.gumshoe-page {
+  background-color: #191919;
+}
 .gumshoe-view {
   width: 100%;
-  max-width: 768px;
+  max-width: 840px;
 }
 </style>
