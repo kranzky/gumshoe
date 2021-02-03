@@ -1,4 +1,5 @@
 import { register } from 'register-service-worker'
+import { Notify, Loading } from 'quasar'
 
 register(process.env.SERVICE_WORKER_FILE, {
   registrationOptions: { scope: './' },
@@ -21,6 +22,19 @@ register(process.env.SERVICE_WORKER_FILE, {
 
   updated (/* registration */) {
     console.debug('New content is available; please refresh.') // eslint-disable-line no-console
+    Notify.create({
+      message: 'A new version is available!',
+      icon: 'cloud_download',
+      timeout: 15000,
+      actions: [{
+        label: "Update Now",
+        color: "yellow",
+        handler: () => {
+          Loading.show()
+          location.reload(true)
+        }
+      }]
+    })
   },
 
   offline () {
