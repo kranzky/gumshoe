@@ -4,6 +4,7 @@ import Vuex from "vuex"
 import page from "./page"
 import list from "./list"
 import stats from "./stats"
+import transcript from "./transcript"
 
 Vue.use(Vuex)
 
@@ -17,8 +18,8 @@ export default function() {
       inventory: list('inventory'),
       notebook: list('notebook'),
       quests: list('quests'),
-      stats
-//    transcript,
+      stats,
+      transcript,
 //    viewport,
 //    dialogue
     },

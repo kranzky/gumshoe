@@ -30,9 +30,21 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="transcript" icon="local_library" />
-          <q-tab name="viewport" icon="remove_red_eye" />
-          <q-tab name="dialogue" icon="forum" />
+          <q-tab name="transcript">
+            <q-icon name="local_library" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.transcript" />
+            </q-icon>
+          </q-tab>
+          <q-tab name="viewport">
+            <q-icon name="remove_red_eye" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.viewport" />
+            </q-icon>
+          </q-tab>
+          <q-tab name="dialogue">
+            <q-icon name="forum" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialoge" />
+            </q-icon>
+          </q-tab>
         </q-tabs>
       </q-footer>
     </q-layout>
@@ -85,7 +97,10 @@ export default {
       get() {
         return {
           world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
-          player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount']
+          player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
+          transcript: this.$store.getters['transcript/showBadge'],
+          viewport: this.$store.getters['viewport/showBadge'],
+          dialoge: this.$store.getters['dialogue/showBadge']
         }
       }
     }

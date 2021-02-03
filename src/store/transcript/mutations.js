@@ -1,12 +1,13 @@
 export function clear(state) {
   state.items.length = 0
+  state.seen = true
 }
 
 export function append(state, item) {
   state.items.push(item)
+  state.seen = false
 }
 
-export function seen(state, id) {
-  let item = _.find(state.items, (item) => { return item.id == id })
-  item.seen = true
+export function seen(state) {
+  state.seen = true
 }

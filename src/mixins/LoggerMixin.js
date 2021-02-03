@@ -16,7 +16,7 @@ export const LoggerMixin = {
         type: type,
         message: message,
         position: 'bottom-left',
-        timeout: 10000,
+        timeout: 8000,
         textColor: 'white',
         actions: [{ icon: 'close', color: 'white' }]
       })
