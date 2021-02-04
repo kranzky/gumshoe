@@ -5,6 +5,8 @@ import page from "./page"
 import list from "./list"
 import stats from "./stats"
 import transcript from "./transcript"
+import viewport from "./viewport"
+import dialogue from "./dialogue"
 
 Vue.use(Vuex)
 
@@ -20,8 +22,8 @@ export default function() {
       quests: list('quests'),
       stats,
       transcript,
-//    viewport,
-//    dialogue
+      viewport,
+      dialogue
     },
     strict: process.env.DEV
   })

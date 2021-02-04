@@ -6,10 +6,10 @@
         {{ item.text }}
       </p>
       <q-separator spaced />
-      <q-btn color="secondary" :icon="menu.icon" :label="menu.label">
+      <q-btn color="secondary" icon="keyboard_arrow_right" label="What next?">
         <q-menu content-class="bg-primary">
           <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup v-for="choice in menu.choices" :key="choice.id" @click="select(choice)">
+            <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice)">
               <q-item-section>
                 {{ choice.text }}
               </q-item-section>
@@ -24,20 +24,20 @@
 <script>
 export default {
   name: "ViewportComponent",
-  data () {
-    return {
-      title: "Automatic Update?",
-      items: [
-        { id: 1, text: "This is the first paragraph." },
-        { id: 2, text: "And this is the second!" }
-      ],
-      menu: {
-        icon: "keyboard_arrow_right",
-        label: "What next?",
-        choices: [
-          { id: 1, text: "Not much..." },
-          { id: 2, text: "Lots of things!" }
-        ]
+  computed: {
+    title: {
+      get () {
+        return this.$store.state.viewport.title
+      }
+    },
+    items: {
+      get () {
+        return this.$store.state.viewport.items
+      }
+    },
+    choices: {
+      get () {
+        return this.$store.state.viewport.choices
       }
     }
   },
@@ -46,6 +46,9 @@ export default {
       this.$root.$emit("choice:selected")
       this.$root.$emit("punk:success", `You selected '${choice.text}'!`)
     }
+  },
+  mounted () {
+    this.$store.dispatch("viewport/seen")
   }
 }
 </script>

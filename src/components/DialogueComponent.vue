@@ -11,10 +11,10 @@
         :sent="message.player"
       />
       <q-separator spaced style="margin-top: 24px;" />
-      <q-btn color="secondary" :icon="menu.icon" :label="menu.label" class="float-right">
+      <q-btn color="secondary" icon="message" label="What Now?" class="float-right" v-if="choices.length > 0">
         <q-menu content-class="bg-primary">
           <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup v-for="choice in menu.choices" :key="choice.id" @click="say(choice)">
+            <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="say(choice)">
               <q-item-section>
                 {{ choice.text }}
               </q-item-section>
@@ -29,41 +29,15 @@
 <script>
 export default {
   name: "DialogueComponent",
-  data () {
-    return {
-      messages: [
-        {
-          id: 1,
-          heading: true,
-          label: "Sunday, 11:00"
-        },
-        {
-          id: 2,
-          name: "Other Person",
-          text: ["This is my message.", "And this is another."],
-          time: "1 minute ago"
-        },
-        {
-          id: 3,
-          name: "Yourself",
-          text: ["Well, there you go!"],
-          time: "1 minute ago",
-          player: true
-        },
-        {
-          id: 4,
-          name: "Other Person",
-          text: ["JUST TESTING DUDE"],
-          time: "1 minute ago"
-        }
-      ],
-      menu: {
-        icon: "message",
-        label: "Say Something.",
-        choices: [
-          { id: 1, text: "Blah blah." },
-          { id: 2, text: "Rhubarb?" }
-        ]
+  computed: {
+    messages: {
+      get () {
+        return this.$store.state.dialogue.items
+      }
+    },
+    choices: {
+      get () {
+        return this.$store.state.dialogue.choices
       }
     }
   },
@@ -75,6 +49,9 @@ export default {
       this.$root.$emit("choice:selected")
       this.$root.$emit("punk:success", `You said '${choice.text}'!`)
     }
+  },
+  mounted () {
+    this.$store.dispatch("dialogue/seen")
   }
 }
 </script>

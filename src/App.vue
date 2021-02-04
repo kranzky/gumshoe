@@ -53,12 +53,20 @@ export default {
     this.$store.dispatch("transcript/append", { id: 9, heading: true, body: 'Chapter 4' })
     this.$store.dispatch("transcript/append", { id: 10, name: "Third Thing", date: "Monday, 7:00", body: "Drank some covfefe. Felt great." })
 
-//  this.$store.dispatch("viewport/clear")
-//  this.$store.dispatch("viewport/object", { id: 1, name: "Nothingness." })
-//  this.$store.dispatch("viewport/text", { body: "A lingering memory of chaos intrudes upon the void." })
-//  this.$store.dispatch("viewport/choice", { id: 1, name: "What is there to do but wait?" })
+    this.$store.dispatch("viewport/clear")
+    this.$store.dispatch("viewport/title", "Utter Chaos")
+    this.$store.dispatch("viewport/appendItem", { id: 1, text: "This is the first paragraph." })
+    this.$store.dispatch("viewport/appendItem", { id: 2, text: "And this is the second!" })
+    this.$store.dispatch("viewport/appendChoice", { id: 1, text: "Not much..." })
+    this.$store.dispatch("viewport/appendChoice", { id: 2, text: "Lots of things!" })
 
-//  this.$store.dispatch("dialogue/clear")
+    this.$store.dispatch("dialogue/clear")
+    this.$store.dispatch("dialogue/appendItem", { id: 1, heading: true, label: "Sunday, 11:00" })
+    this.$store.dispatch("dialogue/appendItem", { id: 2, name: "Other Person", text: ["This is my message.", "And this is another."], time: "1 minute ago" })
+    this.$store.dispatch("dialogue/appendItem", { id: 3, name: "Yourself", text: ["Well, there you go!"], time: "1 minute ago", player: true })
+    this.$store.dispatch("dialogue/appendItem", { id: 4, name: "Other Person", text: ["JUST TESTING DUDE"], time: "1 minute ago" })
+    this.$store.dispatch("dialogue/appendChoice", { id: 1, text: "Blah blah." })
+    this.$store.dispatch("dialogue/appendChoice", { id: 2, text: "Rhubarb?" })
   }
 };
 </script>
