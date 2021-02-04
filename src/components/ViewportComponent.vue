@@ -2,12 +2,14 @@
   <div class="row justify-center">
     <div style="max-width:700px; width: 100%;">
       <h4>{{ title }}</h4>
-      <p class="text-body1" v-for="item in items" :key="item.id">
-        {{ item.text }}
-      </p>
-      <q-separator spaced />
-      <q-btn color="secondary" icon="keyboard_arrow_right" label="What next?">
-        <q-menu content-class="bg-primary">
+      <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <p class="text-body1" v-for="item in items" :key="item.id">
+          {{ item.text }}
+        </p>
+      </transition-group>
+      <q-separator spaced v-if="choices.length > 0" />
+      <q-btn color="secondary" icon="keyboard_arrow_right" label="What next?" v-if="choices.length > 0">
+        <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice)">
               <q-item-section>

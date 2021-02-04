@@ -1,4 +1,5 @@
 export function clear(state) {
+  state.show = true
   state.title = null
   state.items.length = 0
   state.choices.length = 0

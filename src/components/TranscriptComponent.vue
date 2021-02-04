@@ -1,14 +1,16 @@
 <template>
   <q-timeline :layout="layout" color="secondary">
-    <q-timeline-entry v-for="section in sections"
-      :key="section.id"
-      :heading="section.heading"
-      :title="section.name"
-      :subtitle="section.date"
-      :body="section.body"
-      :icon="section.icon"
-      :side="alternate(section)"
-    />
+    <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <q-timeline-entry v-for="section in sections"
+        :key="section.id"
+        :heading="section.heading"
+        :title="section.name"
+        :subtitle="section.date"
+        :body="section.body"
+        :icon="section.icon"
+        :side="alternate(section)"
+      />
+    </transition-group>
     <q-resize-observer @resize="onResize" />
   </q-timeline>
 </template>

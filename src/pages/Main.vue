@@ -1,15 +1,17 @@
 <template>
   <q-page>
     <q-tab-panels animated swipeable transition-prev="slide-right" transition-next="slide-left" v-model="tab" style="top: 50px; margin-bottom: 50px; height: calc(100% - 2px);">
-      <q-tab-panel name="transcript"><transcript /></q-tab-panel>
-      <q-tab-panel name="viewport"><viewport /></q-tab-panel>
-      <q-tab-panel name="dialogue"><dialogue /></q-tab-panel>
+      <q-tab-panel name="transcript" v-if="show.transcript"><transcript /></q-tab-panel>
+      <q-tab-panel name="viewport" v-if="show.viewport"><viewport /></q-tab-panel>
+      <q-tab-panel name="dialogue" v-if="show.dialogue"><dialogue /></q-tab-panel>
     </q-tab-panels>
     <q-page-sticky position="top" class="bg-accent text-white shadow-2">
       <q-toolbar>
-        <q-chip icon="today" color="primary" v-if="show.time">{{ stats.time }}</q-chip>
-        <q-chip icon="face" color="primary" v-if="show.player">{{ stats.player }}</q-chip>
-        <q-chip icon="star" color="primary" v-if="show.score">{{ stats.score }}</q-chip>
+        <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+          <q-chip icon="today" color="primary" v-if="show.time" key="1">{{ stats.time }}</q-chip>
+          <q-chip icon="face" color="primary" v-if="show.player" key="2">{{ stats.player }}</q-chip>
+          <q-chip icon="star" color="primary" v-if="show.score" key="3">{{ stats.score }}</q-chip>
+        </transition-group>
       </q-toolbar>
     </q-page-sticky>
   </q-page>
@@ -37,7 +39,10 @@ export default {
         return {
           time: this.$store.getters['stats/showTime'],
           player: this.$store.getters['stats/showPlayer'],
-          score: this.$store.getters['stats/showScore']
+          score: this.$store.getters['stats/showScore'],
+          transcript: this.$store.state.transcript.show,
+          viewport: this.$store.state.viewport.show,
+          dialogue: this.$store.state.dialogue.show
         }
       }
     }

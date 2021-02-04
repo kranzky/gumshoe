@@ -17,10 +17,10 @@
           </q-btn>
         </q-toolbar>
       </q-header>
-      <q-drawer show-if-above no-swipe-open no-swipe-close v-model="left" side="left" elevated>
+      <q-drawer no-swipe-open no-swipe-close v-model="left" side="left" elevated>
         <world />
       </q-drawer>
-      <q-drawer show-if-above no-swipe-open no-swipe-close v-model="right" side="right" elevated>
+      <q-drawer no-swipe-open no-swipe-close v-model="right" side="right" elevated>
         <player />
       </q-drawer>
       <q-page-container>
@@ -30,17 +30,17 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="transcript">
+          <q-tab name="transcript" v-if="show.transcript">
             <q-icon name="local_library" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.transcript" />
             </q-icon>
           </q-tab>
-          <q-tab name="viewport">
+          <q-tab name="viewport" v-if="show.viewport">
             <q-icon name="remove_red_eye" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.viewport" />
             </q-icon>
           </q-tab>
-          <q-tab name="dialogue">
+          <q-tab name="dialogue" v-if="show.dialogue">
             <q-icon name="forum" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialoge" />
             </q-icon>
@@ -94,13 +94,22 @@ export default {
       }
     },
     badge: {
-      get() {
+      get () {
         return {
           world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
           player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
           transcript: this.$store.getters['transcript/showBadge'],
           viewport: this.$store.getters['viewport/showBadge'],
           dialoge: this.$store.getters['dialogue/showBadge']
+        }
+      }
+    },
+    show: {
+      get () {
+        return {
+          transcript: this.$store.state.transcript.show,
+          viewport: this.$store.state.viewport.show,
+          dialogue: this.$store.state.dialogue.show
         }
       }
     }

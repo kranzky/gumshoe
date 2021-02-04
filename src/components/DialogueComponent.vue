@@ -1,18 +1,20 @@
 <template>
   <div class="row justify-center">
     <div style="max-width:700px; width: 100%;">
-      <q-chat-message v-for="message in messages" size=6
-        :key="message.id"
-        :label="message.label"
-        :name="message.name"
-        :text="message.text"
-        :stamp="message.time"
-        :avatar="avatar(message)"
-        :sent="message.player"
-      />
-      <q-separator spaced style="margin-top: 24px;" />
-      <q-btn color="secondary" icon="message" label="What Now?" class="float-right" v-if="choices.length > 0">
-        <q-menu content-class="bg-primary">
+      <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <q-chat-message v-for="message in messages" size=6
+          :key="message.id"
+          :label="message.label"
+          :name="message.name"
+          :text="message.text"
+          :stamp="message.time"
+          :avatar="avatar(message)"
+          :sent="message.player"
+        />
+      </transition-group>
+      <q-separator spaced style="margin-top: 24px;" v-if="choices.length > 0" />
+      <q-btn color="secondary" icon="message" label="Say what?" class="float-right" v-if="choices.length > 0">
+        <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="say(choice)">
               <q-item-section>
