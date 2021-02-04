@@ -26,7 +26,7 @@ export default {
   name: "ViewportComponent",
   data () {
     return {
-      title: "Hello, World",
+      title: "Automatic Update?",
       items: [
         { id: 1, text: "This is the first paragraph." },
         { id: 2, text: "And this is the second!" }
