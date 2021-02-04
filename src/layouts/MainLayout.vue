@@ -4,13 +4,13 @@
     <q-layout view="lHr LpR fFf" v-else>
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat round icon="public" @click="left = !left">
+          <q-btn dense flat round icon="public" @click="left = !left" v-if="show.world">
             <q-badge color="negative" floating transparent v-if="badge.world > 0 && !left">
               {{ badge.world }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
-          <q-btn dense flat round icon="person" @click="right = !right">
+          <q-btn dense flat round icon="person" @click="right = !right" v-if="show.player">
             <q-badge color="negative" floating transparent v-if="badge.player > 0 && !right">
               {{ badge.player }}
             </q-badge>
@@ -107,6 +107,8 @@ export default {
     show: {
       get () {
         return {
+          world: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
+          player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
           transcript: this.$store.state.transcript.show,
           viewport: this.$store.state.viewport.show,
           dialogue: this.$store.state.dialogue.show
