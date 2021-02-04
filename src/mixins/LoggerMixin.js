@@ -15,8 +15,7 @@ export const LoggerMixin = {
       this.$q.notify({
         type: type,
         message: message,
-        position: 'bottom-left',
-        timeout: 8000,
+        timeout: 5000,
         textColor: 'white',
         actions: [{ icon: 'close', color: 'white' }]
       })
