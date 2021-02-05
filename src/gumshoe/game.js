@@ -19,7 +19,6 @@ class Game {
   }
 
   handleAction(action) {
-    console.debug(`Perform action "${action}"`)
     window.game.data[action]()
   }
 
