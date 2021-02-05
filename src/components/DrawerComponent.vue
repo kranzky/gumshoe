@@ -12,7 +12,7 @@
             </q-icon>
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ item.seen }}</q-item-label>
+            <q-item-label>{{ item.name }}</q-item-label>
             <q-item-label caption>{{ item.detail }}</q-item-label>
           </q-item-section>
         </q-item>
