@@ -28,7 +28,7 @@ register(process.env.SERVICE_WORKER_FILE, {
       timeout: 15000,
       actions: [{
         label: "Update Now",
-        color: "yellow",
+        color: "secondary",
         handler: () => {
           Loading.show()
           location.reload(true)

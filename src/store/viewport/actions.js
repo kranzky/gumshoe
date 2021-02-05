@@ -14,6 +14,10 @@ export function appendChoice(store, choice) {
   this.commit("viewport/appendChoice", choice)
 }
 
+export function removeChoice(store, id) {
+  this.commit("viewport/removeChoice", id)
+}
+
 export function seen(store) {
   this.commit("viewport/seen")
 }

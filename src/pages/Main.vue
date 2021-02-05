@@ -20,6 +20,8 @@
 <script>
 import { TitleMixin } from "../mixins/TitleMixin.js"
 import { TabMixin } from "../mixins/TabMixin.js"
+import Game from '../gumshoe/game.js'
+
 export default {
   name: "Main",
   title: "Gumshoe v" + process.env.PACKAGE_VERSION,
@@ -51,6 +53,17 @@ export default {
     "transcript": () => import("components/TranscriptComponent.vue"),
     "viewport": () => import("components/ViewportComponent.vue"),
     "dialogue": () => import("components/DialogueComponent.vue")
+  },
+  created () {
+    this.$game = new Game(this.$root, this.$store)
+  },
+  mounted () {
+    this.$q.dark.set(true)
+    this.$game.run()
+  },
+  beforeDestroy () {
+    this.$game.stop()
+    this.$game = undefined
   }
 }
 </script>

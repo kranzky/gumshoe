@@ -1,6 +1,7 @@
 export default () => {
   return {
     show: false,
-    items: []
+    items: {},
+    hasItems: false
   }
 }

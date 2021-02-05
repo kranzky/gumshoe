@@ -7,6 +7,7 @@ import stats from "./stats"
 import transcript from "./transcript"
 import viewport from "./viewport"
 import dialogue from "./dialogue"
+import progress from "./progress"
 
 Vue.use(Vuex)
 
@@ -23,7 +24,8 @@ export default function() {
       stats,
       transcript,
       viewport,
-      dialogue
+      dialogue,
+      progress
     },
     strict: process.env.DEV
   })

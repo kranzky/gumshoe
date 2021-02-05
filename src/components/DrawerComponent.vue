@@ -3,7 +3,7 @@
     <q-toolbar position="top" class="bg-accent text-white">
       <q-toolbar-title>{{ title }}</q-toolbar-title>
     </q-toolbar>
-    <q-list separator v-if="items.length > 0" class="rounded-borders text-primary">
+    <q-list separator v-if="showItems" class="rounded-borders text-primary">
       <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item)">
           <q-item-section avatar>
@@ -12,7 +12,7 @@
             </q-icon>
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{ item.name }}</q-item-label>
+            <q-item-label>{{ item.seen }}</q-item-label>
             <q-item-label caption>{{ item.detail }}</q-item-label>
           </q-item-section>
         </q-item>
@@ -38,12 +38,19 @@ export default {
       get () {
         return this.$store.state[this.module].items
       }
+    },
+    showItems: {
+      get () {
+        return this.$store.state[this.module].hasItems
+      }
     }
   },
   methods: {
     show (item) {
-      this.$root.$emit("item:clicked")
-      this.$root.$emit("punk:success", `You clicked ${item.name}!`)
+      let data = this.$store.state[this.module].items[item.id]
+      if (data.action && !data.seen) {
+        this.$root.$emit("game:action", data.action)
+      }
       this.$store.dispatch(`${this.module}/seen`, item.id)
     }
   }
