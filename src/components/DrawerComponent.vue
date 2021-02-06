@@ -47,11 +47,12 @@ export default {
   },
   methods: {
     show (item) {
+      this.$store.dispatch(`${this.module}/seen`, item.id)
       let data = this.$store.state[this.module].items[item.id]
       if (data.action && !data.seen) {
         this.$root.$emit("game:action", data.action)
       }
-      this.$store.dispatch(`${this.module}/seen`, item.id)
+      this.$root.$emit("item:clicked")
     }
   }
 }
