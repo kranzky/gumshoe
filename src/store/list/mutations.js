@@ -1,14 +1,17 @@
+import { uid } from 'quasar'
+
 export function clear(state) {
   state.show = true
-  state.hasItems = false
-  state.items = {}
+  state.items = []
 }
 
 export function append(state, item) {
-  state.hasItems = true
-  state.items[item.id] = item
+  item.id = uid()
+  item.seen = false
+  state.items.push(item)
 }
 
 export function seen(state, id) {
-  state.items[id].seen = true
+  let item = _.find(state.items, (item) => { return item.id == id })
+  item.seen = true
 }

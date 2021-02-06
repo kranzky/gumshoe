@@ -49,7 +49,7 @@ class Game {
       },
       remember: () => {
         this.$store.dispatch("people/clear")
-        this.$store.dispatch("people/append", { id: 1, name: 'Your Lizard Brain', icon: 'face', seen: false, action: "activateLizard" })
+        this.$store.dispatch("people/append", { name: 'Your Lizard Brain', icon: 'face', action: "activateLizard" })
         setTimeout(() => {
           this.$store.dispatch("viewport/appendItem", { id: 4, text: "Something has changed." })
         }, 2000)
