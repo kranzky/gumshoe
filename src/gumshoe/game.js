@@ -71,10 +71,10 @@ class Game {
       talkLizard2: () => {
         this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["Sounds tiring. It was so peaceful."], time: "Somewhen", player: true })
         this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["We risk non-existence!!!"], time: "Somewhen" })
-        this.$store.dispatch("dialogueChoices/append", { text: "I see. But what can be done?", action: 'talkLizard3' })
+        this.$store.dispatch("dialogueChoices/append", { text: "I understand. But what can be done?", action: 'talkLizard3' })
       },
       talkLizard3: () => {
-        this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["I see. But what can be done?"], time: "Somewhen", player: true })
+        this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["I understand. But what can be done?"], time: "Somewhen", player: true })
         this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["Activate your sensory cortex!!!!"], time: "Somewhen" })
         this.$store.dispatch("dialogueChoices/append", { text: "I ... can't. I don't remember how.", action: 'talkLizard4' })
       },
