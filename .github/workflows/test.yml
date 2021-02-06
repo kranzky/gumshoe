@@ -48,6 +48,6 @@ jobs:
         cmd: lint
     - name: Run tests
       run: bundle exec punk test
-    - uses: oshstrange/setup-quasar@v1
+    - uses: joshstrange/setup-quasar@1
     - name: Build app
       run: quasar build
