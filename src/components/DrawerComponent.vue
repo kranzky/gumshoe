@@ -5,7 +5,7 @@
     </q-toolbar>
     <q-list separator v-if="items.length > 0" class="rounded-borders text-primary">
       <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item)">
+        <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item.id)">
           <q-item-section avatar>
             <q-icon :name="item.icon">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="!item.seen" />
@@ -42,15 +42,15 @@ export default {
   },
   methods: {
     find (id) {
-      return this.$root.$lodash.find(this.items, (item) => { return item.id == id })
+      return _.find(this.items, (item) => { return item.id == id })
     },
-    show (item) {
-      let data = this.find(item.id)
-      if (data.action && !data.seen) {
-        this.$root.$emit("game:action", data.action)
+    show (id) {
+      let item = this.find(id)
+      if (item.action && !item.seen) {
+        this.$root.$emit("game:action", item.action)
       }
+      this.$store.dispatch(`${this.module}/seen`, id)
       this.$root.$emit("item:clicked")
-      this.$store.dispatch(`${this.module}/seen`, item.id)
     }
   }
 }

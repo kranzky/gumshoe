@@ -41,10 +41,10 @@ export default {
     },
     select (id) {
       let choice = this.find(id)
-      this.$store.dispatch(`${this.module}/remove`, id)
       if (choice.action) {
         this.$root.$emit("game:action", choice.action)
       }
+      this.$store.dispatch(`${this.module}/remove`, id)
     }
   }
 }
