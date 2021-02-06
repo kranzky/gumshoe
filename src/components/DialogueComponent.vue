@@ -62,6 +62,9 @@ export default {
   },
   mounted () {
     this.$store.dispatch("dialogue/seen")
+  },
+  beforeDestroy () {
+    this.$store.dispatch("dialogue/seen")
   }
 }
 </script>

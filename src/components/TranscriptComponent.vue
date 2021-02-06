@@ -47,6 +47,9 @@ export default {
   },
   mounted () {
     this.$store.dispatch("transcript/seen")
+  },
+  beforeDestroy () {
+    this.$store.dispatch("transcript/seen")
   }
 }
 </script>

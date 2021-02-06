@@ -70,6 +70,9 @@ export default {
   },
   mounted () {
     this.$store.dispatch("viewport/seen")
+  },
+  beforeDestroy () {
+    this.$store.dispatch("viewport/seen")
   }
 }
 </script>

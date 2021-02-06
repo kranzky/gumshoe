@@ -98,9 +98,9 @@ export default {
         return {
           world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
           player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
-          transcript: this.$store.getters['transcript/showBadge'],
-          viewport: this.$store.getters['viewport/showBadge'],
-          dialoge: this.$store.getters['dialogue/showBadge']
+          transcript: this.$store.getters['transcript/showBadge'] && this.$store.state.page.tab != 'transcript',
+          viewport: this.$store.getters['viewport/showBadge'] && this.$store.state.page.tab != 'viewport',
+          dialoge: this.$store.getters['dialogue/showBadge'] && this.$store.state.page.tab != 'dialogue'
         }
       }
     },

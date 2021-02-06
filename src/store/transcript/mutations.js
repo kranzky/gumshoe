@@ -1,3 +1,5 @@
+import { uid } from 'quasar'
+
 export function clear(state) {
   state.show = true
   state.seen = true
@@ -6,6 +8,7 @@ export function clear(state) {
 
 export function append(state, item) {
   state.seen = false
+  item.id = uid()
   state.items.push(item)
 }
 
