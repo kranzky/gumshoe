@@ -13,11 +13,11 @@
         />
       </transition-group>
       <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <q-separator spaced color="secondary" style="margin-top: 24px;" v-if="showChoices" :key="1" />
-        <q-btn color="secondary" icon="message" label="What now?" class="float-right" v-if="showChoices" :key="2" >
+        <q-separator spaced color="secondary" style="margin-top: 24px;" v-if="choices.length > 0" :key="1" />
+        <q-btn color="secondary" icon="message" label="What now?" class="float-right" v-if="choices.length > 0" :key="2" >
           <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade">
             <q-list style="min-width: 100px">
-              <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="say(choice)">
+              <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="say(choice.id)">
                 <q-item-section>
                   {{ choice.text }}
                 </q-item-section>
@@ -43,23 +43,21 @@ export default {
       get () {
         return this.$store.state.dialogue.choices
       }
-    },
-    showChoices: {
-      get () {
-        return this.$store.state.dialogue.hasChoices
-      }
     }
   },
   methods: {
     avatar (message) {
       return message.label ? undefined : "images/avatar.png"
     },
-    say (choice) {
-      let action = this.$store.state.dialogue.choices[choice.id].action
-      this.$store.dispatch("dialogue/removeChoice", choice.id)
-      if (action) {
-        this.$root.$emit("game:action", action)
+    find (id) {
+      return this.$root.$lodash.find(this.choices, (choice) => { return choice.id == id })
+    },
+    say (id) {
+      let choice = this.find(id)
+      if (choice.action) {
+        this.$root.$emit("game:action", choice.action)
       }
+      this.$store.dispatch("dialogue/removeChoice", id)
     }
   },
   mounted () {

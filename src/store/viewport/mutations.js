@@ -1,31 +1,33 @@
+import { uid } from 'quasar'
+
 export function clear(state) {
   state.show = true
+  state.seen = true
   state.title = null
   state.items.length = 0
-  state.choices = {}
-  state.seen = true
-  state.hasChoices = false
+  state.choices.length = 0
 }
 
 export function title(state, title) {
-  state.title = title
   state.seen = false
+  state.title = title
 }
 
 export function appendItem(state, item) {
-  state.items.push(item)
   state.seen = false
+  item.id = uid()
+  state.items.push(item)
 }
 
 export function appendChoice(state, choice) {
-  state.choices[choice.id] = choice
   state.seen = false
-  state.hasChoices = true
+  choice.id = uid()
+  state.choices.push(choice)
 }
 
 export function removeChoice(state, id) {
-  delete state.choices[id]
-  state.hasChoices = !_.isEmpty(state.choices)
+  let index = _.findIndex(state.choices, (choice) => { return choice.id == id })
+  state.choices.splice(index, 1)
 }
 
 export function seen(state) {

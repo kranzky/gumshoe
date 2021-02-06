@@ -1,12 +1,12 @@
 export function clear(state) {
   state.show = true
-  state.items.length = 0
   state.seen = true
+  state.items.length = 0
 }
 
 export function append(state, item) {
-  state.items.push(item)
   state.seen = false
+  state.items.push(item)
 }
 
 export function seen(state) {

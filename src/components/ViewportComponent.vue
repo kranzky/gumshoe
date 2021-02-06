@@ -9,11 +9,11 @@
       </transition-group>
       <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <q-linear-progress size="xs" color="secondary" v-if="showProgress" :value="progressValue" :key="1" />
-        <q-separator spaced color="secondary" v-if="showChoices" :key="2" />
-        <q-btn color="secondary" icon="keyboard_arrow_right" class="float-right" label="What now?" v-if="showChoices" :key="3">
+        <q-separator spaced color="secondary" v-if="choices.length > 0" :key="2" />
+        <q-btn color="secondary" icon="keyboard_arrow_right" class="float-right" label="What now?" v-if="choices.length > 0" :key="3">
           <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade">
             <q-list style="min-width: 100px">
-              <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice)">
+              <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice.id)">
                 <q-item-section>
                   {{ choice.text }}
                 </q-item-section>
@@ -54,19 +54,17 @@ export default {
       get () {
         return this.$store.state.progress.value
       }
-    },
-    showChoices: {
-      get () {
-        return this.$store.state.viewport.hasChoices
-      }
     }
   },
   methods: {
-    select (choice) {
-      let action = this.$store.state.viewport.choices[choice.id].action
-      this.$store.dispatch("viewport/removeChoice", choice.id)
-      if (action) {
-        this.$root.$emit("game:action", action)
+    find (id) {
+      return _.find(this.choices, (choice) => { return choice.id == id })
+    },
+    select (id) {
+      let choice = this.find(id)
+      this.$store.dispatch("viewport/removeChoice", id)
+      if (choice.action) {
+        this.$root.$emit("game:action", choice.action)
       }
     }
   },

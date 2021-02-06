@@ -46,7 +46,6 @@ export default {
     },
     show (item) {
       let data = this.find(item.id)
-      console.log(data)
       if (data.action && !data.seen) {
         this.$root.$emit("game:action", data.action)
       }

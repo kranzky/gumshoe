@@ -2,7 +2,7 @@ import { uid } from 'quasar'
 
 export function clear(state) {
   state.show = true
-  state.items = []
+  state.items.length = 0
 }
 
 export function append(state, item) {
