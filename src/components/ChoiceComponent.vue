@@ -31,7 +31,7 @@ export default {
   computed: {
     choices: {
       get () {
-        return this.$store.state[this.module].choices
+        return this.$store.state[this.module].items
       }
     }
   },
@@ -41,7 +41,7 @@ export default {
     },
     select (id) {
       let choice = this.find(id)
-      this.$store.dispatch(`${this.module}/removeChoice`, id)
+      this.$store.dispatch(`${this.module}/remove`, id)
       if (choice.action) {
         this.$root.$emit("game:action", choice.action)
       }

@@ -12,7 +12,7 @@
           :sent="message.player"
         />
       </transition-group>
-      <choices label="What now?" module="dialogue" style="margin-top: 18px;" />
+      <choices label="What now?" module="dialogueChoices" style="margin-top: 18px;" />
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   computed: {
     messages: {
       get () {
-        return this.$store.state.dialogue.items
+        return this.$store.state.dialogueItems.items
       }
     }
   },

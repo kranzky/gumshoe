@@ -10,7 +10,7 @@
       <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <q-linear-progress size="xs" color="secondary" v-if="showProgress" :value="progressValue" />
       </transition>
-      <choices label="What now?" module="viewport" />
+      <choices label="What now?" module="viewportChoices" />
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
     },
     items: {
       get () {
-        return this.$store.state.viewport.items
+        return this.$store.state.viewportItems.items
       }
     },
     showProgress: {

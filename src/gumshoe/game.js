@@ -33,16 +33,16 @@ class Game {
         }, 2000)
       },
       timePasses: () => {
-        this.$store.dispatch("viewport/appendItem", { text: "A lingering memory of utter chaos punctuates the void." })
+        this.$store.dispatch("viewportItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
         setTimeout(() => {
-          this.$store.dispatch("viewport/appendChoice", { text: "What is there to do but wait?", action: 'waitLonger' })
+          this.$store.dispatch("viewportChoices/append", { text: "What is there to do but wait?", action: 'waitLonger' })
         }, 2000)
       },
       waitLonger: () => {
         this.$store.dispatch("progress/delay", 'firstDecision')
       },
       firstDecision: () => {
-        this.$store.dispatch("viewport/appendItem", { text: "Aeons pass." })
+        this.$store.dispatch("viewportItems/append", { text: "Aeons pass." })
         setTimeout(() => {
           this.$store.dispatch("progress/delay", 'remember')
         }, 2000)
@@ -51,41 +51,41 @@ class Game {
         this.$store.dispatch("people/clear")
         this.$store.dispatch("people/append", { name: 'Your Lizard Brain', icon: 'face', action: "activateLizard" })
         setTimeout(() => {
-          this.$store.dispatch("viewport/appendItem", { text: "Something has changed." })
+          this.$store.dispatch("viewportItems/append", { text: "Something has changed." })
         }, 2000)
       },
       activateLizard: () => {
-        this.$store.dispatch("viewport/appendItem", { text: "It is trying to attract your attention." })
+        this.$store.dispatch("viewportItems/append", { text: "It is trying to attract your attention." })
         setTimeout(() => {
           this.$store.dispatch("dialogue/clear")
-          this.$store.dispatch("dialogue/appendItem", { heading: true, label: "Chat with Your Lizard Brain" })
-          this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["Hey! Over here! Emergency!"], time: "Somewhen" })
-          this.$store.dispatch("dialogue/appendChoice", { text: "Ugh. Why do you disturb my rest?", action: 'talkLizard1' })
+          this.$store.dispatch("dialogueItems/append", { heading: true, label: "Chat with Your Lizard Brain" })
+          this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["Hey! Over here! Emergency!"], time: "Somewhen" })
+          this.$store.dispatch("dialogueChoices/append", { text: "Ugh. Why do you disturb my rest?", action: 'talkLizard1' })
         }, 2000)
       },
       talkLizard1: () => {
-        this.$store.dispatch("dialogue/appendItem", { name: "Yourself", text: ["Ugh. Why do you disturb my rest?"], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["You must awaken!!"], time: "Somewhen" })
-        this.$store.dispatch("dialogue/appendChoice", { text: "Sounds tiring. It was so peaceful.", action: 'talkLizard2' })
+        this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["Ugh. Why do you disturb my rest?"], time: "Somewhen", player: true })
+        this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["You must awaken!!"], time: "Somewhen" })
+        this.$store.dispatch("dialogueChoices/append", { text: "Sounds tiring. It was so peaceful.", action: 'talkLizard2' })
       },
       talkLizard2: () => {
-        this.$store.dispatch("dialogue/appendItem", { name: "Yourself", text: ["Sounds tiring. It was so peaceful."], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["We risk non-existence!!!"], time: "Somewhen" })
-        this.$store.dispatch("dialogue/appendChoice", { text: "I see. But what can be done?", action: 'talkLizard3' })
+        this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["Sounds tiring. It was so peaceful."], time: "Somewhen", player: true })
+        this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["We risk non-existence!!!"], time: "Somewhen" })
+        this.$store.dispatch("dialogueChoices/append", { text: "I see. But what can be done?", action: 'talkLizard3' })
       },
       talkLizard3: () => {
-        this.$store.dispatch("dialogue/appendItem", { name: "Yourself", text: ["I see. But what can be done?"], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["Activate your sensory cortex!!!!"], time: "Somewhen" })
-        this.$store.dispatch("dialogue/appendChoice", { text: "I ... can't. I don't remember how.", action: 'talkLizard4' })
+        this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["I see. But what can be done?"], time: "Somewhen", player: true })
+        this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["Activate your sensory cortex!!!!"], time: "Somewhen" })
+        this.$store.dispatch("dialogueChoices/append", { text: "I ... can't. I don't remember how.", action: 'talkLizard4' })
       },
       talkLizard4: () => {
-        this.$store.dispatch("dialogue/appendItem", { name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
-        this.$store.dispatch("viewport/appendChoice", { text: "You need to pull yourself together.", action: 'everything' })
-        this.$store.dispatch("dialogue/appendItem", { heading: true, label: "Your Lizard Brain has disconnected." })
+        this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
+        this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
+        this.$store.dispatch("viewportChoices/append", { text: "You need to pull yourself together.", action: 'everything' })
+        this.$store.dispatch("dialogueItems/append", { heading: true, label: "Your Lizard Brain has disconnected." })
       },
       everything: () => {
-        this.$store.dispatch("viewport/appendItem", { text: "You awaken." })
+        this.$store.dispatch("viewportItems/append", { text: "You awaken." })
 
         setTimeout(() => { this.$store.dispatch("stats/player", "Yourself") }, 1000)
         setTimeout(() => { this.$store.dispatch("stats/time", "SUN 11:00") }, 2000)

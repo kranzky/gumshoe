@@ -1,3 +1,3 @@
-export const showBadge = state => {
-  return !state.seen
+export const showBadge = (state, getters, rootState, rootGetters) => {
+  return !state.seen || rootGetters['viewportItems/showBadge'] || rootGetters['viewportChoices/showBadge']
 }

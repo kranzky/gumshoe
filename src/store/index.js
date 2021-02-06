@@ -22,7 +22,11 @@ export default function() {
       quests: list('quests'),
       transcript: list('transcript'),
       viewport,
+      viewportItems: list('viewportItems'),
+      viewportChoices: list('viewportChoices'),
       dialogue,
+      dialogueItems: list('dialogueItems'),
+      dialogueChoices: list('dialogueChoices'),
       stats,
       progress
     },
