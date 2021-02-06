@@ -3,10 +3,9 @@ import Vuex from "vuex"
 
 import page from "./page"
 import list from "./list"
-import stats from "./stats"
-import transcript from "./transcript"
 import viewport from "./viewport"
 import dialogue from "./dialogue"
+import stats from "./stats"
 import progress from "./progress"
 
 Vue.use(Vuex)
@@ -21,10 +20,10 @@ export default function() {
       inventory: list('inventory'),
       notebook: list('notebook'),
       quests: list('quests'),
-      stats,
-      transcript,
+      transcript: list('transcript'),
       viewport,
       dialogue,
+      stats,
       progress
     },
     strict: process.env.DEV
