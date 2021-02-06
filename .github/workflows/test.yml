@@ -31,6 +31,9 @@ jobs:
         options: --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
     - uses: actions/checkout@v2
+    - uses: borales/actions-yarn@v2
+      with:
+        cmd: install
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -39,5 +42,12 @@ jobs:
       run: |
         bundle exec punk db create
         bundle exec punk db migrate
+    - name: Run linter
+      uses: borales/actions-yarn@v2
+      with:
+        cmd: lint
     - name: Run tests
       run: bundle exec punk test
+    - name: Built app
+      uses: oshstrange/setup-quasar@v1
+      run: quasar build

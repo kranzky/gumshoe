@@ -28,31 +28,40 @@ class Game {
         this.$store.dispatch("viewport/clear")
         this.$store.dispatch("viewport/title", "Nothingness.")
         this.$store.dispatch("page/setTitle", "Nothingness.")
-        this.$store.dispatch("viewport/appendItem", { id: 1, text: "A lingering memory of utter chaos intrudes upon the void." })
+        setTimeout(() => {
+          this.$store.dispatch("progress/delay", 'timePasses')
+        }, 2000)
+      },
+      timePasses: () => {
+        this.$store.dispatch("viewport/appendItem", { id: 1, text: "A lingering memory of utter chaos punctuates the void." })
+        setTimeout(() => {
+          this.$store.dispatch("viewport/appendChoice", { id: 1, text: "What is there to do but wait?", action: 'waitLonger' })
+        }, 2000)
+      },
+      waitLonger: () => {
         this.$store.dispatch("progress/delay", 'firstDecision')
       },
       firstDecision: () => {
-        this.$store.dispatch("viewport/appendChoice", { id: 1, text: "What is there to do but wait?", action: 'waitLonger' })
-      },
-      waitLonger: () => {
-        this.$store.dispatch("progress/delay", 'remember')
+        this.$store.dispatch("viewport/appendItem", { id: 2, text: "Aeons pass." })
+        setTimeout(() => {
+          this.$store.dispatch("progress/delay", 'remember')
+        }, 2000)
       },
       remember: () => {
-        this.$store.dispatch("viewport/appendItem", { id: 2, text: "Aeons pass. Then something changes." })
+        this.$store.dispatch("people/clear")
+        this.$store.dispatch("people/append", { id: 1, name: 'Your Lizard Brain', icon: 'face', seen: false, action: "activateLizard" })
         setTimeout(() => {
-          this.$store.dispatch("viewport/appendItem", { id: 3, text: "There is another presence here." })
+          this.$store.dispatch("viewport/appendItem", { id: 4, text: "Something has changed." })
         }, 2000)
-        setTimeout(() => {
-          this.$store.dispatch("people/clear")
-          this.$store.dispatch("people/append", { id: 1, name: 'Your Lizard Brain', icon: 'face', seen: false, action: "activateLizard" })
-        }, 4000)
       },
       activateLizard: () => {
-        this.$store.dispatch("viewport/appendItem", { id: 4, text: "Your Lizard Brain is trying to attract your attention." })
-        this.$store.dispatch("dialogue/clear")
-        this.$store.dispatch("dialogue/appendItem", { id: 1, heading: true, label: "Chat with Your Lizard Brain" })
-        this.$store.dispatch("dialogue/appendItem", { id: 2, name: "Your Lizard Brain", text: ["Hey! Over here! Emergency!"], time: "Somewhen" })
-        this.$store.dispatch("dialogue/appendChoice", { id: 1, text: "Ugh. Why do you disturb my rest?", action: 'talkLizard1' })
+        this.$store.dispatch("viewport/appendItem", { id: 5, text: "It is trying to attract your attention." })
+        setTimeout(() => {
+          this.$store.dispatch("dialogue/clear")
+          this.$store.dispatch("dialogue/appendItem", { id: 1, heading: true, label: "Chat with Your Lizard Brain" })
+          this.$store.dispatch("dialogue/appendItem", { id: 2, name: "Your Lizard Brain", text: ["Hey! Over here! Emergency!"], time: "Somewhen" })
+          this.$store.dispatch("dialogue/appendChoice", { id: 1, text: "Ugh. Why do you disturb my rest?", action: 'talkLizard1' })
+        }, 2000)
       },
       talkLizard1: () => {
         this.$store.dispatch("dialogue/appendItem", { id: 3, name: "Yourself", text: ["Ugh. Why do you disturb my rest?"], time: "Somewhen", player: true })
@@ -76,7 +85,7 @@ class Game {
         this.$store.dispatch("dialogue/appendItem", { id: 11, heading: true, label: "Your Lizard Brain has disconnected." })
       },
       everything: () => {
-        this.$store.dispatch("viewport/appendItem", { id: 5, text: "You awaken." })
+        this.$store.dispatch("viewport/appendItem", { id: 6, text: "You awaken." })
 
         setTimeout(() => { this.$store.dispatch("stats/player", "Yourself") }, 1000)
         setTimeout(() => { this.$store.dispatch("stats/time", "SUN 11:00") }, 2000)
