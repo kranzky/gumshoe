@@ -65,22 +65,22 @@ class Game {
       },
       talkLizard1: () => {
         this.$store.dispatch("dialogue/appendItem", { id: 3, name: "Yourself", text: ["Ugh. Why do you disturb my rest?"], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { id: 4, name: "Your Lizard Brain", text: ["We need you to awaken."], time: "Somewhen" })
+        this.$store.dispatch("dialogue/appendItem", { id: 4, name: "Your Lizard Brain", text: ["You must awaken!!"], time: "Somewhen" })
         this.$store.dispatch("dialogue/appendChoice", { id: 1, text: "Sounds tiring. It was so peaceful.", action: 'talkLizard2' })
       },
       talkLizard2: () => {
         this.$store.dispatch("dialogue/appendItem", { id: 5, name: "Yourself", text: ["Sounds tiring. It was so peaceful."], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { id: 6, name: "Your Lizard Brain", text: ["But we are in danger of non-existence."], time: "Somewhen" })
+        this.$store.dispatch("dialogue/appendItem", { id: 6, name: "Your Lizard Brain", text: ["We risk non-existence!!!"], time: "Somewhen" })
         this.$store.dispatch("dialogue/appendChoice", { id: 1, text: "I see. But what can be done?", action: 'talkLizard3' })
       },
       talkLizard3: () => {
         this.$store.dispatch("dialogue/appendItem", { id: 7, name: "Yourself", text: ["I see. But what can be done?"], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { id: 8, name: "Your Lizard Brain", text: ["Activate your sensory cortex!"], time: "Somewhen" })
+        this.$store.dispatch("dialogue/appendItem", { id: 8, name: "Your Lizard Brain", text: ["Activate your sensory cortex!!!!"], time: "Somewhen" })
         this.$store.dispatch("dialogue/appendChoice", { id: 1, text: "I ... can't. I don't remember how.", action: 'talkLizard4' })
       },
       talkLizard4: () => {
         this.$store.dispatch("dialogue/appendItem", { id: 9, name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { id: 10, name: "Your Lizard Brain", text: ["Just try. Please. For all of us."], time: "Somewhen" })
+        this.$store.dispatch("dialogue/appendItem", { id: 10, name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us."], time: "Somewhen" })
         this.$store.dispatch("viewport/appendChoice", { id: 1, text: "You need to pull yourself together.", action: 'everything' })
         this.$store.dispatch("dialogue/appendItem", { id: 11, heading: true, label: "Your Lizard Brain has disconnected." })
       },
