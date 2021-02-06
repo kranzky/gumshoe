@@ -80,7 +80,7 @@ class Game {
       },
       talkLizard4: () => {
         this.$store.dispatch("dialogue/appendItem", { name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
-        this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us."], time: "Somewhen" })
+        this.$store.dispatch("dialogue/appendItem", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
         this.$store.dispatch("viewport/appendChoice", { text: "You need to pull yourself together.", action: 'everything' })
         this.$store.dispatch("dialogue/appendItem", { heading: true, label: "Your Lizard Brain has disconnected." })
       },
