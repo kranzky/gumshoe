@@ -10,23 +10,23 @@
       <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <q-linear-progress size="xs" color="secondary" v-if="showProgress" :value="progressValue" />
       </transition>
-      <choices label="What now?" module="viewportChoices" />
+      <choices label="What now?" module="locationChoices" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ViewportComponent",
+  name: "LocationComponent",
   computed: {
     title: {
       get () {
-        return this.$store.state.viewport.title
+        return this.$store.state.location.title
       }
     },
     items: {
       get () {
-        return this.$store.state.viewportItems.items
+        return this.$store.state.locationItems.items
       }
     },
     showProgress: {
@@ -41,10 +41,10 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch("viewport/seen")
+    this.$store.dispatch("location/seen")
   },
   beforeDestroy () {
-    this.$store.dispatch("viewport/seen")
+    this.$store.dispatch("location/seen")
   },
   components: {
     "choices": () => import("components/ChoiceComponent.vue")

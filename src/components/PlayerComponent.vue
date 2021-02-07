@@ -6,12 +6,12 @@
           {{ badge.inventory }}
         </q-badge>
       </q-tab>
-      <q-tab name="notebook" icon="description" v-if="show.notebook">
+      <q-tab name="notebook" icon="bookmarks" v-if="show.notebook">
         <q-badge color="negative" floating transparent v-if="badge.notebook > 0">
           {{ badge.notebook }}
         </q-badge>
       </q-tab>
-      <q-tab name="quests" icon="fmd_bad" v-if="show.quests">
+      <q-tab name="quests" icon="priority_high" v-if="show.quests">
         <q-badge color="negative" floating transparent v-if="badge.quests > 0">
           {{ badge.quests }}
         </q-badge>

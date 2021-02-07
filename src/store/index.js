@@ -3,7 +3,7 @@ import Vuex from "vuex"
 
 import page from "./page"
 import list from "./list"
-import viewport from "./viewport"
+import location from "./location"
 import dialogue from "./dialogue"
 import stats from "./stats"
 import progress from "./progress"
@@ -21,9 +21,9 @@ export default function() {
       notebook: list('notebook'),
       quests: list('quests'),
       transcript: list('transcript'),
-      viewport,
-      viewportItems: list('viewportItems'),
-      viewportChoices: list('viewportChoices'),
+      location,
+      locationItems: list('locationItems'),
+      locationChoices: list('locationChoices'),
       dialogue,
       dialogueItems: list('dialogueItems'),
       dialogueChoices: list('dialogueChoices'),

@@ -25,24 +25,24 @@ class Game {
   loadGame () {
     this.data = {
       firstLocation: () => {
-        this.$store.dispatch("viewport/clear")
-        this.$store.dispatch("viewport/title", "Nothingness.")
+        this.$store.dispatch("location/clear")
+        this.$store.dispatch("location/title", "Nothingness.")
         this.$store.dispatch("page/setTitle", "Nothingness.")
         setTimeout(() => {
           this.$store.dispatch("progress/delay", 'timePasses')
         }, 2000)
       },
       timePasses: () => {
-        this.$store.dispatch("viewportItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
+        this.$store.dispatch("locationItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
         setTimeout(() => {
-          this.$store.dispatch("viewportChoices/append", { text: "What is there to do but wait?", action: 'waitLonger' })
+          this.$store.dispatch("locationChoices/append", { text: "What is there to do but wait?", action: 'waitLonger' })
         }, 2000)
       },
       waitLonger: () => {
         this.$store.dispatch("progress/delay", 'firstDecision')
       },
       firstDecision: () => {
-        this.$store.dispatch("viewportItems/append", { text: "Aeons pass." })
+        this.$store.dispatch("locationItems/append", { text: "Aeons pass." })
         setTimeout(() => {
           this.$store.dispatch("progress/delay", 'remember')
         }, 2000)
@@ -51,11 +51,11 @@ class Game {
         this.$store.dispatch("people/clear")
         this.$store.dispatch("people/append", { name: 'Your Lizard Brain', icon: 'face', action: "activateLizard" })
         setTimeout(() => {
-          this.$store.dispatch("viewportItems/append", { text: "Something has changed." })
+          this.$store.dispatch("locationItems/append", { text: "Something has changed." })
         }, 2000)
       },
       activateLizard: () => {
-        this.$store.dispatch("viewportItems/append", { text: "It is trying to attract your attention." })
+        this.$store.dispatch("locationItems/append", { text: "It is trying to attract your attention." })
         setTimeout(() => {
           this.$store.dispatch("dialogue/clear")
           this.$store.dispatch("dialogueItems/append", { heading: true, label: "Chat with Your Lizard Brain" })
@@ -81,11 +81,11 @@ class Game {
       talkLizard4: () => {
         this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
         this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
-        this.$store.dispatch("viewportChoices/append", { text: "You need to pull yourself together.", action: 'everything' })
+        this.$store.dispatch("locationChoices/append", { text: "You need to pull yourself together.", action: 'everything' })
         this.$store.dispatch("dialogueItems/append", { heading: true, label: "Your Lizard Brain has disconnected." })
       },
       everything: () => {
-        this.$store.dispatch("viewportItems/append", { text: "You awaken." })
+        this.$store.dispatch("locationItems/append", { text: "You awaken." })
 
         setTimeout(() => { this.$store.dispatch("stats/player", "Yourself") }, 1000)
         setTimeout(() => { this.$store.dispatch("stats/time", "SUN 11:00") }, 2000)
@@ -134,7 +134,8 @@ class Game {
 
         setTimeout(() => {
           this.$store.dispatch("quests/clear")
-          this.$store.dispatch("quests/append", { name: 'Wake Up!', icon: 'task' })
+          this.$store.dispatch("quests/append", { name: 'Do Stuffs', icon: 'assignment_turned_in' })
+          this.$store.dispatch("quests/append", { name: 'Wake Up!', icon: 'assignment_late' })
         }, 9000)
       }
     }

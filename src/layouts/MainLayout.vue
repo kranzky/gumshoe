@@ -30,19 +30,29 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="transcript" v-if="show.transcript">
-            <q-icon name="local_library" size="sm">
-              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.transcript" />
+          <q-tab name="location" v-if="show.location">
+            <q-icon name="home" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.location" />
             </q-icon>
           </q-tab>
-          <q-tab name="viewport" v-if="show.viewport">
-            <q-icon name="remove_red_eye" size="sm">
-              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.viewport" />
+          <q-tab name="item" v-if="show.item">
+            <q-icon name="search" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.item" />
             </q-icon>
           </q-tab>
           <q-tab name="dialogue" v-if="show.dialogue">
             <q-icon name="forum" size="sm">
-              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialoge" />
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialogue" />
+            </q-icon>
+          </q-tab>
+          <q-tab name="task" v-if="show.task">
+            <q-icon name="fact_check" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.task" />
+            </q-icon>
+          </q-tab>
+          <q-tab name="transcript" v-if="show.transcript">
+            <q-icon name="local_library" size="sm">
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.transcript" />
             </q-icon>
           </q-tab>
         </q-tabs>
@@ -98,9 +108,11 @@ export default {
         return {
           world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
           player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
-          transcript: this.$store.getters['transcript/showBadge'] && this.$store.state.page.tab != 'transcript',
-          viewport: this.$store.getters['viewport/showBadge'] && this.$store.state.page.tab != 'viewport',
-          dialoge: this.$store.getters['dialogue/showBadge'] && this.$store.state.page.tab != 'dialogue'
+          location: this.$store.getters['location/showBadge'] && this.$store.state.page.tab != 'location',
+          item: true,
+          dialogue: this.$store.getters['dialogue/showBadge'] && this.$store.state.page.tab != 'dialogue',
+          task: true,
+          transcript: this.$store.getters['transcript/showBadge'] && this.$store.state.page.tab != 'transcript'
         }
       }
     },
@@ -109,9 +121,11 @@ export default {
         return {
           world: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
           player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
-          transcript: this.$store.state.transcript.show,
-          viewport: this.$store.state.viewport.show,
-          dialogue: this.$store.state.dialogue.show
+          location: this.$store.state.location.show,
+          item: true,
+          dialogue: this.$store.state.dialogue.show,
+          task: true,
+          transcript: this.$store.state.transcript.show
         }
       }
     }
