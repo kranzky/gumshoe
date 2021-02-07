@@ -4,14 +4,14 @@
     <q-layout view="lHr LpR fFf" v-else>
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat round icon="public" @click="left = !left" v-if="show.world">
-            <q-badge color="negative" floating transparent v-if="badge.world > 0 && !left">
+          <q-btn dense flat icon="public" label="World" @click="left = !left" v-if="show.world">
+            <q-badge class="absolute-top-left" color="negative" transparent v-if="badge.world > 0 && !left">
               {{ badge.world }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
-          <q-btn dense flat round icon="person" @click="right = !right" v-if="show.player">
-            <q-badge color="negative" floating transparent v-if="badge.player > 0 && !right">
+          <q-btn dense flat icon-right="person" label="Player" @click="right = !right" v-if="show.player">
+            <q-badge class="absolute-top-right" style="z-index: 1;" color="negative" transparent v-if="badge.player > 0 && !right">
               {{ badge.player }}
             </q-badge>
           </q-btn>
@@ -30,27 +30,27 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="location" v-if="show.location">
+          <q-tab name="location" label="Look" v-if="show.location">
             <q-icon name="home" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.location" />
             </q-icon>
           </q-tab>
-          <q-tab name="item" v-if="show.item">
+          <q-tab name="item" label="Item" v-if="show.item">
             <q-icon name="search" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.item" />
             </q-icon>
           </q-tab>
-          <q-tab name="dialogue" v-if="show.dialogue">
+          <q-tab name="dialogue" label="Talk" v-if="show.dialogue">
             <q-icon name="forum" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialogue" />
             </q-icon>
           </q-tab>
-          <q-tab name="task" v-if="show.task">
+          <q-tab name="task" label="Tasks" v-if="show.task">
             <q-icon name="fact_check" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.task" />
             </q-icon>
           </q-tab>
-          <q-tab name="transcript" v-if="show.transcript">
+          <q-tab name="transcript" label="Story" v-if="show.transcript">
             <q-icon name="local_library" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.transcript" />
             </q-icon>
