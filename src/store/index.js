@@ -4,7 +4,9 @@ import Vuex from "vuex"
 import page from "./page"
 import list from "./list"
 import location from "./location"
+import item from "./item"
 import dialogue from "./dialogue"
+import task from "./task"
 import stats from "./stats"
 import progress from "./progress"
 
@@ -24,9 +26,11 @@ export default function() {
       location,
       locationItems: list('locationItems'),
       locationChoices: list('locationChoices'),
+      item,
       dialogue,
       dialogueItems: list('dialogueItems'),
       dialogueChoices: list('dialogueChoices'),
+      task,
       stats,
       progress
     },

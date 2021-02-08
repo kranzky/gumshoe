@@ -13,7 +13,7 @@ class Game {
 
     this.$root.$on("game:action", this.handleAction)
     this.loadGame()
-    this.handleAction("firstLocation")
+    this.handleAction(process.env.DEV ? "demo" : "firstLocation")
 
     this.state = 'running'
   }
@@ -25,6 +25,7 @@ class Game {
   loadGame () {
     this.data = {
       firstLocation: () => {
+        // TODO: clear all state
         this.$store.dispatch("location/clear")
         this.$store.dispatch("location/title", "Nothingness.")
         this.$store.dispatch("page/setTitle", "Nothingness.")
@@ -137,6 +138,56 @@ class Game {
           this.$store.dispatch("quests/append", { name: 'Do Stuffs', icon: 'assignment_turned_in' })
           this.$store.dispatch("quests/append", { name: 'Wake Up!', icon: 'assignment_late' })
         }, 9000)
+      },
+      demo: () => {
+        // TODO: clear all state
+
+        this.$store.dispatch("stats/player", "Player")
+        this.$store.dispatch("stats/time", "Date / Time")
+        this.$store.dispatch("stats/score", "Score")
+
+        this.$store.dispatch("location/clear")
+        this.$store.dispatch("location/title", "Location Name")
+        this.$store.dispatch("locationItems/append", { text: "Location description." })
+        this.$store.dispatch("locationChoices/append", { text: "Play Game", action: 'firstLocation' })
+
+        this.$store.dispatch("item/clear")
+        this.$store.dispatch("item/title", "Item Name")
+
+        this.$store.dispatch("dialogue/clear")
+        this.$store.dispatch("dialogueItems/append", { heading: true, label: "Chat with NPC" })
+        this.$store.dispatch("dialogueItems/append", { name: "NPC", text: ["Something."], time: "Date / Time" })
+        this.$store.dispatch("dialogueChoices/append", { text: "Play Game", action: 'firstLocation' })
+
+        this.$store.dispatch("task/clear")
+        this.$store.dispatch("task/title", "Quest Name")
+
+        this.$store.dispatch("transcript/clear")
+        this.$store.dispatch("transcript/append", { heading: true, body: 'Chapter Title' })
+        this.$store.dispatch("transcript/append", { name: "Part 1", date: "Date / Time", body: "Something." })
+        this.$store.dispatch("transcript/append", { name: "Part 2", date: "Date / Time", body: "Something." })
+
+        this.$store.dispatch("places/clear")
+        this.$store.dispatch("places/append", { name: 'Room #1', icon: 'place' })
+
+        this.$store.dispatch("people/clear")
+        this.$store.dispatch("people/append", { name: 'NPC #1', icon: 'face' })
+
+        this.$store.dispatch("objects/clear")
+        this.$store.dispatch("objects/append", { name: 'Item #1', icon: 'label' })
+
+        this.$store.dispatch("inventory/clear")
+        this.$store.dispatch("inventory/append", { name: 'Item #2', icon: 'label' })
+
+        this.$store.dispatch("notebook/clear")
+        this.$store.dispatch("notebook/append", { name: 'Room #2', icon: 'place' })
+        this.$store.dispatch("notebook/append", { name: 'NPC #2', icon: 'face' })
+        this.$store.dispatch("notebook/append", { name: 'Item #3', icon: 'label' })
+
+        this.$store.dispatch("quests/clear")
+        this.$store.dispatch("quests/append", { name: 'Quest #1', icon: 'assignment_turned_in' })
+        this.$store.dispatch("quests/append", { name: 'Quest #2', icon: 'assignment_late' })
+
       }
     }
   }

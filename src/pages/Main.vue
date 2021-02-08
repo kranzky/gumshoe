@@ -1,9 +1,11 @@
 <template>
   <q-page>
     <q-tab-panels animated swipeable transition-prev="slide-right" transition-next="slide-left" v-model="tab" style="top: 50px; margin-bottom: 50px; height: calc(100% - 2px);">
-      <q-tab-panel name="transcript" v-if="show.transcript"><transcript /></q-tab-panel>
       <q-tab-panel name="location" v-if="show.location"><location /></q-tab-panel>
+      <q-tab-panel name="item" v-if="show.item"><item /></q-tab-panel>
       <q-tab-panel name="dialogue" v-if="show.dialogue"><dialogue /></q-tab-panel>
+      <q-tab-panel name="task" v-if="show.task"><task /></q-tab-panel>
+      <q-tab-panel name="transcript" v-if="show.transcript"><transcript /></q-tab-panel>
     </q-tab-panels>
     <q-page-sticky position="top" class="bg-accent text-white shadow-2">
       <q-toolbar>
@@ -42,17 +44,21 @@ export default {
           time: this.$store.getters['stats/showTime'],
           player: this.$store.getters['stats/showPlayer'],
           score: this.$store.getters['stats/showScore'],
-          transcript: this.$store.state.transcript.show,
           location: this.$store.state.location.show,
-          dialogue: this.$store.state.dialogue.show
+          item: this.$store.state.item.show,
+          dialogue: this.$store.state.dialogue.show,
+          task: this.$store.state.task.show,
+          transcript: this.$store.state.transcript.show
         }
       }
     }
   },
   components: {
-    "transcript": () => import("components/TranscriptComponent.vue"),
-    "location": () => import("components/locationComponent.vue"),
-    "dialogue": () => import("components/DialogueComponent.vue")
+    "location": () => import("components/LocationComponent.vue"),
+    "item": () => import("components/ItemComponent.vue"),
+    "dialogue": () => import("components/DialogueComponent.vue"),
+    "task": () => import("components/TaskComponent.vue"),
+    "transcript": () => import("components/TranscriptComponent.vue")
   },
   created () {
     this.$game = new Game(this.$root, this.$store)

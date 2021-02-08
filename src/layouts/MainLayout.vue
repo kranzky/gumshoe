@@ -35,7 +35,7 @@
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.location" />
             </q-icon>
           </q-tab>
-          <q-tab name="item" label="Item" v-if="show.item">
+          <q-tab name="item" label="Inspect" v-if="show.item">
             <q-icon name="search" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.item" />
             </q-icon>
@@ -109,9 +109,9 @@ export default {
           world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
           player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
           location: this.$store.getters['location/showBadge'] && this.$store.state.page.tab != 'location',
-          item: true,
+          item:this.$store.getters['item/showBadge'] && this.$store.state.page.tab != 'item',
           dialogue: this.$store.getters['dialogue/showBadge'] && this.$store.state.page.tab != 'dialogue',
-          task: true,
+          task:this.$store.getters['task/showBadge'] && this.$store.state.page.tab != 'task',
           transcript: this.$store.getters['transcript/showBadge'] && this.$store.state.page.tab != 'transcript'
         }
       }
@@ -122,9 +122,9 @@ export default {
           world: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
           player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
           location: this.$store.state.location.show,
-          item: true,
+          item: this.$store.state.item.show,
           dialogue: this.$store.state.dialogue.show,
-          task: true,
+          task: this.$store.state.task.show,
           transcript: this.$store.state.transcript.show
         }
       }
