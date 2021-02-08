@@ -7,9 +7,6 @@
           {{ item.text }}
         </p>
       </transition-group>
-      <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <q-linear-progress size="xs" color="secondary" v-if="showProgress" :value="progressValue" />
-      </transition>
       <choices label="What now?" icon="construction" module="entityChoices" />
     </div>
   </div>
@@ -27,16 +24,6 @@ export default {
     items: {
       get () {
         return this.$store.state.entityItems.items
-      }
-    },
-    showProgress: {
-      get () {
-        return this.$store.state.progress.show
-      }
-    },
-    progressValue: {
-      get () {
-        return this.$store.state.progress.value
       }
     }
   },

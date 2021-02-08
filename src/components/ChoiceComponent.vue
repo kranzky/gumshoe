@@ -1,8 +1,8 @@
 <template>
   <div>
-    <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <q-separator spaced color="secondary" v-if="choices.length > 0" :key="1" />
-      <q-btn color="secondary" :icon="icon" class="float-right" :label="label" v-if="choices.length > 0" :key="2">
+    <q-linear-progress size="xs" color="secondary" :value="progressValue" style="margin-bottom: 8px;" />
+    <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <q-btn color="secondary" :icon="icon" class="float-right" :label="label" v-if="choices.length > 0 && !showProgress" :key="3">
         <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice.id)">
@@ -13,7 +13,7 @@
           </q-list>
         </q-menu>
       </q-btn>
-    </transition-group>
+    </transition>
   </div>
 </template>
 
@@ -35,6 +35,16 @@ export default {
     choices: {
       get () {
         return this.$store.state[this.module].items
+      }
+    },
+    showProgress: {
+      get () {
+        return this.$store.state.progress.show
+      }
+    },
+    progressValue: {
+      get () {
+        return this.$store.state.progress.value
       }
     }
   },
