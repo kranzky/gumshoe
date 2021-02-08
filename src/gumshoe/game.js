@@ -13,7 +13,7 @@ class Game {
 
     this.$root.$on("game:action", this.handleAction)
     this.loadGame()
-    this.handleAction(process.env.DEV ? "demo" : "firstRoom")
+    this.handleAction("demo")
 
     this.state = 'running'
   }
