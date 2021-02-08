@@ -1,4 +1,5 @@
 export default {
   title: "Undefined",
-  tab: 'room'
+  tab: 'room',
+  width: 0
 }

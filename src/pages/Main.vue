@@ -16,6 +16,7 @@
         </transition-group>
       </q-toolbar>
     </q-page-sticky>
+    <q-resize-observer @resize="onResize" />
   </q-page>
 </template>
 
@@ -28,6 +29,11 @@ export default {
   name: "Main",
   title: "Gumshoe v" + process.env.PACKAGE_VERSION,
   mixins: [TitleMixin, TabMixin],
+  methods: {
+    onResize (size) {
+      this.$store.commit('page/width', size.width)
+    }
+  },
   computed:  {
     game: {
       get () {

@@ -8,6 +8,6 @@ function getTitle(vm) {
 export const TitleMixin = {
   name: "TitleMixin",
   created() {
-    this.$store.dispatch("page/setTitle", getTitle(this));
+    this.$store.dispatch("page/title", getTitle(this));
   }
 };

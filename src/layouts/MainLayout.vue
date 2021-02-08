@@ -4,13 +4,13 @@
     <q-layout view="lHr LpR fFf" v-else>
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat icon="public" label="World" @click="left = !left" v-if="show.world">
+          <q-btn dense flat icon="public" :label="headerLabel ? 'World' : ''" @click="left = !left" v-if="show.world">
             <q-badge class="absolute-top-left" color="negative" transparent v-if="badge.world > 0 && !left">
               {{ badge.world }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
-          <q-btn dense flat icon-right="person" label="Player" @click="right = !right" v-if="show.player">
+          <q-btn dense flat icon-right="person" :label="headerLabel ? 'Player' : ''" @click="right = !right" v-if="show.player">
             <q-badge class="absolute-top-right" style="z-index: 1;" color="negative" transparent v-if="badge.player > 0 && !right">
               {{ badge.player }}
             </q-badge>
@@ -30,27 +30,27 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="room" label="Look" v-if="show.room">
+          <q-tab name="room" :label="footerLabel ? 'Look' : ''" v-if="show.room">
             <q-icon name="home" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.room" />
             </q-icon>
           </q-tab>
-          <q-tab name="entity" label="Examine" v-if="show.entity">
+          <q-tab name="entity" :label="footerLabel ? 'Examine' : ''" v-if="show.entity">
             <q-icon name="search" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.entity" />
             </q-icon>
           </q-tab>
-          <q-tab name="dialogue" label="Talk" v-if="show.dialogue">
+          <q-tab name="dialogue" :label="footerLabel ? 'Talk' : ''" v-if="show.dialogue">
             <q-icon name="forum" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialogue" />
             </q-icon>
           </q-tab>
-          <q-tab name="quest" label="Quest" v-if="show.quest">
+          <q-tab name="quest" :label="footerLabel ? 'Quest' : ''" v-if="show.quest">
             <q-icon name="fact_check" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.quest" />
             </q-icon>
           </q-tab>
-          <q-tab name="transcript" label="Story" v-if="show.transcript">
+          <q-tab name="transcript" :label="footerLabel ? 'Story' : ''" v-if="show.transcript">
             <q-icon name="local_library" size="sm">
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.transcript" />
             </q-icon>
@@ -127,6 +127,16 @@ export default {
           quest: this.$store.state.quest.show,
           transcript: this.$store.state.transcript.show
         }
+      }
+    },
+    headerLabel: {
+      get () {
+        return this.$store.state.page.width > 720
+      }
+    },
+    footerLabel: {
+      get () {
+        return this.$store.state.page.width > 540
       }
     }
   },

@@ -1,5 +1,4 @@
 export function reset(store) {
-  console.log(store)
   this.commit("game/time", null)
   this.commit("game/player", null)
   this.commit("game/score", null)

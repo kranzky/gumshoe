@@ -11,7 +11,6 @@
         :side="alternate(section)"
       />
     </transition-group>
-    <q-resize-observer @resize="onResize" />
   </q-timeline>
 </template>
 
@@ -26,17 +25,14 @@ export default {
       get () {
         return this.$store.state.transcript.items
       }
-    }
-  },
-  data () {
-    return {
-      width: 0
+    },
+    width: {
+      get () {
+        return this.$store.state.page.width
+      }
     }
   },
   methods: {
-    onResize (size) {
-      this.width = size.width
-    },
     alternate (section) {
       if (section.heading) {
         this.flip = false

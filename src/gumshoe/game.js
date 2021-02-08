@@ -28,7 +28,7 @@ class Game {
         this.$store.dispatch("game/reset")
         this.$store.dispatch("room/clear")
         this.$store.dispatch("room/title", "Nothingness.")
-        this.$store.dispatch("page/setTitle", "Nothingness.")
+        this.$store.dispatch("page/title", "Nothingness.")
         setTimeout(() => {
           this.$store.dispatch("progress/delay", 'timePasses')
         }, 2000)

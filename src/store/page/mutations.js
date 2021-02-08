@@ -1,8 +1,12 @@
-export function title(state, data) {
-  state.title = data
-  document.title = data
+export function title(state, title) {
+  state.title = title
+  document.title = title
 }
 
-export function tab(state, data) {
-  state.tab = data
+export function width(state, width) {
+  state.width = width
+}
+
+export function tab(state, tab) {
+  state.tab = tab
 }
