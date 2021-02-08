@@ -30,14 +30,14 @@
       </q-page-container>
       <q-footer elevated>
         <q-tabs v-model="tab" align="center">
-          <q-tab name="location" label="Look" v-if="show.location">
+          <q-tab name="room" label="Look" v-if="show.room">
             <q-icon name="home" size="sm">
-              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.location" />
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.room" />
             </q-icon>
           </q-tab>
-          <q-tab name="item" label="Inspect" v-if="show.item">
+          <q-tab name="entity" label="Examine" v-if="show.entity">
             <q-icon name="search" size="sm">
-              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.item" />
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.entity" />
             </q-icon>
           </q-tab>
           <q-tab name="dialogue" label="Talk" v-if="show.dialogue">
@@ -45,9 +45,9 @@
               <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.dialogue" />
             </q-icon>
           </q-tab>
-          <q-tab name="task" label="Tasks" v-if="show.task">
+          <q-tab name="quest" label="Quest" v-if="show.quest">
             <q-icon name="fact_check" size="sm">
-              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.task" />
+              <q-badge color="negative" floating class="gumshoe-badge" v-if="badge.quest" />
             </q-icon>
           </q-tab>
           <q-tab name="transcript" label="Story" v-if="show.transcript">
@@ -108,10 +108,10 @@ export default {
         return {
           world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
           player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
-          location: this.$store.getters['location/showBadge'] && this.$store.state.page.tab != 'location',
-          item:this.$store.getters['item/showBadge'] && this.$store.state.page.tab != 'item',
+          room: this.$store.getters['room/showBadge'] && this.$store.state.page.tab != 'room',
+          entity: this.$store.getters['entity/showBadge'] && this.$store.state.page.tab != 'entity',
           dialogue: this.$store.getters['dialogue/showBadge'] && this.$store.state.page.tab != 'dialogue',
-          task:this.$store.getters['task/showBadge'] && this.$store.state.page.tab != 'task',
+          quest: this.$store.getters['quest/showBadge'] && this.$store.state.page.tab != 'quest',
           transcript: this.$store.getters['transcript/showBadge'] && this.$store.state.page.tab != 'transcript'
         }
       }
@@ -121,10 +121,10 @@ export default {
         return {
           world: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
           player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
-          location: this.$store.state.location.show,
-          item: this.$store.state.item.show,
+          room: this.$store.state.room.show,
+          entity: this.$store.state.entity.show,
           dialogue: this.$store.state.dialogue.show,
-          task: this.$store.state.task.show,
+          quest: this.$store.state.quest.show,
           transcript: this.$store.state.transcript.show
         }
       }

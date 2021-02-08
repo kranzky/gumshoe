@@ -1,18 +1,18 @@
 <template>
   <q-page>
     <q-tab-panels animated swipeable transition-prev="slide-right" transition-next="slide-left" v-model="tab" style="top: 50px; margin-bottom: 50px; height: calc(100% - 2px);">
-      <q-tab-panel name="location" v-if="show.location"><location /></q-tab-panel>
-      <q-tab-panel name="item" v-if="show.item"><item /></q-tab-panel>
+      <q-tab-panel name="room" v-if="show.room"><room /></q-tab-panel>
+      <q-tab-panel name="entity" v-if="show.entity"><entity /></q-tab-panel>
       <q-tab-panel name="dialogue" v-if="show.dialogue"><dialogue /></q-tab-panel>
-      <q-tab-panel name="task" v-if="show.task"><task /></q-tab-panel>
+      <q-tab-panel name="quest" v-if="show.quest"><quest /></q-tab-panel>
       <q-tab-panel name="transcript" v-if="show.transcript"><transcript /></q-tab-panel>
     </q-tab-panels>
     <q-page-sticky position="top" class="bg-accent text-white shadow-2">
       <q-toolbar>
         <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-          <q-chip icon="today" color="primary" v-if="show.time" key="1">{{ stats.time }}</q-chip>
-          <q-chip icon="face" color="primary" v-if="show.player" key="2">{{ stats.player }}</q-chip>
-          <q-chip icon="star" color="primary" v-if="show.score" key="3">{{ stats.score }}</q-chip>
+          <q-chip icon="today" color="primary" v-if="show.time" key="1">{{ game.time }}</q-chip>
+          <q-chip icon="face" color="primary" v-if="show.player" key="2">{{ game.player }}</q-chip>
+          <q-chip icon="star" color="primary" v-if="show.score" key="3">{{ game.score }}</q-chip>
         </transition-group>
       </q-toolbar>
     </q-page-sticky>
@@ -29,35 +29,35 @@ export default {
   title: "Gumshoe v" + process.env.PACKAGE_VERSION,
   mixins: [TitleMixin, TabMixin],
   computed:  {
-    stats: {
+    game: {
       get () {
         return {
-          time: this.$store.state.stats.time,
-          player: this.$store.state.stats.player,
-          score: this.$store.state.stats.score
+          time: this.$store.state.game.time,
+          player: this.$store.state.game.player,
+          score: this.$store.state.game.score
         }
       }
     },
     show: {
       get () {
         return {
-          time: this.$store.getters['stats/showTime'],
-          player: this.$store.getters['stats/showPlayer'],
-          score: this.$store.getters['stats/showScore'],
-          location: this.$store.state.location.show,
-          item: this.$store.state.item.show,
+          time: this.$store.getters['game/showTime'],
+          player: this.$store.getters['game/showPlayer'],
+          score: this.$store.getters['game/showScore'],
+          room: this.$store.state.room.show,
+          entity: this.$store.state.entity.show,
           dialogue: this.$store.state.dialogue.show,
-          task: this.$store.state.task.show,
+          quest: this.$store.state.quest.show,
           transcript: this.$store.state.transcript.show
         }
       }
     }
   },
   components: {
-    "location": () => import("components/LocationComponent.vue"),
-    "item": () => import("components/ItemComponent.vue"),
+    "room": () => import("components/RoomComponent.vue"),
+    "entity": () => import("components/EntityComponent.vue"),
     "dialogue": () => import("components/DialogueComponent.vue"),
-    "task": () => import("components/TaskComponent.vue"),
+    "quest": () => import("components/QuestComponent.vue"),
     "transcript": () => import("components/TranscriptComponent.vue")
   },
   created () {

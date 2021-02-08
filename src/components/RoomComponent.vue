@@ -10,23 +10,23 @@
       <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <q-linear-progress size="xs" color="secondary" v-if="showProgress" :value="progressValue" />
       </transition>
-      <choices label="What now?" module="locationChoices" />
+      <choices label="What now?" icon="keyboard_arrow_right" module="roomChoices" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "LocationComponent",
+  name: "RoomComponent",
   computed: {
     title: {
       get () {
-        return this.$store.state.location.title
+        return this.$store.state.room.title
       }
     },
     items: {
       get () {
-        return this.$store.state.locationItems.items
+        return this.$store.state.roomItems.items
       }
     },
     showProgress: {
@@ -41,10 +41,10 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch("location/seen")
+    this.$store.dispatch("room/seen")
   },
   beforeDestroy () {
-    this.$store.dispatch("location/seen")
+    this.$store.dispatch("room/seen")
   },
   components: {
     "choices": () => import("components/ChoiceComponent.vue")

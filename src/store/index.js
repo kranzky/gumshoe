@@ -3,11 +3,11 @@ import Vuex from "vuex"
 
 import page from "./page"
 import list from "./list"
-import location from "./location"
-import item from "./item"
+import room from "./room"
+import entity from "./entity"
 import dialogue from "./dialogue"
-import task from "./task"
-import stats from "./stats"
+import quest from "./quest"
+import game from "./game"
 import progress from "./progress"
 
 Vue.use(Vuex)
@@ -23,15 +23,18 @@ export default function() {
       notebook: list('notebook'),
       quests: list('quests'),
       transcript: list('transcript'),
-      location,
-      locationItems: list('locationItems'),
-      locationChoices: list('locationChoices'),
-      item,
+      room,
+      roomItems: list('roomItems'),
+      roomChoices: list('roomChoices'),
+      entity,
+      entityItems: list('entityItems'),
+      entityChoices: list('entityChoices'),
       dialogue,
       dialogueItems: list('dialogueItems'),
       dialogueChoices: list('dialogueChoices'),
-      task,
-      stats,
+      quest,
+      questItems: list('questItems'),
+      game,
       progress
     },
     strict: process.env.DEV

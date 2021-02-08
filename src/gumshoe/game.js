@@ -13,7 +13,7 @@ class Game {
 
     this.$root.$on("game:action", this.handleAction)
     this.loadGame()
-    this.handleAction(process.env.DEV ? "demo" : "firstLocation")
+    this.handleAction(process.env.DEV ? "demo" : "firstRoom")
 
     this.state = 'running'
   }
@@ -24,26 +24,26 @@ class Game {
 
   loadGame () {
     this.data = {
-      firstLocation: () => {
-        // TODO: clear all state
-        this.$store.dispatch("location/clear")
-        this.$store.dispatch("location/title", "Nothingness.")
+      firstRoom: () => {
+        this.$store.dispatch("game/reset")
+        this.$store.dispatch("room/clear")
+        this.$store.dispatch("room/title", "Nothingness.")
         this.$store.dispatch("page/setTitle", "Nothingness.")
         setTimeout(() => {
           this.$store.dispatch("progress/delay", 'timePasses')
         }, 2000)
       },
       timePasses: () => {
-        this.$store.dispatch("locationItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
+        this.$store.dispatch("roomItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
         setTimeout(() => {
-          this.$store.dispatch("locationChoices/append", { text: "What is there to do but wait?", action: 'waitLonger' })
+          this.$store.dispatch("roomChoices/append", { text: "What is there to do but wait?", action: 'waitLonger' })
         }, 2000)
       },
       waitLonger: () => {
         this.$store.dispatch("progress/delay", 'firstDecision')
       },
       firstDecision: () => {
-        this.$store.dispatch("locationItems/append", { text: "Aeons pass." })
+        this.$store.dispatch("roomItems/append", { text: "Aeons pass." })
         setTimeout(() => {
           this.$store.dispatch("progress/delay", 'remember')
         }, 2000)
@@ -52,11 +52,11 @@ class Game {
         this.$store.dispatch("people/clear")
         this.$store.dispatch("people/append", { name: 'Your Lizard Brain', icon: 'face', action: "activateLizard" })
         setTimeout(() => {
-          this.$store.dispatch("locationItems/append", { text: "Something has changed." })
+          this.$store.dispatch("roomItems/append", { text: "Something has changed." })
         }, 2000)
       },
       activateLizard: () => {
-        this.$store.dispatch("locationItems/append", { text: "It is trying to attract your attention." })
+        this.$store.dispatch("roomItems/append", { text: "It is trying to attract your attention." })
         setTimeout(() => {
           this.$store.dispatch("dialogue/clear")
           this.$store.dispatch("dialogueItems/append", { heading: true, label: "Chat with Your Lizard Brain" })
@@ -82,15 +82,15 @@ class Game {
       talkLizard4: () => {
         this.$store.dispatch("dialogueItems/append", { name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
         this.$store.dispatch("dialogueItems/append", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
-        this.$store.dispatch("locationChoices/append", { text: "You need to pull yourself together.", action: 'everything' })
+        this.$store.dispatch("roomChoices/append", { text: "You need to pull yourself together.", action: 'everything' })
         this.$store.dispatch("dialogueItems/append", { heading: true, label: "Your Lizard Brain has disconnected." })
       },
       everything: () => {
-        this.$store.dispatch("locationItems/append", { text: "You awaken." })
+        this.$store.dispatch("roomItems/append", { text: "You awaken." })
 
-        setTimeout(() => { this.$store.dispatch("stats/player", "Yourself") }, 1000)
-        setTimeout(() => { this.$store.dispatch("stats/time", "SUN 11:00") }, 2000)
-        setTimeout(() => { this.$store.dispatch("stats/score", "1 / 100") }, 3000)
+        setTimeout(() => { this.$store.dispatch("game/player", "Yourself") }, 1000)
+        setTimeout(() => { this.$store.dispatch("game/time", "SUN 11:00") }, 2000)
+        setTimeout(() => { this.$store.dispatch("game/score", "1 / 100") }, 3000)
 
         setTimeout(() => {
           this.$store.dispatch("objects/clear")
@@ -139,28 +139,50 @@ class Game {
           this.$store.dispatch("quests/append", { name: 'Wake Up!', icon: 'assignment_late' })
         }, 9000)
       },
+      demoRoom: () => {
+        this.$store.dispatch("roomItems/append", { text: "More room description." })
+        this.$store.dispatch("roomChoices/append", { text: "More Content", action: 'demoRoom' })
+      },
+      demoDialogue: () => {
+        this.$store.dispatch("dialogueItems/append", { name: "NPC", text: ["Something."], time: "Date / Time" })
+        this.$store.dispatch("dialogueItems/append", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
+        this.$store.dispatch("dialogueChoices/append", { text: "More Content", action: 'demoDialogue' })
+      },
+      demoEntity: () => {
+        this.$store.dispatch("entityItems/append", { text: "More entity description." })
+        this.$store.dispatch("entityChoices/append", { text: "More Content", action: 'demoEntity' })
+      },
       demo: () => {
-        // TODO: clear all state
+        this.$store.dispatch("game/reset")
 
-        this.$store.dispatch("stats/player", "Player")
-        this.$store.dispatch("stats/time", "Date / Time")
-        this.$store.dispatch("stats/score", "Score")
+        this.$store.dispatch("game/player", "Player")
+        this.$store.dispatch("game/time", "Date / Time")
+        this.$store.dispatch("game/score", "Score")
 
-        this.$store.dispatch("location/clear")
-        this.$store.dispatch("location/title", "Location Name")
-        this.$store.dispatch("locationItems/append", { text: "Location description." })
-        this.$store.dispatch("locationChoices/append", { text: "Play Game", action: 'firstLocation' })
+        this.$store.dispatch("room/clear")
+        this.$store.dispatch("room/title", "Room Name")
+        this.$store.dispatch("roomItems/append", { text: "Room description." })
+        this.$store.dispatch("roomChoices/append", { text: "Play Game", action: 'firstRoom' })
+        this.$store.dispatch("roomChoices/append", { text: "More Content", action: 'demoRoom' })
 
-        this.$store.dispatch("item/clear")
-        this.$store.dispatch("item/title", "Item Name")
+        this.$store.dispatch("entity/clear")
+        this.$store.dispatch("entity/title", "Entity Name")
+        this.$store.dispatch("entityItems/append", { text: "Entity description." })
+        this.$store.dispatch("entityChoices/append", { text: "Play Game", action: 'firstRoom' })
+        this.$store.dispatch("entityChoices/append", { text: "More Content", action: 'demoEntity' })
 
         this.$store.dispatch("dialogue/clear")
         this.$store.dispatch("dialogueItems/append", { heading: true, label: "Chat with NPC" })
         this.$store.dispatch("dialogueItems/append", { name: "NPC", text: ["Something."], time: "Date / Time" })
-        this.$store.dispatch("dialogueChoices/append", { text: "Play Game", action: 'firstLocation' })
+        this.$store.dispatch("dialogueItems/append", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
+        this.$store.dispatch("dialogueChoices/append", { text: "Play Game", action: 'firstRoom' })
+        this.$store.dispatch("dialogueChoices/append", { text: "More Content", action: 'demoDialogue' })
 
-        this.$store.dispatch("task/clear")
-        this.$store.dispatch("task/title", "Quest Name")
+        this.$store.dispatch("quest/clear")
+        this.$store.dispatch("quest/title", "Quest Name")
+        this.$store.dispatch("quest/description", "Quest Description")
+        this.$store.dispatch("questItems/append", { name: "Task #1", done: false })
+        this.$store.dispatch("questItems/append", { name: "Task #2", done: true })
 
         this.$store.dispatch("transcript/clear")
         this.$store.dispatch("transcript/append", { heading: true, body: 'Chapter Title' })
@@ -174,15 +196,15 @@ class Game {
         this.$store.dispatch("people/append", { name: 'NPC #1', icon: 'face' })
 
         this.$store.dispatch("objects/clear")
-        this.$store.dispatch("objects/append", { name: 'Item #1', icon: 'label' })
+        this.$store.dispatch("objects/append", { name: 'Entity #1', icon: 'label' })
 
         this.$store.dispatch("inventory/clear")
-        this.$store.dispatch("inventory/append", { name: 'Item #2', icon: 'label' })
+        this.$store.dispatch("inventory/append", { name: 'Entity #2', icon: 'label' })
 
         this.$store.dispatch("notebook/clear")
         this.$store.dispatch("notebook/append", { name: 'Room #2', icon: 'place' })
         this.$store.dispatch("notebook/append", { name: 'NPC #2', icon: 'face' })
-        this.$store.dispatch("notebook/append", { name: 'Item #3', icon: 'label' })
+        this.$store.dispatch("notebook/append", { name: 'Entity #3', icon: 'label' })
 
         this.$store.dispatch("quests/clear")
         this.$store.dispatch("quests/append", { name: 'Quest #1', icon: 'assignment_turned_in' })

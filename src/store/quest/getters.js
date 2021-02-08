@@ -1,3 +1,3 @@
 export const showBadge = (state, getters, rootState, rootGetters) => {
-  return !state.seen
+  return !state.seen || rootGetters['entityItems/showBadge']
 }

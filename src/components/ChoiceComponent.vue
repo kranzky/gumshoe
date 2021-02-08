@@ -2,7 +2,7 @@
   <div>
     <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <q-separator spaced color="secondary" v-if="choices.length > 0" :key="1" />
-      <q-btn color="secondary" icon="keyboard_arrow_right" class="float-right" :label="label" v-if="choices.length > 0" :key="2">
+      <q-btn color="secondary" :icon="icon" class="float-right" :label="label" v-if="choices.length > 0" :key="2">
         <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice.id)">
@@ -23,6 +23,9 @@ export default {
   props: {
     label: {
       default: "Untitled"
+    },
+    icon: {
+      default: "report"
     },
     module: {
       default: "undefined"

@@ -12,7 +12,7 @@
           :sent="message.player"
         />
       </transition-group>
-      <choices label="What now?" module="dialogueChoices" style="margin-top: 18px;" />
+      <choices label="What now?" icon="textsms" module="dialogueChoices" style="margin-top: 18px;" />
     </div>
   </div>
 </template>
