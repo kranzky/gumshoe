@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      typing: _.isEmpty(this.message.label),
+      typing: _.isEmpty(this.message.label) && !this.message.seen,
       avatar: this.message.label ? undefined : "images/avatar.png",
       lines: [],
       remain: this.message.text
@@ -37,13 +37,20 @@ export default {
           if (this.remain.length > 0) {
             this.typing = true
             this.showMessage()
+          } else {
+            this.$store.dispatch(`dialogueItems/seen`, this.message.id)
           }
         }
       }, 1000)
     }
   },
   mounted () {
-    this.showMessage()
+    if (!this.message.seen) {
+      this.showMessage()
+    } else {
+      this.lines = this.message.text
+      this.remain = []
+    }
   }
 }
 </script>
