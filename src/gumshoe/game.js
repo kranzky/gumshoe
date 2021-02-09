@@ -36,7 +36,7 @@ class Game {
       timePasses: () => {
         this.$store.dispatch("roomItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
         setTimeout(() => {
-          this.$store.dispatch("roomChoices/append", { text: "What is there to do but wait?", action: 'waitLonger' })
+          this.$store.dispatch("roomChoices/append", { text: "What is there to do but wait?", action: 'waitLonger', icon: 'schedule' })
         }, 2000)
       },
       waitLonger: () => {
@@ -141,11 +141,9 @@ class Game {
       },
       demoRoom: () => {
         this.$store.dispatch("roomItems/append", { text: "More room description." })
-        this.$store.dispatch("roomChoices/append", { text: "More Content", action: 'demoRoom' })
       },
       demoRoomAppend: () => {
         this.$store.dispatch("roomItems/append", { text: "More room description." })
-        this.$store.dispatch("roomChoices/append", { text: "Wait...", action: 'demoRoomWait' })
       },
       demoRoomWait: () => {
         this.$store.dispatch("progress/delay", 'demoRoomAppend')
@@ -153,23 +151,19 @@ class Game {
       demoDialogue: () => {
         this.$store.dispatch("dialogueItems/append", { name: "NPC", text: ["Something."], time: "Date / Time" })
         this.$store.dispatch("dialogueItems/append", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
-        this.$store.dispatch("dialogueChoices/append", { text: "More Content", action: 'demoDialogue' })
       },
       demoDialogueAppend: () => {
         this.$store.dispatch("dialogueItems/append", { name: "NPC", text: ["Something."], time: "Date / Time" })
         this.$store.dispatch("dialogueItems/append", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
-        this.$store.dispatch("dialogueChoices/append", { text: "Wait...", action: 'demoDialogueWait' })
       },
       demoDialogueWait: () => {
         this.$store.dispatch("progress/delay", 'demoDialogueAppend')
       },
       demoEntity: () => {
         this.$store.dispatch("entityItems/append", { text: "More entity description." })
-        this.$store.dispatch("entityChoices/append", { text: "More Content", action: 'demoEntity' })
       },
       demoEntityAppend: () => {
         this.$store.dispatch("entityItems/append", { text: "More entity description." })
-        this.$store.dispatch("entityChoices/append", { text: "Wait...", action: 'demoEntityWait' })
       },
       demoEntityWait: () => {
         this.$store.dispatch("progress/delay", 'demoEntityAppend')
@@ -186,7 +180,7 @@ class Game {
         this.$store.dispatch("roomItems/append", { text: "Room description." })
         this.$store.dispatch("roomChoices/append", { text: "Play Game", action: 'firstRoom' })
         this.$store.dispatch("roomChoices/append", { text: "More Content", action: 'demoRoom' })
-        this.$store.dispatch("roomChoices/append", { text: "Wait...", action: 'demoRoomWait' })
+        this.$store.dispatch("roomChoices/append", { text: "Wait...", action: 'demoRoomWait', icon: 'schedule' })
 
         this.$store.dispatch("entity/clear")
         this.$store.dispatch("entity/title", "Entity Name")

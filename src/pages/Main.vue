@@ -9,7 +9,7 @@
     </q-tab-panels>
     <q-page-sticky position="top" class="bg-accent text-white shadow-2">
       <q-toolbar>
-        <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+        <transition-group appear enter-active-class="animated rubberBand" leave-active-class="animated fadeOut">
           <q-chip icon="today" color="primary" v-if="show.time" key="1">{{ game.time }}</q-chip>
           <q-chip icon="face" color="primary" v-if="show.player" key="2">{{ game.player }}</q-chip>
           <q-chip icon="star" color="primary" v-if="show.score" key="3">{{ game.score }}</q-chip>

@@ -9,11 +9,11 @@ export function delay(store, action) {
       if (value >= 1) {
         clearInterval(interval)
         setTimeout(() => {
-          this.commit("progress/hide")
+          root.$emit("game:action", action)
           setTimeout(() => {
-            root.$emit("game:action", action)
-          }, 500)
-        }, 1000)
+            this.commit("progress/hide")
+          }, 1000)
+        }, 500)
       }
     }, 1000)
     this.commit("progress/show")
