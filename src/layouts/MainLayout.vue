@@ -4,23 +4,23 @@
     <q-layout view="lHr LpR fFf" v-else>
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat icon="public" :label="headerLabel ? 'World' : ''" @click="left = !left" v-if="show.world">
-            <q-badge class="absolute-top-left" color="negative" transparent v-if="badge.world > 0 && !left">
+          <q-btn dense flat icon="public" :label="headerLabel ? 'World' : ''" @click="world = !world" v-if="show.world">
+            <q-badge class="absolute-top-left" color="negative" transparent v-if="badge.world > 0 && !world">
               {{ badge.world }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
-          <q-btn dense flat icon-right="person" :label="headerLabel ? 'Player' : ''" @click="right = !right" v-if="show.player">
-            <q-badge class="absolute-top-right" style="z-index: 1;" color="negative" transparent v-if="badge.player > 0 && !right">
+          <q-btn dense flat icon-right="person" :label="headerLabel ? 'Player' : ''" @click="player = !player" v-if="show.player">
+            <q-badge class="absolute-top-right" style="z-index: 1;" color="negative" transparent v-if="badge.player > 0 && !player">
               {{ badge.player }}
             </q-badge>
           </q-btn>
         </q-toolbar>
       </q-header>
-      <q-drawer no-swipe-open no-swipe-close v-model="left" side="left" elevated>
+      <q-drawer no-swipe-open no-swipe-close v-model="world" side="left" elevated>
         <world />
       </q-drawer>
-      <q-drawer no-swipe-open no-swipe-close v-model="right" side="right" elevated>
+      <q-drawer no-swipe-open no-swipe-close v-model="player" side="right" elevated>
         <player />
       </q-drawer>
       <q-page-container>
@@ -69,16 +69,14 @@ export default {
   mixins: [LoggerMixin, TabMixin],
   data () {
     return {
-      showSplash: !process.env.DEV,
-      left: false,
-      right: false
+      showSplash: !process.env.DEV
     }
   },
   methods: {
     hide () {
       if (this.$q.screen.lt.md) {
-        this.left = false
-        this.right = false
+        this.world = false
+        this.player = false
       }
     }
   },
@@ -99,7 +97,7 @@ export default {
   },
   computed: {
     pageTitle: {
-      get() {
+      get () {
         return this.$store.state.page.title
       }
     },
@@ -137,6 +135,22 @@ export default {
     footerLabel: {
       get () {
         return this.$store.state.page.width > 540
+      }
+    },
+    world: {
+      get () {
+        return this.$store.state.page.world
+      },
+      set (open) {
+        this.$store.commit("page/world", open)
+      }
+    },
+    player: {
+      get () {
+        return this.$store.state.page.player
+      },
+      set (open) {
+        this.$store.commit("page/player", open)
       }
     }
   },
