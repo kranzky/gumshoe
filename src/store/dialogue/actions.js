@@ -12,6 +12,4 @@ export function clear(store) {
 
 export function seen(store) {
   this.commit("dialogue/seen")
-  this.commit("dialogueItems/seen")
-  this.commit("dialogueChoices/seen")
 }

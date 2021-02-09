@@ -17,5 +17,4 @@ export function title(store, title) {
 export function seen(store) {
   this.commit("entity/seen")
   this.commit("entityItems/seen")
-  this.commit("entityChoices/seen")
 }

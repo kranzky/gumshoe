@@ -17,5 +17,4 @@ export function title(store, title) {
 export function seen(store) {
   this.commit("room/seen")
   this.commit("roomItems/seen")
-  this.commit("roomChoices/seen")
 }

@@ -42,6 +42,8 @@ export default {
           } else {
             this.$store.dispatch(`dialogueItems/seen`, this.message.id)
           }
+        } else {
+          this.$store.dispatch(`dialogueItems/seen`, this.message.id)
         }
       }, 1000)
     }
