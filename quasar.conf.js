@@ -85,7 +85,7 @@ module.exports = function(ctx) {
       }
     },
 
-    animations: ["fadeIn", "fadeOut", "fadeInDown", "fadeOutUp", "rubberBand"],
+    animations: ["fadeIn", "fadeOut", "fadeInDown", "fadeOutUp", "zoomIn", "zoomOut"],
 
     ssr: {
       pwa: false
