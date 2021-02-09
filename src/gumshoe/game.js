@@ -100,7 +100,7 @@ class Game {
           setTimeout(() => {
             this.$store.dispatch("roomChoices/append", { text: "Show demo content.", action: 'demo' })
             this.$store.dispatch("dialogueItems/append", { heading: true, label: "Your Lizard Brain has disconnected." })
-          }, 4000)
+          }, 5000)
         }, 2000)
       },
       demoRoom: () => {

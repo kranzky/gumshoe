@@ -35,8 +35,10 @@ export default {
           this.lines.push(_.first(this.remain))
           this.remain = _.drop(this.remain)
           if (this.remain.length > 0) {
-            this.typing = true
-            this.showMessage()
+            setTimeout (() => {
+              this.typing = true
+              this.showMessage()
+            }, 500)
           } else {
             this.$store.dispatch(`dialogueItems/seen`, this.message.id)
           }
