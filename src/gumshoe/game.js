@@ -36,7 +36,7 @@ class Game {
       timePasses: () => {
         this.$store.dispatch("roomItems/append", { text: "A lingering memory of utter chaos punctuates the void." })
         setTimeout(() => {
-          this.$store.dispatch("roomChoices/append", { text: "What is there to do but wait?", action: 'waitLonger', icon: 'schedule' })
+          this.$store.dispatch("roomChoices/append", { text: "What is there to do but wait?", action: 'waitLonger', icon: 'update' })
         }, 2000)
       },
       waitLonger: () => {
@@ -180,14 +180,14 @@ class Game {
         this.$store.dispatch("roomItems/append", { text: "Room description." })
         this.$store.dispatch("roomChoices/append", { text: "Play Game", action: 'firstRoom' })
         this.$store.dispatch("roomChoices/append", { text: "More Content", action: 'demoRoom' })
-        this.$store.dispatch("roomChoices/append", { text: "Wait...", action: 'demoRoomWait', icon: 'schedule' })
+        this.$store.dispatch("roomChoices/append", { text: "Wait...", action: 'demoRoomWait', icon: 'update' })
 
         this.$store.dispatch("entity/clear")
         this.$store.dispatch("entity/title", "Entity Name")
         this.$store.dispatch("entityItems/append", { text: "Entity description." })
         this.$store.dispatch("entityChoices/append", { text: "Play Game", action: 'firstRoom' })
         this.$store.dispatch("entityChoices/append", { text: "More Content", action: 'demoEntity' })
-        this.$store.dispatch("entityChoices/append", { text: "Wait...", action: 'demoEntityWait' })
+        this.$store.dispatch("entityChoices/append", { text: "Wait...", action: 'demoEntityWait', icon: 'update' })
 
         this.$store.dispatch("dialogue/clear")
         this.$store.dispatch("dialogueItems/append", { heading: true, label: "Chat with NPC" })
@@ -195,7 +195,7 @@ class Game {
         this.$store.dispatch("dialogueItems/append", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
         this.$store.dispatch("dialogueChoices/append", { text: "Play Game", action: 'firstRoom' })
         this.$store.dispatch("dialogueChoices/append", { text: "More Content", action: 'demoDialogue' })
-        this.$store.dispatch("dialogueChoices/append", { text: "Wait...", action: 'demoDialogueWait' })
+        this.$store.dispatch("dialogueChoices/append", { text: "Wait...", action: 'demoDialogueWait', icon: 'update' })
 
         this.$store.dispatch("quest/clear")
         this.$store.dispatch("quest/title", "Quest Name")
