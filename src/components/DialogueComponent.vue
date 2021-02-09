@@ -2,15 +2,7 @@
   <div class="row justify-center">
     <div style="max-width:700px; width: 100%;">
       <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <q-chat-message v-for="message in messages" size=6
-          :key="message.id"
-          :label="message.label"
-          :name="message.name"
-          :text="message.text"
-          :stamp="message.time"
-          :avatar="avatar(message)"
-          :sent="message.player"
-        />
+        <message v-for="message in messages" :message="message" :key="message.id" />
       </transition-group>
       <choices label="What now?" icon="textsms" module="dialogueChoices" style="margin-top: 18px;" />
     </div>
@@ -27,11 +19,6 @@ export default {
       }
     }
   },
-  methods: {
-    avatar (message) {
-      return message.label ? undefined : "images/avatar.png"
-    }
-  },
   mounted () {
     this.$store.dispatch("dialogue/seen")
   },
@@ -39,7 +26,8 @@ export default {
     this.$store.dispatch("dialogue/seen")
   },
   components: {
-    "choices": () => import("components/ChoiceComponent.vue")
+    "choices": () => import("components/ChoiceComponent.vue"),
+    "message": () => import("components/MessageComponent.vue")
   }
 }
 </script>
