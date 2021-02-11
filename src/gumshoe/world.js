@@ -2,7 +2,7 @@ import Room from './room.js'
 
 class World {
   constructor () {
-    this.rooms = []
+    this.rooms = {}
     this.currentRoom = null
   }
 
@@ -10,13 +10,21 @@ class World {
     if (_.isNull(this.currentRoom)) {
       return;
     }
-    this.currentRoom.render(store)
+    let room = this.rooms[this.currentRoom]
+    room.render(store, this)
+  }
+
+  addRoom (name) {
+    let room = new Room(name)
+    this.rooms[room.id] = room
+    return room
   }
 
   spawn () {
-    let room = new Room("Jason's Office")
-    this.rooms.push(room)
-    this.currentRoom = room
+    let room = this.addRoom("Jason's Office")
+    let hallway = this.addRoom("Hallway")
+    room.addExit(hallway)
+    this.currentRoom = room.id
   }
 }
 

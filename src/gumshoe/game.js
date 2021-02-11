@@ -20,6 +20,7 @@ class Game {
 
     this.$root.$on("game:wait", this.wait)
     this.$root.$on("game:action", this.handleAction)
+    this.$root.$on("item:clicked", this.select)
     this.loadGame()
     this.handleAction(process.env.DEV ? 'world' : 'firstRoom')
 
@@ -50,6 +51,19 @@ class Game {
     console.debug(`action "${action}"`) // eslint-disable-line no-console
     this.data[action]()
     this.update()
+  }
+
+  select (item) {
+    if (this != window.game) {
+      window.game.select(item)
+      return
+    }
+    if (item.type == 'room') {
+      console.debug(`move to "${item.name}"`) // eslint-disable-line no-console
+      this.world.currentRoom = item.id
+      this.store.set("page", "tab", 'room')
+      this.update()
+    }
   }
 
   loadGame () {
@@ -239,6 +253,7 @@ class Game {
     if (this.state !== 'running') {
       return
     }
+    this.$root.$off("item:clicked", this.select)
     this.$root.$off("game:action", this.handleAction)
     this.$root.$off("game:wait", this.wait)
     window.game = undefined

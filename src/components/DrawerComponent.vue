@@ -18,7 +18,7 @@
         </q-item>
       </transition-group>
     </q-list>
-    <p v-else class="text-body1 text-center" style="padding-top: 10px;">...  emptiness ...</p>
+    <p v-else class="text-body1 text-center" style="padding-top: 10px;">...</p>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
         this.$root.$emit("game:action", item.action)
       }
       this.$store.dispatch(`${this.module}/seen`, id)
-      this.$root.$emit("item:clicked")
+      this.$root.$emit("item:clicked", item)
     }
   }
 }

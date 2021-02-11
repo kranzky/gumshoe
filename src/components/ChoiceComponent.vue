@@ -3,7 +3,9 @@
     <q-linear-progress size="xs" color="secondary" :value="progressValue" style="margin-bottom: 8px;" />
     <transition appear enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
       <q-btn color="secondary" :icon="icon" class="float-right" :label="label" v-if="choices.length > 0 && !showProgress" :key="3">
-        <q-badge color="negative" floating class="gumshoe-badge" v-if="showBadge" />
+        <q-badge color="negative" floating transparent v-if="showBadge">
+          {{ badgeCount }}
+        </q-badge>
         <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade" @show="seen">
           <q-list style="min-width: 100px">
             <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice.id)">
@@ -54,6 +56,11 @@ export default {
     showBadge: {
       get () {
         return this.$store.getters[`${this.module}/showBadge`]
+      }
+    },
+    badgeCount: {
+      get () {
+        return this.$store.getters[`${this.module}/badgeCount`]
       }
     }
   },

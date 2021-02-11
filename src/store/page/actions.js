@@ -1,7 +1,11 @@
 export function title(store, title) {
-  let root = this.$router.app;
+  let root = this.$router.app
   if (_.isUndefined(title)) {
-    title = "Gumshoe";
+    title = "Gumshoe"
   }
-  this.commit("page/title", title);
+  this.commit("page/title", title)
+}
+
+export function tab(store, name) {
+  this.commit("page/tab", name)
 }

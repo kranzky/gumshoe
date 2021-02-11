@@ -15,7 +15,9 @@ export function clear(state) {
 }
 
 export function append(state, item) {
-  item.id = uid()
+  if (_.isEmpty(item.id)) {
+    item.id = uid()
+  }
   item.seen = false
   state.items.push(item)
 }

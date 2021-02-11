@@ -1,7 +1,10 @@
+import { uid } from 'quasar'
+
 class Entity {
-  constructor (name) {
+  constructor (name, type) {
+    this.id = uid()
+    this.type = type
     this.name = name
-    this.contents = []
   }
 
   render (store) {
