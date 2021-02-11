@@ -1,5 +1,6 @@
 import Store from './store.js'
 import Stats from './stats.js'
+import World from './world.js'
 
 class Game {
   constructor (root, store) {
@@ -7,6 +8,7 @@ class Game {
     this.$root = root
     this.store = new Store(store)
     this.stats = new Stats()
+    this.world = new World()
   }
 
   run () {
@@ -17,7 +19,7 @@ class Game {
 
     this.$root.$on("game:action", this.handleAction)
     this.loadGame()
-    this.handleAction(process.env.DEV ? 'demo' : 'firstRoom')
+    this.handleAction(process.env.DEV ? 'world' : 'firstRoom')
 
     this.state = 'running'
   }
@@ -25,6 +27,7 @@ class Game {
   update (delta) {
     this.stats.addTime()
     this.stats.render(this.store)
+    this.world.render(this.store)
   }
 
   handleAction (action) {
@@ -39,6 +42,10 @@ class Game {
 
   loadGame () {
     this.data = {
+      world: () => {
+        this.store.reset()
+        this.world.spawn()
+      },
       firstRoom: () => {
         this.store.reset()
         this.store.clear('room')
