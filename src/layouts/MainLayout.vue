@@ -129,12 +129,12 @@ export default {
     },
     headerLabel: {
       get () {
-        return this.$store.state.page.width > 720
+        return this.$store.state.page.width > 640
       }
     },
     footerLabel: {
       get () {
-        return this.$store.state.page.width > 540
+        return this.$store.state.page.width > 400
       }
     },
     world: {
