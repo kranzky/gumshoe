@@ -11,18 +11,27 @@ class Room extends Entity {
 
   render (store, world) {
     store.clear('room')
-    store.clear('people')
-    store.clear('objects')
-    store.clear('places')
     setTimeout(() => {
       store.set("room", "title", this.name)
       store.set("page", "title", this.name)
-      store.add("roomChoices", { text: "Start Demo", action: 'demo' })
-      _.each([...this.exits], (id) => {
-        let exit = world.rooms[id]
-        store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place' })
+      _.each(this.log, (text) => {
+        store.add("roomItems", { text: text })
       })
-    })
+      store.clear('people')
+      store.clear('objects')
+      store.clear('places')
+      setTimeout(() => {
+        store.add("roomChoices", { text: "Start Demo", action: 'demo' })
+        _.each([...this.exits], (id) => {
+          let exit = world.rooms[id]
+          store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place' })
+        })
+      })
+    }, 500)
+  }
+
+  addLog (text) {
+    this.log.push(text)
   }
 
   addExit (other) {

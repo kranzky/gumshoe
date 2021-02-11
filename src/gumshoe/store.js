@@ -26,5 +26,13 @@ class Store {
   delay (action) {
     this.$store.dispatch("progress/delay", action)
   }
+
+  hide (name) {
+    this.$store.commit(`${name}/loading`, true)
+  }
+
+  show (name) {
+    this.$store.commit(`${name}/loading`, false)
+  }
 }
 export default Store

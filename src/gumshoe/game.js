@@ -23,7 +23,6 @@ class Game {
     this.$root.$on("item:clicked", this.select)
     this.loadGame()
     this.handleAction(process.env.DEV ? 'world' : 'firstRoom')
-
     this.state = 'running'
   }
 
@@ -59,6 +58,7 @@ class Game {
       return
     }
     if (item.type == 'room') {
+      this.$root.$emit("punk:info", `You go to "${item.name}"`)
       console.debug(`move to "${item.name}"`) // eslint-disable-line no-console
       this.world.currentRoom = item.id
       this.store.set("page", "tab", 'room')
@@ -72,6 +72,7 @@ class Game {
         this.useWorld = true
         this.store.reset()
         this.world.spawn()
+        this.stats.showTime()
       },
       firstRoom: () => {
         this.useWorld = false

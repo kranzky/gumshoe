@@ -29,9 +29,26 @@ export default {
   name: "Main",
   title: "Gumshoe v" + process.env.PACKAGE_VERSION,
   mixins: [TitleMixin, TabMixin],
+  data () {
+    return {
+      loading: 0
+    }
+  },
   methods: {
     onResize (size) {
       this.$store.commit('page/width', size.width)
+    },
+    showLoading () {
+      if (this.loading == 0) {
+        this.$q.loading.show()
+      }
+      this.loading += 1
+    },
+    hideLoading () {
+      this.loading -= 1
+      if (this.loading == 0) {
+        this.$q.loading.hide()
+      }
     }
   },
   computed:  {
@@ -71,10 +88,14 @@ export default {
   },
   mounted () {
     this.$q.dark.set(true)
+    this.$root.$on("page:showLoading", this.showLoading)
+    this.$root.$on("page:hideLoading", this.hideLoading)
     this.$game.run()
   },
   beforeDestroy () {
     this.$game.stop()
+    this.$root.$off("page:showLoading", this.showLoading)
+    this.$root.$off("page:hideLoading", this.hideLoading)
     this.$game = undefined
   }
 }
