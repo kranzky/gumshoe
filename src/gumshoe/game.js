@@ -1,87 +1,5 @@
-class Store {
-  constructor (store) {
-    this.$store = store
-  }
-
-  reset () {
-    console.debug('reset ui') // eslint-disable-line no-console
-    this.$store.dispatch("game/reset")
-  }
-
-  clear (component) {
-    console.debug(`clear ${component}`) // eslint-disable-line no-console
-    this.$store.dispatch(`${component}/clear`)
-  }
-
-  set (component, name, value) {
-    console.debug(`set ${component} ${name} to "${value}"`) // eslint-disable-line no-console
-    this.$store.dispatch(`${component}/${name}`, value)
-  }
-
-  add (component, data) {
-    console.debug(`add ${component} "${data.name || data.text}"`) // eslint-disable-line no-console
-    this.$store.dispatch(`${component}/append`, data)
-  }
-
-  delay (action) {
-    this.$store.dispatch("progress/delay", action)
-  }
-}
-
-class Stats {
-  constructor () {
-    this.score = 0
-    this.time = 0
-    this.player = null
-    this.show = {
-      score: false,
-      time: false,
-      player: false
-    }
-  }
-
-  render (store) {
-    if (this.show.score) {
-      store.set('game', 'score', `${this.score} / 100`)
-    }
-
-    if (this.show.time) {
-      let date = new Date('2021-02-12 17:36:40')
-      date.setSeconds(date.getSeconds() + this.time * 41)
-      store.set('game', 'time', `Fri ${date.getHours()}:${date.getMinutes()}`)
-    }
-
-    if (this.show.player) {
-      store.set('game', 'player', this.player)
-    }
-  }
-
-  showScore() {
-    this.show.score = true
-  }
-
-  addScore () {
-    if (this.score < 100) {
-      this.score += 1
-    }
-  }
-
-  showTime() {
-    this.show.time = true
-  }
-
-  addTime (delta = 1) {
-    this.time += delta
-  }
-
-  showPlayer() {
-    this.show.player = true
-  }
-
-  setPlayer (name) {
-    this.player = name
-  }
-}
+import Store from './store.js'
+import Stats from './stats.js'
 
 class Game {
   constructor (root, store) {
@@ -110,9 +28,13 @@ class Game {
   }
 
   handleAction (action) {
+    if (this != window.game) {
+      window.game.handleAction(action)
+      return
+    }
     console.debug(`action "${action}"`) // eslint-disable-line no-console
-    window.game.data[action]()
-    window.game.update()
+    this.data[action]()
+    this.update()
   }
 
   loadGame () {
@@ -286,7 +208,6 @@ class Game {
         this.store.clear('quests')
         this.store.add("quests", { name: 'Quest #1', icon: 'assignment_turned_in' })
         this.store.add("quests", { name: 'Quest #2', icon: 'assignment_late' })
-
       }
     }
   }
