@@ -9,6 +9,7 @@ class Room extends Entity {
     store.clear('room')
     store.set("room", "title", this.name)
     store.set("page", "title", this.name)
+    store.add("roomChoices", { text: "Start Demo", action: 'demo' })
   }
 }
 

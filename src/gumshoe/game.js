@@ -9,6 +9,7 @@ class Game {
     this.store = new Store(store)
     this.stats = new Stats()
     this.world = new World()
+    this.useWorld = false
   }
 
   run () {
@@ -24,10 +25,12 @@ class Game {
     this.state = 'running'
   }
 
-  update (delta) {
+  update () {
     this.stats.addTime()
     this.stats.render(this.store)
-    this.world.render(this.store)
+    if (this.useWorld) {
+      this.world.render(this.store)
+    }
   }
 
   handleAction (action) {
@@ -43,10 +46,12 @@ class Game {
   loadGame () {
     this.data = {
       world: () => {
+        this.useWorld = true
         this.store.reset()
         this.world.spawn()
       },
       firstRoom: () => {
+        this.useWorld = false
         this.store.reset()
         this.store.clear('room')
         setTimeout(() => {
@@ -155,6 +160,7 @@ class Game {
         this.store.delay('demoEntityAppend')
       },
       demo: () => {
+        this.useWorld = false
         this.store.reset()
 
         this.stats.showTime()
@@ -164,6 +170,7 @@ class Game {
 
         this.store.clear('room')
         this.store.set('room', 'title', "Room Name")
+        this.store.set('page', 'title', "Room Name")
         this.store.add('roomItems', { text: "Room description." })
         this.store.add("roomChoices", { text: "Play Game", action: 'firstRoom' })
         this.store.add("roomChoices", { text: "More Content", action: 'demoRoom' })
