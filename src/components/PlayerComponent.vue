@@ -19,7 +19,7 @@
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
       <q-tab-panel name="inventory" style="padding: 0;" v-if="show.inventory"><drawer title="Inventory" module="inventory" /></q-tab-panel>
-      <q-tab-panel name="notebook" style="padding: 0;" v-if="show.notebook"><drawer title="Notebook" module="notebook" /></q-tab-panel>
+      <q-tab-panel name="notebook" style="padding: 0;" v-if="show.notebook"><drawer title="Notes" module="notebook" /></q-tab-panel>
       <q-tab-panel name="quests" style="padding: 0;" v-if="show.quests"><drawer title="Quests" module="quests" /></q-tab-panel>
     </q-tab-panels>
   </div>

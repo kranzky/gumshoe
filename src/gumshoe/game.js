@@ -18,6 +18,7 @@ class Game {
     }
     window.game = this
 
+    this.$root.$on("game:wait", this.wait)
     this.$root.$on("game:action", this.handleAction)
     this.loadGame()
     this.handleAction(process.env.DEV ? 'world' : 'firstRoom')
@@ -26,11 +27,20 @@ class Game {
   }
 
   update () {
-    this.stats.addTime()
-    this.stats.render(this.store)
+    this.wait()
     if (this.useWorld) {
       this.world.render(this.store)
     }
+  }
+
+  wait () {
+    if (this != window.game) {
+      window.game.wait()
+      return
+    }
+    console.debug('time passes...') // eslint-disable-line no-console
+    this.stats.addTime()
+    this.stats.render(this.store)
   }
 
   handleAction (action) {
@@ -231,6 +241,7 @@ class Game {
       return
     }
     this.$root.$off("game:action", this.handleAction)
+    this.$root.$off("game:wait", this.wait)
     window.game = undefined
     this.state = 'stopped'
   }
