@@ -38,8 +38,7 @@ class Game {
       window.game.wait()
       return
     }
-    console.debug('time passes...') // eslint-disable-line no-console
-    this.stats.addTime()
+    this.stats.wait()
     this.stats.render(this.store)
   }
 

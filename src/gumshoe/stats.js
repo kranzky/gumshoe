@@ -1,5 +1,6 @@
 class Stats {
-  constructor () {
+  constructor (epoch = '2021-02-12 17:36:40') {
+    this.epoch = epoch
     this.score = 0
     this.time = 0
     this.player = null
@@ -8,6 +9,7 @@ class Stats {
       time: false,
       player: false
     }
+    this.days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
   }
 
   render (store) {
@@ -16,9 +18,8 @@ class Stats {
     }
 
     if (this.show.time) {
-      let date = new Date('2021-02-12 17:36:40')
-      date.setSeconds(date.getSeconds() + this.time * 41)
-      store.set('game', 'time', `Fri ${date.getHours()}:${date.getMinutes()}`)
+      let date = this.getDate()
+      store.set('game', 'time', `${this.days[date.getDay()]} ${date.getHours()}:${date.getMinutes()}`)
     }
 
     if (this.show.player) {
@@ -26,7 +27,13 @@ class Stats {
     }
   }
 
-  showScore() {
+  getDate () {
+    let date = new Date(this.epoch)
+    date.setSeconds(date.getSeconds() + this.time * 41)
+    return date
+  }
+
+  showScore () {
     this.show.score = true
   }
 
@@ -40,8 +47,9 @@ class Stats {
     this.show.time = true
   }
 
-  addTime (delta = 1) {
-    this.time += delta
+  wait () {
+    this.time += 1
+    console.debug(`time passes... [${this.getDate().toISOString()}]`) // eslint-disable-line no-console
   }
 
   showPlayer() {
