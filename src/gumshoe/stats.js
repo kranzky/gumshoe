@@ -4,12 +4,8 @@ class Stats {
     this.score = 0
     this.time = 0
     this.player = null
-    this.show = {
-      score: false,
-      time: false,
-      player: false
-    }
     this.days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    this.clear()
   }
 
   render (store) {
@@ -27,6 +23,14 @@ class Stats {
 
     if (this.show.player) {
       store.set('game', 'player', this.player)
+    }
+  }
+
+  clear () {
+    this.show = {
+      score: false,
+      time: false,
+      player: false
     }
   }
 

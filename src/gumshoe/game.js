@@ -78,17 +78,22 @@ class Game {
     this.data = {
       world: () => {
         this.useWorld = true
+        this.stats.clear()
         this.store.reset()
         this.world.spawn()
         this.stats.showTime()
       },
       prologue: () => {
         this.useWorld = false
+        this.stats.clear()
         this.store.reset()
         this.store.clear('room')
+        this.store.set("page", "title", null)
+        this.store.hide('room')
         setTimeout(() => {
           this.store.set("room", "title", "Nothingness.")
           this.store.set("page", "title", "Nothingness.")
+          this.store.show('room')
           setTimeout(() => {
             this.store.add('roomItems', { text: "A lingering memory of utter chaos punctuates the void." })
             setTimeout(() => {
@@ -193,6 +198,7 @@ class Game {
       },
       demo: () => {
         this.useWorld = false
+        this.stats.clear()
         this.store.reset()
 
         this.stats.showTime()
