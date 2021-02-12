@@ -35,3 +35,7 @@ export function seen(state, id) {
     item.seen = true
   }
 }
+
+export function loading(state, loading) {
+  state.loading = loading
+}

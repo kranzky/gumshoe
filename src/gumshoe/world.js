@@ -11,10 +11,14 @@ class World {
       return;
     }
     store.hide('room')
+    store.hide('places')
     setTimeout(() => {
       let room = this.rooms[this.currentRoom]
       room.render(store, this)
-      setTimeout(() => { store.show('room') }, 800)
+      setTimeout(() => {
+        store.show('room')
+        store.show('places')
+      }, 800)
     })
   }
 
