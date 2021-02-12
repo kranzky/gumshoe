@@ -20,7 +20,7 @@
             </q-item>
           </transition-group>
         </q-list>
-        <p v-else class="text-body1 text-center" style="padding-top: 10px;">...</p>
+        <p v-else class="text-center text-weight-light text-italic" style="padding-top: 10px;">{{ empty }}</p>
       </div>
     </transition>
   </div>
@@ -32,6 +32,9 @@ export default {
   props: {
     title: {
       default: "Untitled"
+    },
+    empty: {
+      default: "..."
     },
     module: {
       default: "undefined"

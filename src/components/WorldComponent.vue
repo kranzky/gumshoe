@@ -18,9 +18,9 @@
       </q-tab>
     </q-tabs>
     <q-tab-panels v-model="tab" animated swipeable transition-prev="slide-right" transition-next="slide-left" style="height: 100%;">
-      <q-tab-panel name="places" style="padding: 0;" v-if="show.places"><drawer title="Exits" module="places" /></q-tab-panel>
-      <q-tab-panel name="people" style="padding: 0;" v-if="show.people"><drawer title="NPCs" module="people" /></q-tab-panel>
-      <q-tab-panel name="objects" style="padding: 0;" v-if="show.objects"><drawer title="Items" module="objects" /></q-tab-panel>
+      <q-tab-panel name="places" style="padding: 0;" v-if="show.places"><drawer title="Exits" module="places" empty="There is nowhere to go."/></q-tab-panel>
+      <q-tab-panel name="people" style="padding: 0;" v-if="show.people"><drawer title="NPCs" module="people" empty="There is nobody here."/></q-tab-panel>
+      <q-tab-panel name="objects" style="padding: 0;" v-if="show.objects"><drawer title="Items" module="objects" empty="There is nothing here."/></q-tab-panel>
     </q-tab-panels>
   </div>
 </template>
