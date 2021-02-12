@@ -19,7 +19,10 @@ class Stats {
 
     if (this.show.time) {
       let date = this.getDate()
-      store.set('game', 'time', `${this.days[date.getDay()]} ${date.getHours()}:${date.getMinutes()}`)
+      let day = this.days[date.getDay()]
+      let hour = date.getHours().toString().padStart(2, '0')
+      let minute = date.getMinutes().toString().padStart(2, '0')
+      store.set('game', 'time', `${day} ${hour}:${minute}`)
     }
 
     if (this.show.player) {

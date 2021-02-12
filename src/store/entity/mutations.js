@@ -21,3 +21,7 @@ export function title(state, title) {
 export function seen(state) {
   state.seen = true
 }
+
+export function loading(state, loading) {
+  state.loading = loading
+}

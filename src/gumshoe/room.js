@@ -21,11 +21,15 @@ class Room extends Entity {
       store.clear('objects')
       store.clear('places')
       setTimeout(() => {
-        store.add("roomChoices", { text: "Start Demo", action: 'demo' })
         _.each([...this.exits], (id) => {
           let exit = world.rooms[id]
           store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
         })
+        _.each([...this.items], (id) => {
+          let item = world.items[id]
+          store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
+        })
+        store.add("roomChoices", { text: "Start Demo", action: 'demo' })
       })
     }, 500)
   }
@@ -34,9 +38,14 @@ class Room extends Entity {
     this.log.push(text)
   }
 
-  addExit (other) {
-    this.exits.add(other.id)
-    other.exits.add(this.id)
+  addExit (room) {
+    this.exits.add(room.id)
+    room.exits.add(this.id)
+  }
+
+  addItem (item) {
+    this.items.add(item.id)
+    item.setRoom(this.id)
   }
 
   getRooms () {

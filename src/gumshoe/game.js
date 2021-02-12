@@ -60,9 +60,16 @@ class Game {
     console.debug(`select "${item.name}"`) // eslint-disable-line no-console
     if (item.type == 'room') {
       this.$root.$emit("punk:info", `You go to "${item.name}"`)
-      console.debug(`move to "${item.name}"`) // eslint-disable-line no-console
-      this.world.move(item.id)
+      console.debug(`look "${item.name}"`) // eslint-disable-line no-console
+      this.world.look(item.id)
       this.store.set("page", "tab", 'room')
+      this.update()
+    }
+    if (item.type == 'item') {
+      this.$root.$emit("punk:info", `You examine the "${item.name}"`)
+      console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
+      this.world.examine(item.id)
+      this.store.set("page", "tab", 'entity')
       this.update()
     }
   }
@@ -150,7 +157,7 @@ class Game {
         setTimeout(() => {
           this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
           setTimeout(() => {
-            this.store.add("roomChoices", { text: "Show demo content.", action: 'demo' })
+            this.store.add("roomChoices", { text: "Show demo content.", action: 'world' })
             this.store.add("dialogueItems", { heading: true, label: "Your Lizard Brain has disconnected." })
           }, 5000)
         }, 2000)

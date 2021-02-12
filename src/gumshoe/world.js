@@ -1,9 +1,12 @@
 import Room from './room.js'
+import Item from './item.js'
 
 class World {
   constructor () {
     this.rooms = {}
+    this.items = {}
     this.currentRoom = null
+    this.currentItem = null
   }
 
   render (store) {
@@ -12,12 +15,20 @@ class World {
     }
     store.hide('room')
     store.hide('places')
+    store.hide('objects')
+    store.hide('entity')
     setTimeout(() => {
       let room = this.rooms[this.currentRoom]
       room.render(store, this)
+      if (!_.isNull(this.currentItem)) {
+        let item = this.items[this.currentItem]
+        item.render(store, this)
+      }
       setTimeout(() => {
         store.show('room')
         store.show('places')
+        store.show('objects')
+        store.show('entity')
       }, 800)
     })
   }
@@ -29,9 +40,21 @@ class World {
     return room
   }
 
-  move (roomId) {
+  addItem (name, description) {
+    let item = new Item(name)
+    item.addLog(description)
+    this.items[item.id] = item
+    return item
+  }
+
+  look (roomId) {
     this.currentRoom = roomId
     this.rooms[roomId].seen = true
+  }
+
+  examine (itemId) {
+    this.currentItem = itemId
+    this.items[itemId].seen = true
   }
 
   spawn () {
@@ -60,7 +83,9 @@ class World {
     dining.addExit(family)
     kitchen.addExit(family)
     family.addExit(alfresco)
-    this.move(office.id)
+    let sofa = this.addItem('Red Sofa', "A comfortable sofa bed.")
+    office.addItem(sofa)
+    this.look(office.id)
   }
 }
 
