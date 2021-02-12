@@ -22,7 +22,7 @@ class Game {
     this.$root.$on("game:action", this.handleAction)
     this.$root.$on("item:clicked", this.select)
     this.loadGame()
-    this.handleAction(process.env.DEV ? 'world' : 'firstRoom')
+    this.handleAction(process.env.DEV ? 'world' : 'prologue')
     this.state = 'running'
   }
 
@@ -82,7 +82,7 @@ class Game {
         this.world.spawn()
         this.stats.showTime()
       },
-      firstRoom: () => {
+      prologue: () => {
         this.useWorld = false
         this.store.reset()
         this.store.clear('room')
@@ -157,7 +157,7 @@ class Game {
         setTimeout(() => {
           this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
           setTimeout(() => {
-            this.store.add("roomChoices", { text: "Show demo content.", action: 'world' })
+            this.store.add("roomChoices", { text: "Enter the world.", action: 'world' })
             this.store.add("dialogueItems", { heading: true, label: "Your Lizard Brain has disconnected." })
           }, 5000)
         }, 2000)
@@ -204,14 +204,14 @@ class Game {
         this.store.set('room', 'title', "Room Name")
         this.store.set('page', 'title', "Room Name")
         this.store.add('roomItems', { text: "Room description." })
-        this.store.add("roomChoices", { text: "Play Game", action: 'firstRoom' })
+        this.store.add("roomChoices", { text: "Play Game", action: 'prologue' })
         this.store.add("roomChoices", { text: "More Content", action: 'demoRoom' })
         this.store.add("roomChoices", { text: "Wait...", action: 'demoRoomWait', icon: 'update' })
 
         this.store.clear('entity')
         this.store.set("entity", "title", "Entity Name")
         this.store.add("entityItems", { text: "Entity description." })
-        this.store.add("entityChoices", { text: "Play Game", action: 'firstRoom' })
+        this.store.add("entityChoices", { text: "Play Game", action: 'prologue' })
         this.store.add("entityChoices", { text: "More Content", action: 'demoEntity' })
         this.store.add("entityChoices", { text: "Wait...", action: 'demoEntityWait', icon: 'update' })
 
@@ -219,7 +219,7 @@ class Game {
         this.store.add("dialogueItems", { heading: true, label: "Chat with NPC" })
         this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
         this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
-        this.store.add("dialogueChoices", { text: "Play Game", action: 'firstRoom' })
+        this.store.add("dialogueChoices", { text: "Play Game", action: 'prologue' })
         this.store.add("dialogueChoices", { text: "More Content", action: 'demoDialogue' })
         this.store.add("dialogueChoices", { text: "Wait...", action: 'demoDialogueWait', icon: 'update' })
 
