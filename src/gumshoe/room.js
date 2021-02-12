@@ -21,14 +21,24 @@ class Room extends Entity {
       store.clear('objects')
       store.clear('places')
       setTimeout(() => {
-        _.each([...this.exits], (id) => {
-          let exit = world.rooms[id]
-          store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
-        })
+        let names = []
         _.each([...this.items], (id) => {
           let item = world.items[id]
+          names.push(item.name)
           store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
         })
+        if (!_.isEmpty(names)) {
+          store.add("roomItems", { text: `Items: ${names.join(', ')}.` })
+        }
+        names = []
+        _.each([...this.exits], (id) => {
+          let exit = world.rooms[id]
+          names.push(exit.name)
+          store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
+        })
+        if (!_.isEmpty(names)) {
+          store.add("roomItems", { text: `Exits: ${names.join(', ')}.` })
+        }
         store.add("roomChoices", { text: "Start Demo", action: 'demo' })
       })
     }, 500)

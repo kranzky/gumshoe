@@ -19,10 +19,15 @@ class Item extends Entity {
       })
       store.clear('objects')
       setTimeout(() => {
+        let names = []
         _.each([...this.items], (id) => {
           let item = world.items[id]
+          names.push(item.name)
           store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
         })
+        if (!_.isEmpty(names)) {
+          store.add("entityItems", { text: `Items: ${names.join(', ')}.` })
+        }
         store.add("entityChoices", { text: "Start Demo", action: 'demo' })
       })
     }, 500)
