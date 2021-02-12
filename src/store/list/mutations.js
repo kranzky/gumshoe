@@ -18,7 +18,9 @@ export function append(state, item) {
   if (_.isEmpty(item.id)) {
     item.id = uid()
   }
-  item.seen = false
+  if (_.isUndefined(item.seen)) {
+    item.seen = false
+  }
   state.items.push(item)
 }
 

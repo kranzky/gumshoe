@@ -57,10 +57,11 @@ class Game {
       window.game.select(item)
       return
     }
+    console.debug(`select "${item.name}"`) // eslint-disable-line no-console
     if (item.type == 'room') {
       this.$root.$emit("punk:info", `You go to "${item.name}"`)
       console.debug(`move to "${item.name}"`) // eslint-disable-line no-console
-      this.world.currentRoom = item.id
+      this.world.move(item.id)
       this.store.set("page", "tab", 'room')
       this.update()
     }

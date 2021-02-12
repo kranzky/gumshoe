@@ -5,6 +5,7 @@ class Entity {
     this.id = uid()
     this.type = type
     this.name = name
+    this.seen = false
   }
 
   render (store) {

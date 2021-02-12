@@ -24,7 +24,7 @@ class Room extends Entity {
         store.add("roomChoices", { text: "Start Demo", action: 'demo' })
         _.each([...this.exits], (id) => {
           let exit = world.rooms[id]
-          store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place' })
+          store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
         })
       })
     }, 500)

@@ -29,6 +29,11 @@ class World {
     return room
   }
 
+  move (roomId) {
+    this.currentRoom = roomId
+    this.rooms[roomId].seen = true
+  }
+
   spawn () {
     let office = this.addRoom("Jason's Office", "You stand in an office, sunlight streaming in the window. A half-full mug of coffee sits on the desk.")
     let hallway = this.addRoom("Hallway", "You find yourself in a long, black-tiled hallway running the length of the house.")
@@ -55,7 +60,7 @@ class World {
     dining.addExit(family)
     kitchen.addExit(family)
     family.addExit(alfresco)
-    this.currentRoom = office.id
+    this.move(office.id)
   }
 }
 
