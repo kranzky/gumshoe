@@ -45,7 +45,7 @@ class Room extends Entity {
 
   addItem (item) {
     this.items.add(item.id)
-    item.setRoom(this.id)
+    item.setRoomId(this.id)
   }
 
   getRooms () {

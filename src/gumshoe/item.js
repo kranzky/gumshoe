@@ -5,7 +5,8 @@ class Item extends Entity {
     super(name, 'item')
     this.log = []
     this.items = new Set()
-    this.room = null
+    this.roomId = null
+    this.containerId = null
   }
 
   render (store, world) {
@@ -19,7 +20,7 @@ class Item extends Entity {
       store.clear('objects')
       setTimeout(() => {
         _.each([...this.items], (id) => {
-          let item = world.item[id]
+          let item = world.items[id]
           store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
         })
         store.add("entityChoices", { text: "Start Demo", action: 'demo' })
@@ -31,8 +32,18 @@ class Item extends Entity {
     this.log.push(text)
   }
 
-  setRoom (room) {
-    this.room = room.id
+  setRoomId (id) {
+    this.roomId = id
+  }
+
+  setContainerId (id) {
+    this.containerId = id
+  }
+
+  addItem (item) {
+    this.items.add(item.id)
+    item.setContainerId(this.id)
+    item.setRoomId(this.room)
   }
 
   getItems () {

@@ -84,7 +84,11 @@ class World {
     kitchen.addExit(family)
     family.addExit(alfresco)
     let sofa = this.addItem('Red Sofa', "A comfortable sofa bed.")
+    let desk = this.addItem('Wooden Desk', "An old wooden desk.")
+    let mug = this.addItem('Coffee Mug', "A crusty coffee mug.")
     office.addItem(sofa)
+    office.addItem(desk)
+    desk.addItem(mug)
     this.look(office.id)
   }
 }

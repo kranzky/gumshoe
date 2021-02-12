@@ -62,14 +62,14 @@ class Game {
       this.$root.$emit("punk:info", `You go to "${item.name}"`)
       console.debug(`look "${item.name}"`) // eslint-disable-line no-console
       this.world.look(item.id)
-      this.store.set("page", "tab", 'room')
+      setTimeout(() => { this.store.set("page", "tab", 'room') }, 500)
       this.update()
     }
     if (item.type == 'item') {
       this.$root.$emit("punk:info", `You examine the "${item.name}"`)
       console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
       this.world.examine(item.id)
-      this.store.set("page", "tab", 'entity')
+      setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update()
     }
   }
