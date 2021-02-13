@@ -22,7 +22,7 @@ class Game {
     this.$root.$on("game:action", this.handleAction)
     this.$root.$on("item:clicked", this.select)
     this.loadGame()
-    this.handleAction(process.env.DEV ? 'world' : 'prologue')
+    this.handleAction(process.env.DEV ? 'world' : 'world')
     this.state = 'running'
   }
 
@@ -59,7 +59,7 @@ class Game {
     }
     console.debug(`select "${item.name}"`) // eslint-disable-line no-console
     if (item.type == 'room') {
-      this.$root.$emit("punk:info", `You go to "${item.name}"`)
+      this.$root.$emit("punk:info", `You go to the "${item.name}"`)
       console.debug(`look "${item.name}"`) // eslint-disable-line no-console
       this.world.look(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'room') }, 500)
@@ -70,6 +70,13 @@ class Game {
       console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
       this.world.examine(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
+      this.update()
+    }
+    if (item.type == 'bot') {
+      this.$root.$emit("punk:info", `You talk to "${item.name}"`)
+      console.debug(`talk "${item.name}"`) // eslint-disable-line no-console
+      this.world.talk(item.id)
+      setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
       this.update()
     }
   }

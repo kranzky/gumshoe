@@ -22,6 +22,15 @@ class Room extends Entity {
       store.clear('places')
       setTimeout(() => {
         let names = []
+        _.each([...this.bots], (id) => {
+          let bot = world.bots[id]
+          names.push(bot.name)
+          store.add("people", { id: id, name: bot.name, type: 'bot', icon: 'face', seen: bot.seen })
+        })
+        if (!_.isEmpty(names)) {
+          store.add("roomItems", { text: `NPCs: ${names.join(', ')}.` })
+        }
+        names = []
         _.each([...this.items], (id) => {
           let item = world.items[id]
           names.push(item.name)
@@ -56,6 +65,11 @@ class Room extends Entity {
   addItem (item) {
     this.items.add(item.id)
     item.setRoomId(this.id)
+  }
+
+  addBot (bot) {
+    this.bots.add(bot.id)
+    bot.setRoomId(this.id)
   }
 
   getRooms () {

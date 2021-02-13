@@ -1,12 +1,15 @@
 import Room from './room.js'
 import Item from './item.js'
+import Bot from './bot.js'
 
 class World {
   constructor () {
     this.rooms = {}
     this.items = {}
+    this.bots = {}
     this.currentRoom = null
     this.currentItem = null
+    this.currentBot = null
   }
 
   render (store) {
@@ -23,6 +26,10 @@ class World {
       if (!_.isNull(this.currentItem)) {
         let item = this.items[this.currentItem]
         item.render(store, this)
+      }
+      if (!_.isNull(this.currentBot)) {
+        let bot = this.bots[this.currentBot]
+        bot.render(store, this)
       }
       setTimeout(() => {
         store.show('room')
@@ -47,6 +54,12 @@ class World {
     return item
   }
 
+  addBot (name) {
+    let bot = new Bot(name)
+    this.bots[bot.id] = bot
+    return bot
+  }
+
   look (roomId) {
     this.currentRoom = roomId
     this.rooms[roomId].seen = true
@@ -55,6 +68,11 @@ class World {
   examine (itemId) {
     this.currentItem = itemId
     this.items[itemId].seen = true
+  }
+
+  talk (botId) {
+    this.currentBot = botId
+    this.bots[botId].seen = true
   }
 
   spawn () {
@@ -91,6 +109,8 @@ class World {
     let sneakers = this.addItem('Grotty Sneakers', "Formerly white running shoes, now a dirty brown.")
     let hose = this.addItem('Rubber Hose', "A coiled hose, leaking water.")
     let soap = this.addItem('Hand Soap', "An empty container of hand soap.")
+    let bone = this.addItem('Dog Bone', "A fresh dog bone.")
+    let beer = this.addItem('Beer Can', "A refreshing can of beer.")
     office.addItem(sofa)
     office.addItem(desk)
     desk.addItem(mug)
@@ -99,6 +119,18 @@ class World {
     cabinet.addItem(sneakers)
     courtyard.addItem(hose)
     bathroom.addItem(soap)
+    pantry.addItem(bone)
+    let jason = this.addBot("Jason")
+    let jack = this.addBot("Jack")
+    let rob = this.addBot("Rob")
+    let matthew = this.addBot("Matthew")
+    let bailey = this.addBot("Bailey")
+    office.addBot(jason)
+    entrance.addBot(jack)
+    hobbit.addBot(matthew)
+    family.addBot(jack)
+    alfresco.addBot(bailey)
+    matthew.addItem(beer)
     this.look(office.id)
   }
 }

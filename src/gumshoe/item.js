@@ -6,6 +6,7 @@ class Item extends Entity {
     this.log = []
     this.items = new Set()
     this.roomId = null
+    this.botId = null
     this.containerId = null
   }
 
@@ -39,6 +40,10 @@ class Item extends Entity {
 
   setRoomId (id) {
     this.roomId = id
+  }
+
+  setBotId (id) {
+    this.botId = id
   }
 
   setContainerId (id) {
