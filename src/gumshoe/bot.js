@@ -10,19 +10,10 @@ class Bot extends Entity {
 
   render (store, world) {
     store.clear('dialogue')
-    setTimeout(() => {
-      store.add("dialogueItems", { heading: true, label: `Chat with ${this.name}` })
-      store.add("dialogueItems", { name: this.name, text: this.lines, time: "Fri 17:38" })
-      store.set("page", "title", this.name)
-      store.clear('objects')
-      setTimeout(() => {
-        _.each([...this.items], (id) => {
-          let item = world.items[id]
-          store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
-        })
-        store.add("dialogueChoices", { text: "Start Demo", action: 'demo' })
-      })
-    }, 500)
+    store.add("dialogueItems", { heading: true, label: `Chat with ${this.name}` })
+    store.add("dialogueItems", { name: this.name, text: this.lines, time: "Fri 17:38" })
+    store.set("page", "title", this.name)
+    store.add("dialogueChoices", { text: "Start Demo", action: 'demo' })
   }
 
   setRoomId (id) {

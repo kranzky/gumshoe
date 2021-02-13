@@ -84,7 +84,7 @@ export default {
     this.registerPunk()
   },
   mounted () {
-    this.$root.$on("item:clicked", this.hide)
+    this.$root.$on("game:view", this.hide)
     if (this.showSplash) {
       setTimeout(() => {
         this.showSplash = false
@@ -92,7 +92,7 @@ export default {
     }
   },
   beforeDestroy () {
-    this.$root.$off("item:clicked", this.hide)
+    this.$root.$off("game:view", this.hide)
     this.deregisterPunk()
   },
   computed: {

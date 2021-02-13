@@ -28,6 +28,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch("dialogue/seen")
+    this.$root.$emit("game:items", 'dialogue')
   },
   beforeDestroy () {
     this.$store.dispatch("dialogue/seen")

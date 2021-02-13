@@ -11,46 +11,40 @@ class Room extends Entity {
 
   render (store, world) {
     store.clear('room')
-    setTimeout(() => {
-      store.set("room", "title", this.name)
-      store.set("page", "title", this.name)
-      _.each(this.log, (text) => {
-        store.add("roomItems", { text: text })
-      })
-      store.clear('people')
-      store.clear('objects')
-      store.clear('places')
-      setTimeout(() => {
-        let names = []
-        _.each([...this.bots], (id) => {
-          let bot = world.bots[id]
-          names.push(bot.name)
-          store.add("people", { id: id, name: bot.name, type: 'bot', icon: 'face', seen: bot.seen })
-        })
-        if (!_.isEmpty(names)) {
-          store.add("roomItems", { text: `NPCs: ${names.join(', ')}.` })
-        }
-        names = []
-        _.each([...this.items], (id) => {
-          let item = world.items[id]
-          names.push(item.name)
-          store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
-        })
-        if (!_.isEmpty(names)) {
-          store.add("roomItems", { text: `Items: ${names.join(', ')}.` })
-        }
-        names = []
-        _.each([...this.exits], (id) => {
-          let exit = world.rooms[id]
-          names.push(exit.name)
-          store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
-        })
-        if (!_.isEmpty(names)) {
-          store.add("roomItems", { text: `Exits: ${names.join(', ')}.` })
-        }
-        store.add("roomChoices", { text: "Start Demo", action: 'demo' })
-      })
-    }, 500)
+    store.set("room", "title", this.name)
+    store.set("page", "title", this.name)
+    _.each(this.log, (text) => {
+      store.add("roomItems", { text: text })
+    })
+    store.clear('people')
+    store.clear('places')
+    let names = []
+    _.each([...this.bots], (id) => {
+      let bot = world.bots[id]
+      names.push(bot.name)
+      store.add("people", { id: id, name: bot.name, type: 'bot', icon: 'face', seen: bot.seen })
+    })
+    if (!_.isEmpty(names)) {
+      store.add("roomItems", { text: `NPCs: ${names.join(', ')}.` })
+    }
+    names = []
+    _.each([...this.items], (id) => {
+      let item = world.items[id]
+      names.push(item.name)
+    })
+    if (!_.isEmpty(names)) {
+      store.add("roomItems", { text: `Items: ${names.join(', ')}.` })
+    }
+    names = []
+    _.each([...this.exits], (id) => {
+      let exit = world.rooms[id]
+      names.push(exit.name)
+      store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
+    })
+    if (!_.isEmpty(names)) {
+      store.add("roomItems", { text: `Exits: ${names.join(', ')}.` })
+    }
+    store.add("roomChoices", { text: "Start Demo", action: 'demo' })
   }
 
   addLog (text) {

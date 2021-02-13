@@ -19,17 +19,21 @@ class Game {
     window.game = this
 
     this.$root.$on("game:wait", this.wait)
-    this.$root.$on("game:action", this.handleAction)
-    this.$root.$on("item:clicked", this.select)
+    this.$root.$on("game:action", this.action)
+    this.$root.$on("game:view", this.view)
+    this.$root.$on("game:items", this.items)
     this.loadGame()
-    this.handleAction(process.env.DEV ? 'world' : 'world')
+    this.action(process.env.DEV ? 'world' : 'world')
     this.state = 'running'
   }
 
-  update () {
+  update (type) {
     this.wait()
     if (this.useWorld) {
       this.world.render(this.store)
+      if (!_.isUndefined(type)) {
+        this.world.renderItems(type, this.store)
+      }
     }
   }
 
@@ -42,9 +46,9 @@ class Game {
     this.stats.render(this.store)
   }
 
-  handleAction (action) {
+  action (action) {
     if (this != window.game) {
-      window.game.handleAction(action)
+      window.game.action(action)
       return
     }
     console.debug(`action "${action}"`) // eslint-disable-line no-console
@@ -52,33 +56,41 @@ class Game {
     this.update()
   }
 
-  select (item) {
+  view (item) {
     if (this != window.game) {
-      window.game.select(item)
+      window.game.view(item)
       return
     }
-    console.debug(`select "${item.name}"`) // eslint-disable-line no-console
+    console.debug(`view "${item.name}"`) // eslint-disable-line no-console
     if (item.type == 'room') {
       this.$root.$emit("punk:info", `You go to the "${item.name}"`)
       console.debug(`look "${item.name}"`) // eslint-disable-line no-console
       this.world.look(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'room') }, 500)
-      this.update()
+      this.update('room')
     }
     if (item.type == 'item') {
       this.$root.$emit("punk:info", `You examine the "${item.name}"`)
       console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
       this.world.examine(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
-      this.update()
+      this.update('entity')
     }
     if (item.type == 'bot') {
       this.$root.$emit("punk:info", `You talk to "${item.name}"`)
       console.debug(`talk "${item.name}"`) // eslint-disable-line no-console
       this.world.talk(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
-      this.update()
+      this.update('dialogue')
     }
+  }
+
+  items (type) {
+    if (this != window.game) {
+      window.game.items(type)
+      return
+    }
+    this.world.renderItems(type, this.store)
   }
 
   loadGame () {
@@ -275,8 +287,9 @@ class Game {
     if (this.state !== 'running') {
       return
     }
-    this.$root.$off("item:clicked", this.select)
-    this.$root.$off("game:action", this.handleAction)
+    this.$root.$off("game:items", this.items)
+    this.$root.$off("game:view", this.view)
+    this.$root.$off("game:action", this.action)
     this.$root.$off("game:wait", this.wait)
     window.game = undefined
     this.state = 'stopped'

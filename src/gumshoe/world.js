@@ -18,28 +18,56 @@ class World {
     }
     store.hide('room')
     store.hide('places')
-    store.hide('objects')
     store.hide('entity')
     store.hide('dialogue')
+    let room = this.rooms[this.currentRoom]
+    room.render(store, this)
+    if (!_.isNull(this.currentItem)) {
+      let item = this.items[this.currentItem]
+      item.render(store, this)
+    }
+    if (!_.isNull(this.currentBot)) {
+      let bot = this.bots[this.currentBot]
+      bot.render(store, this)
+    }
     setTimeout(() => {
+      store.show('room')
+      store.show('places')
+      store.show('entity')
+      store.show('dialogue')
+    }, 500)
+  }
+
+  renderItems (type, store) {
+    store.hide('objects')
+    if (type == 'room' && !_.isNull(this.currentRoom)) {
       let room = this.rooms[this.currentRoom]
-      room.render(store, this)
-      if (!_.isNull(this.currentItem)) {
-        let item = this.items[this.currentItem]
-        item.render(store, this)
-      }
-      if (!_.isNull(this.currentBot)) {
-        let bot = this.bots[this.currentBot]
-        bot.render(store, this)
-      }
-      setTimeout(() => {
-        store.show('room')
-        store.show('places')
-        store.show('objects')
-        store.show('entity')
-        store.show('dialogue')
-      }, 800)
-    })
+      room.renderItems(store, this)
+    }
+    if (type == 'entity' && !_.isNull(this.currentItem)) {
+      let item = this.items[this.currentItem]
+      item.renderItems(store, this)
+    }
+    if (type == 'dialogue' && !_.isNull(this.currentBot)) {
+      let bot = this.bots[this.currentBot]
+      bot.renderItems(store, this)
+    }
+    setTimeout(() => {
+      store.show('objects')
+    }, 500)
+  }
+
+  getEntity (type, id) {
+    if (type == 'room') {
+      return this.rooms[id]
+    }
+    if (type == 'item') {
+      return this.items[id]
+    }
+    if (type == 'bot') {
+      return this.bots[id]
+    }
+    return null
   }
 
   addRoom (name, description) {

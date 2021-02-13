@@ -36,6 +36,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch("room/seen")
+    this.$root.$emit("game:items", 'room')
   },
   beforeDestroy () {
     this.$store.dispatch("room/seen")

@@ -62,7 +62,7 @@ export default {
         this.$root.$emit("game:action", item.action)
       }
       this.$store.dispatch(`${this.module}/seen`, id)
-      this.$root.$emit("item:clicked", item)
+      this.$root.$emit("game:view", item)
     }
   }
 }
