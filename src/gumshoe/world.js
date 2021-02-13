@@ -20,6 +20,7 @@ class World {
     store.hide('places')
     store.hide('objects')
     store.hide('entity')
+    store.hide('dialogue')
     setTimeout(() => {
       let room = this.rooms[this.currentRoom]
       room.render(store, this)
@@ -36,6 +37,7 @@ class World {
         store.show('places')
         store.show('objects')
         store.show('entity')
+        store.show('dialogue')
       }, 800)
     })
   }
@@ -54,8 +56,8 @@ class World {
     return item
   }
 
-  addBot (name) {
-    let bot = new Bot(name)
+  addBot (name, line) {
+    let bot = new Bot(name, line)
     this.bots[bot.id] = bot
     return bot
   }
@@ -120,11 +122,11 @@ class World {
     courtyard.addItem(hose)
     bathroom.addItem(soap)
     pantry.addItem(bone)
-    let jason = this.addBot("Jason")
-    let jack = this.addBot("Jack")
-    let rob = this.addBot("Rob")
-    let matthew = this.addBot("Matthew")
-    let bailey = this.addBot("Bailey")
+    let jason = this.addBot("Jason", "Looks like it's beer-o-clock!")
+    let jack = this.addBot("Jack", "I hear they keep all foodstuffs in the pantry.")
+    let rob = this.addBot("Rob", "Any idea where a guy can get a drink in this place? I've looked almost everywhere.")
+    let matthew = this.addBot("Matthew", "Looks like I nabbed the last can.")
+    let bailey = this.addBot("Bailey", "Woof? (translation: I'm hungry)")
     office.addBot(jason)
     entrance.addBot(jack)
     hobbit.addBot(matthew)

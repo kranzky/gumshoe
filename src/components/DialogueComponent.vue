@@ -1,11 +1,13 @@
 <template>
   <div class="row justify-center">
-    <div style="max-width:700px; width: 100%;">
-      <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <message v-for="message in messages" :message="message" :key="message.id" />
-      </transition-group>
-      <choices label="What now?" icon="textsms" module="dialogueChoices" style="margin-top: 18px;" />
-    </div>
+    <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <div style="max-width:700px; width: 100%;" v-if="!loading">
+        <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+          <message v-for="message in messages" :message="message" :key="message.id" />
+        </transition-group>
+        <choices label="What now?" icon="textsms" module="dialogueChoices" style="margin-top: 18px;" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -16,6 +18,11 @@ export default {
     messages: {
       get () {
         return this.$store.state.dialogueItems.items
+      }
+    },
+    loading: {
+      get () {
+        return this.$store.state.dialogue.loading
       }
     }
   },

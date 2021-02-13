@@ -1,4 +1,5 @@
 export default {
   show: false,
-  seen: true
+  seen: true,
+  loading: false
 }

@@ -15,3 +15,7 @@ export function clear(state) {
 export function seen(state) {
   state.seen = true
 }
+
+export function loading(state, loading) {
+  state.loading = loading
+}
