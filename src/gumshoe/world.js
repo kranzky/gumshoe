@@ -56,8 +56,8 @@ class World {
     return item
   }
 
-  addBot (name, line) {
-    let bot = new Bot(name, line)
+  addBot (name, lines) {
+    let bot = new Bot(name, lines)
     this.bots[bot.id] = bot
     return bot
   }
@@ -122,15 +122,15 @@ class World {
     courtyard.addItem(hose)
     bathroom.addItem(soap)
     pantry.addItem(bone)
-    let jason = this.addBot("Jason", "Looks like it's beer-o-clock!")
-    let jack = this.addBot("Jack", "I hear they keep all foodstuffs in the pantry.")
-    let rob = this.addBot("Rob", "Any idea where a guy can get a drink in this place? I've looked almost everywhere.")
-    let matthew = this.addBot("Matthew", "Looks like I nabbed the last can.")
-    let bailey = this.addBot("Bailey", "Woof? (translation: I'm hungry)")
+    let jason = this.addBot("Jason", ["Looks like it's beer-o-clock!"])
+    let jack = this.addBot("Jack", ["I hear they keep all foodstuffs in the pantry."])
+    let rob = this.addBot("Rob", ["Any idea where a guy can get a drink in this place?", "I've looked almost everywhere."])
+    let matthew = this.addBot("Matthew", ["Looks like I nabbed the last can."])
+    let bailey = this.addBot("Bailey", ["Woof?", "(translation: I'm hungry)"])
     office.addBot(jason)
     entrance.addBot(jack)
     hobbit.addBot(matthew)
-    family.addBot(jack)
+    courtyard.addBot(rob)
     alfresco.addBot(bailey)
     matthew.addItem(beer)
     this.look(office.id)

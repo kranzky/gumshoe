@@ -1,18 +1,18 @@
 import Entity from './entity.js'
 
 class Bot extends Entity {
-  constructor (name, line) {
+  constructor (name, lines) {
     super(name, 'bot')
     this.items = new Set()
     this.roomId = null
-    this.line = line || "Hello!"
+    this.lines = lines || ["Hello!"]
   }
 
   render (store, world) {
     store.clear('dialogue')
     setTimeout(() => {
       store.add("dialogueItems", { heading: true, label: `Chat with ${this.name}` })
-      store.add("dialogueItems", { name: this.name, text: [this.line], time: "Fri 17:38" })
+      store.add("dialogueItems", { name: this.name, text: this.lines, time: "Fri 17:38" })
       store.set("page", "title", this.name)
       store.clear('objects')
       setTimeout(() => {
