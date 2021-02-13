@@ -10,10 +10,30 @@ class Item extends Entity {
     this.containerId = null
   }
 
+  addCrumb (store, world) {
+    if (!_.isNull(this.containerId)) {
+      let item = world.items[this.containerId]
+      store.add("entityCrumbs", { id: item.id, name: item.name, type: item.type })
+      item.addCrumb(store, world)
+    } else {
+      if (!_.isNull(this.botId)) {
+        let bot = world.bots[this.botId]
+        store.add("entityCrumbs", { id: bot.id, name: bot.name, type: bot.type })
+        let room = world.rooms[bot.roomId]
+        store.add("entityCrumbs", { id: room.id, name: room.name, type: room.type })
+      } else {
+        let room = world.rooms[this.roomId]
+        store.add("entityCrumbs", { id: room.id, name: room.name, type: room.type })
+      }
+    }
+  }
+
   render (store, world) {
     store.clear('entity')
     store.set("entity", "title", this.name)
     store.set("page", "title", this.name)
+    store.add("entityCrumbs", { id: this.id, name: this.name, type: this.type })
+    this.addCrumb(store, world)
     _.each(this.log, (text) => {
       store.add("entityItems", { text: text })
     })

@@ -30,7 +30,7 @@ export default {
   name: "WorldComponent",
   data () {
     return {
-      tab: 'people'
+      tab: 'objects'
     }
   },
   computed: {

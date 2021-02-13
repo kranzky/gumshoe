@@ -2,7 +2,13 @@
   <div class="row justify-center">
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <div style="max-width:700px; width: 100%;" v-if="!loading">
-        <h4>{{ title }}</h4>
+        <q-breadcrumbs active-color="secondary">
+          <template v-slot:separator>
+            <q-icon size="1.2em" name="arrow_forward" />
+          </template>
+          <q-breadcrumbs-el v-for="crumb in crumbs" :key="crumb.id" :label="crumb.name" @click="nav(crumb)" />
+        </q-breadcrumbs>
+        <h4 style="margin-top: 24px;">{{ title }}</h4>
         <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
           <p class="text-body1" v-for="item in items" :key="item.id">
             {{ item.text }}
@@ -32,6 +38,16 @@ export default {
       get () {
         return this.$store.state.entity.loading
       }
+    },
+    crumbs: {
+      get () {
+        return _.reverse(this.$store.state.entityCrumbs.items)
+      }
+    }
+  },
+  methods: {
+    nav (crumb) {
+      this.$root.$emit("game:view", crumb)
     }
   },
   mounted () {

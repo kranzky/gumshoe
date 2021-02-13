@@ -29,6 +29,7 @@ export default function() {
       entity,
       entityItems: list('entityItems'),
       entityChoices: list('entityChoices'),
+      entityCrumbs: list('entityCrumbs'),
       dialogue,
       dialogueItems: list('dialogueItems'),
       dialogueChoices: list('dialogueChoices'),

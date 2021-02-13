@@ -99,6 +99,9 @@ class Game {
         this.useWorld = true
         this.stats.clear()
         this.store.reset()
+        this.store.clear('inventory')
+        this.store.clear('notebook')
+        this.store.clear('quests')
         this.world.spawn()
         this.stats.showTime()
       },
