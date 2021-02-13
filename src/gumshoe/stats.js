@@ -1,5 +1,5 @@
 class Stats {
-  constructor (epoch = '2021-02-12 17:36:40') {
+  constructor (epoch = '2021-02-12T17:36:40.000Z') {
     this.epoch = epoch
     this.score = 0
     this.time = 0
