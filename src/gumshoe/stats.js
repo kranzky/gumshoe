@@ -15,9 +15,9 @@ class Stats {
 
     if (this.show.time) {
       let date = this.getDate()
-      let day = this.days[date.getDay()]
-      let hour = date.getHours().toString().padStart(2, '0')
-      let minute = date.getMinutes().toString().padStart(2, '0')
+      let day = this.days[date.getUTCDay()]
+      let hour = date.getUTCHours().toString().padStart(2, '0')
+      let minute = date.getUTCMinutes().toString().padStart(2, '0')
       store.set('game', 'time', `${day} ${hour}:${minute}`)
     }
 
