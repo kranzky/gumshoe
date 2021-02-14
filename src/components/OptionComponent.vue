@@ -1,15 +1,30 @@
 <template>
-  <div class="row">
-    <div>
-      <q-chip clickable text-color="secondary" icon="label" v-for="object in objects" :key="object.id" @click="nav(object)">{{ object.name }}</q-chip>
-    </div>
-    <div>
-      <q-chip clickable text-color="secondary" icon="face" v-for="npc in npcs" :key="npc.id" @click="nav(npc)">{{ npc.name }}</q-chip>
-    </div>
-    <div>
-      <q-chip clickable text-color="secondary" icon="place" v-for="exit in exits" :key="exit.id" @click="nav(exit)">{{ exit.name }}</q-chip>
-    </div>
-  </div>
+  <q-list dense>
+    <q-item clickable v-for="object in objects" :key="object.id" @click="nav(object)" class="text-secondary">
+      <q-item-section avatar>
+        <q-icon name="label" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{ object.name }}</q-item-label>
+      </q-item-section>
+    </q-item>
+    <q-item clickable v-for="npc in npcs" :key="npc.id" @click="nav(npc)" class="text-secondary">
+      <q-item-section avatar>
+        <q-icon name="face" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{ npc.name }}</q-item-label>
+      </q-item-section>
+    </q-item>
+    <q-item clickable v-for="exit in exits" :key="exit.id" @click="nav(exit)" class="text-secondary">
+      <q-item-section avatar>
+        <q-icon name="place" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{ exit.name }}</q-item-label>
+      </q-item-section>
+    </q-item>
+  </q-list>
 </template>
 
 <script>
