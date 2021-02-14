@@ -1,10 +1,11 @@
 import Entity from './entity.js'
 
 class Bot extends Entity {
-  constructor (name, lines) {
+  constructor (name, description, lines) {
     super(name, 'bot')
     this.items = new Set()
     this.roomId = null
+    this.description = description
     this.lines = lines || ["Hello!"]
   }
 

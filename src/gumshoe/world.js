@@ -10,6 +10,7 @@ class World {
     this.currentRoom = null
     this.currentItem = null
     this.currentBot = null
+
   }
 
   render (store) {
@@ -84,8 +85,8 @@ class World {
     return item
   }
 
-  addBot (name, lines) {
-    let bot = new Bot(name, lines)
+  addBot (name, description, lines) {
+    let bot = new Bot(name, description, lines)
     this.bots[bot.id] = bot
     return bot
   }
@@ -154,11 +155,11 @@ class World {
     pantry.addItem(rack)
     rack.addItem(bone)
     mug.addItem(rock)
-    let jason = this.addBot("Jason", ["Looks like it's beer-o-clock!"])
-    let jack = this.addBot("Jack", ["I hear they keep all foodstuffs in the pantry."])
-    let rob = this.addBot("Rob", ["Any idea where a guy can get a drink in this place?", "I've looked almost everywhere."])
-    let matthew = this.addBot("Matthew", ["Looks like I nabbed the last can."])
-    let bailey = this.addBot("Bailey", ["Woof?", "(translation: I'm hungry)"])
+    let jason = this.addBot("Jason", "He is working furiously on the GumShoe UI.", ["Looks like it's beer-o-clock!"])
+    let jack = this.addBot("Jack", "He looks up from procedurally generating footwear.", ["I hear they keep all foodstuffs in the pantry."])
+    let rob = this.addBot("Rob", "He seems lost.", ["Any idea where a guy can get a drink in this place?", "I've looked almost everywhere."])
+    let matthew = this.addBot("Matthew", "He grins at you in triumph.", ["Looks like I nabbed the last can."])
+    let bailey = this.addBot("Bailey", "He wags his tail.", ["Woof?", "(translation: I'm hungry)"])
     office.addBot(jason)
     entrance.addBot(jack)
     hobbit.addBot(matthew)
