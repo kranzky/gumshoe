@@ -12,7 +12,6 @@ class Bot extends Entity {
     store.clear('dialogue')
     store.add("dialogueItems", { heading: true, label: `Chat with ${this.name}` })
     store.add("dialogueItems", { name: this.name, text: this.lines, time: "Fri 17:38" })
-    store.set("page", "title", this.name)
     store.add("dialogueChoices", { text: "Start Demo", action: 'demo' })
   }
 

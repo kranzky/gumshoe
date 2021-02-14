@@ -31,7 +31,6 @@ class Item extends Entity {
   render (store, world) {
     store.clear('entity')
     store.set("entity", "title", this.name)
-    store.set("page", "title", this.name)
     store.add("entityCrumbs", { id: this.id, name: this.name, type: this.type })
     this.addCrumb(store, world)
     _.each(this.log, (text) => {

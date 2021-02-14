@@ -12,7 +12,6 @@ class Room extends Entity {
   render (store, world) {
     store.clear('room')
     store.set("room", "title", this.name)
-    store.set("page", "title", this.name)
     _.each(this.log, (text) => {
       store.add("roomItems", { text: text })
     })
