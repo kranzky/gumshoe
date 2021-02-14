@@ -20,3 +20,7 @@ export function seen(store) {
   this.commit("entity/seen")
   this.commit("entityItems/seen")
 }
+
+export function current(store, id) {
+  this.commit("entity/current", id)
+}

@@ -21,17 +21,21 @@ class World {
     store.hide('places')
     store.hide('entity')
     store.hide('dialogue')
+    store.set('room', 'current', this.currentRoom)
     let room = this.rooms[this.currentRoom]
     room.render(store, this)
     if (!_.isNull(this.currentItem)) {
+      store.set('entity', 'current', this.currentItem)
       let item = this.items[this.currentItem]
       item.render(store, this)
     }
     if (!_.isNull(this.currentBot)) {
+      store.set('entity', 'current', this.currentBot)
       let bot = this.bots[this.currentBot]
       bot.render_entity(store, this)
     }
     if (!_.isNull(this.dialogueBot)) {
+      store.set('dialogue', 'current', this.dialogueBot)
       let bot = this.bots[this.dialogueBot]
       bot.render(store, this)
     }

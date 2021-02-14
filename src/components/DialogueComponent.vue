@@ -6,6 +6,7 @@
           <message v-for="message in messages" :message="message" :key="message.id" />
         </transition-group>
         <choices label="What now?" icon="textsms" module="dialogueChoices" style="margin-top: 18px;" />
+        <options :id="current" />
       </div>
     </transition>
   </div>
@@ -24,6 +25,11 @@ export default {
       get () {
         return this.$store.state.dialogue.loading
       }
+    },
+    current: {
+      get () {
+        return this.$store.state.dialogue.current
+      }
     }
   },
   mounted () {
@@ -35,6 +41,7 @@ export default {
   },
   components: {
     "choices": () => import("components/ChoiceComponent.vue"),
+    "options": () => import("components/OptionComponent.vue"),
     "message": () => import("components/MessageComponent.vue")
   }
 }

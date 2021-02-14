@@ -13,3 +13,7 @@ export function clear(store) {
 export function seen(store) {
   this.commit("dialogue/seen")
 }
+
+export function current(store, id) {
+  this.commit("dialogue/current", id)
+}

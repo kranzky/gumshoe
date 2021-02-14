@@ -18,3 +18,7 @@ export function seen(store) {
   this.commit("room/seen")
   this.commit("roomItems/seen")
 }
+
+export function current(store, id) {
+  this.commit("room/current", id)
+}

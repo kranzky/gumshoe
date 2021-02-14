@@ -15,6 +15,7 @@
           </p>
         </transition-group>
         <choices label="What now?" icon="construction" module="entityChoices" />
+        <options :id="current" />
       </div>
     </transition>
   </div>
@@ -43,6 +44,11 @@ export default {
       get () {
         return _.reverse(this.$store.state.entityCrumbs.items)
       }
+    },
+    current: {
+      get () {
+        return this.$store.state.entity.current
+      }
     }
   },
   methods: {
@@ -58,7 +64,8 @@ export default {
     this.$store.dispatch("entity/seen")
   },
   components: {
-    "choices": () => import("components/ChoiceComponent.vue")
+    "choices": () => import("components/ChoiceComponent.vue"),
+    "options": () => import("components/OptionComponent.vue")
   }
 }
 </script>

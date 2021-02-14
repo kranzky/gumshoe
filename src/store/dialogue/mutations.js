@@ -19,3 +19,7 @@ export function seen(state) {
 export function loading(state, loading) {
   state.loading = loading
 }
+
+export function current(state, id) {
+  state.current = id
+}

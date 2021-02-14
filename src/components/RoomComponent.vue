@@ -9,6 +9,7 @@
           </p>
         </transition-group>
         <choices label="What now?" icon="keyboard_arrow_right" module="roomChoices" />
+        <options :id="current" />
       </div>
     </transition>
   </div>
@@ -32,6 +33,11 @@ export default {
       get () {
         return this.$store.state.room.loading
       }
+    },
+    current: {
+      get () {
+        return this.$store.state.room.current
+      }
     }
   },
   mounted () {
@@ -42,7 +48,8 @@ export default {
     this.$store.dispatch("room/seen")
   },
   components: {
-    "choices": () => import("components/ChoiceComponent.vue")
+    "choices": () => import("components/ChoiceComponent.vue"),
+    "options": () => import("components/OptionComponent.vue")
   }
 }
 </script>
