@@ -10,7 +10,7 @@ class World {
     this.currentRoom = null
     this.currentItem = null
     this.currentBot = null
-
+    this.dialogueBot = null
   }
 
   render (store) {
@@ -29,6 +29,10 @@ class World {
     }
     if (!_.isNull(this.currentBot)) {
       let bot = this.bots[this.currentBot]
+      bot.render_entity(store, this)
+    }
+    if (!_.isNull(this.dialogueBot)) {
+      let bot = this.bots[this.dialogueBot]
       bot.render(store, this)
     }
     setTimeout(() => {
@@ -97,13 +101,20 @@ class World {
   }
 
   examine (itemId) {
+    this.currentBot = null
     this.currentItem = itemId
     this.items[itemId].seen = true
   }
 
-  talk (botId) {
+  examine_bot (botId) {
+    this.currentItem = null
     this.currentBot = botId
     this.bots[botId].seen = true
+  }
+
+  talk () {
+    this.dialogueBot = this.currentBot
+    this.bots[this.dialogueBot].seen = true
   }
 
   spawn () {

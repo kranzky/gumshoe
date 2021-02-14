@@ -77,10 +77,10 @@ class Game {
       this.update('entity')
     }
     if (item.type == 'bot') {
-      this.$root.$emit("punk:info", `You talk to "${item.name}"`)
-      console.debug(`talk "${item.name}"`) // eslint-disable-line no-console
-      this.world.talk(item.id)
-      setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
+      this.$root.$emit("punk:info", `You approach "${item.name}"`)
+      console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
+      this.world.examine_bot(item.id)
+      setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update('dialogue')
     }
   }
@@ -104,6 +104,10 @@ class Game {
         this.store.clear('quests')
         this.world.spawn()
         this.stats.showTime()
+      },
+      talk: () => {
+        this.world.talk()
+        setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
       },
       prologue: () => {
         this.useWorld = false
