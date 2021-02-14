@@ -6,7 +6,7 @@
           <template v-slot:separator>
             <q-icon size="1.2em" name="arrow_forward" />
           </template>
-          <q-breadcrumbs-el v-for="crumb in crumbs" :key="crumb.id" :label="crumb.name" @click="nav(crumb)" />
+          <q-breadcrumbs-el v-for="crumb in crumbs" :key="crumb.id" :label="crumb.name" @click="nav(crumb)" class="cursor-pointer" />
         </q-breadcrumbs>
         <h4 style="margin-top: 24px;">{{ title }}</h4>
         <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
