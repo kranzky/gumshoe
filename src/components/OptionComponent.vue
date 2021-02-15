@@ -33,6 +33,12 @@ export default {
   props: {
     id: {
       default: null
+    },
+    showPeople: {
+      default: false
+    },
+    showPlaces: {
+      default: false
     }
   },
   methods: {
@@ -43,17 +49,23 @@ export default {
   computed: {
     objects: {
       get () {
-        return _.filter(this.$store.state.objects.items, (item) => { return item.id != this.id })
+        return _.filter(this.$store.state.objects.items, (item) => {
+          return item.id != this.id
+        })
       }
     },
     npcs: {
       get () {
-        return _.filter(this.$store.state.people.items, (item) => { return item.id != this.id })
+        return _.filter(this.$store.state.people.items, (item) => {
+          return this.showPeople && item.id != this.id
+        })
       }
     },
     exits: {
       get () {
-        return _.filter(this.$store.state.places.items, (item) => { return item.id != this.id })
+        return _.filter(this.$store.state.places.items, (item) => {
+          return this.showPlaces && item.id != this.id
+        })
       }
     }
   }

@@ -9,7 +9,7 @@
           </p>
         </transition-group>
         <choices label="What now?" icon="keyboard_arrow_right" module="roomChoices" />
-        <options :id="current" />
+        <options :id="current" showPeople="true" showPlaces="true" />
       </div>
     </transition>
   </div>
