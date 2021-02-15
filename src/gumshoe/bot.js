@@ -35,6 +35,12 @@ class Bot extends Entity {
     item.setRoomId(this.room)
   }
 
+  removeItem (item) {
+    this.items.delete(item.id)
+    item.setBotId(null)
+    item.setRoomId(null)
+  }
+
   getItems () {
     return this.items
   }

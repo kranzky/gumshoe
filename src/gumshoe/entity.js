@@ -13,11 +13,9 @@ class Entity {
 
   renderItems (store, world) {
     store.clear('objects')
-    setTimeout(() => {
-      _.each([...this.items], (id) => {
-        let item = world.items[id]
-        store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
-      })
+    _.each([...this.items], (id) => {
+      let item = world.items[id]
+      store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
     })
   }
 }

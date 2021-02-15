@@ -109,6 +109,12 @@ class Game {
         this.world.talk()
         setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
       },
+      take: () => {
+        this.world.take()
+      },
+      drop: () => {
+        this.world.drop()
+      },
       prologue: () => {
         this.useWorld = false
         this.stats.clear()

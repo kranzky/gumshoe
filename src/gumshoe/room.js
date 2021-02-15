@@ -41,6 +41,11 @@ class Room extends Entity {
     item.setRoomId(this.id)
   }
 
+  removeItem (item) {
+    this.items.delete(item.id)
+    item.setRoomId(null)
+  }
+
   addBot (bot) {
     this.bots.add(bot.id)
     bot.setRoomId(this.id)

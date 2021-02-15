@@ -1,13 +1,18 @@
 import Entity from './entity.js'
 
 class Item extends Entity {
-  constructor (name, description = null) {
+  constructor (name, canGet, canPut, prep) {
     super(name, 'item')
+    this.original = name
     this.log = []
     this.items = new Set()
     this.roomId = null
     this.botId = null
     this.containerId = null
+    this.canGet = canGet
+    this.canPut = canPut
+    this.prep = prep
+    this.carried = false
   }
 
   addCrumb (crumbs, store, world) {
@@ -18,6 +23,8 @@ class Item extends Entity {
       if (!_.isNull(this.botId)) {
         crumbs.push(world.bots[this.botId])
         crumbs.push(world.rooms[_.last(crumbs).roomId])
+      } else if (this.carried) {
+        crumbs.push(world.rooms[world.currentRoom])
       } else {
         crumbs.push(world.rooms[this.roomId])
       }
@@ -35,6 +42,16 @@ class Item extends Entity {
     _.each(this.log, (text) => {
       store.add("entityItems", { text: text })
     })
+    if (!this.carried) {
+      if (this.canGet) {
+        store.add("entityChoices", { text: `Take the ${this.name}`, action: 'take' })
+      }
+      if (this.canPut) {
+        // list all carried items
+      }
+    } else {
+      store.add("entityChoices", { text: `Drop the ${this.name}`, action: 'drop' })
+    }
   }
 
   addLog (text) {
@@ -57,6 +74,12 @@ class Item extends Entity {
     this.items.add(item.id)
     item.setContainerId(this.id)
     item.setRoomId(this.room)
+  }
+
+  removeItem (item) {
+    this.items.delete(item.id)
+    item.setContainerId(null)
+    item.setRoomId(null)
   }
 
   getItems () {
