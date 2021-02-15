@@ -36,7 +36,6 @@ class Item extends Entity {
     _.each(this.log, (text) => {
       store.add("entityItems", { text: text })
     })
-    store.add("entityChoices", { text: "Start Demo", action: 'demo' })
   }
 
   addLog (text) {

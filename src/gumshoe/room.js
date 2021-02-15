@@ -25,7 +25,6 @@ class Room extends Entity {
       let exit = world.rooms[id]
       store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
     })
-    store.add("roomChoices", { text: "Start Demo", action: 'demo' })
   }
 
   addLog (text) {
