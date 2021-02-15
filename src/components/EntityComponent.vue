@@ -42,7 +42,7 @@ export default {
     },
     crumbs: {
       get () {
-        return _.reverse(this.$store.state.entityCrumbs.items)
+        return this.$store.state.entityCrumbs.items
       }
     },
     current: {

@@ -10,20 +10,16 @@ class Item extends Entity {
     this.containerId = null
   }
 
-  addCrumb (store, world) {
+  addCrumb (crumbs, store, world) {
     if (!_.isNull(this.containerId)) {
-      let item = world.items[this.containerId]
-      store.add("entityCrumbs", { id: item.id, name: item.name, type: item.type })
-      item.addCrumb(store, world)
+      crumbs.push(world.items[this.containerId])
+      _.last(crumbs).addCrumb(crumbs, store, world)
     } else {
       if (!_.isNull(this.botId)) {
-        let bot = world.bots[this.botId]
-        store.add("entityCrumbs", { id: bot.id, name: bot.name, type: bot.type })
-        let room = world.rooms[bot.roomId]
-        store.add("entityCrumbs", { id: room.id, name: room.name, type: room.type })
+        crumbs.push(world.bots[this.botId])
+        crumbs.push(world.rooms[_.last(crumbs).roomId])
       } else {
-        let room = world.rooms[this.roomId]
-        store.add("entityCrumbs", { id: room.id, name: room.name, type: room.type })
+        crumbs.push(world.rooms[this.roomId])
       }
     }
   }
@@ -31,8 +27,11 @@ class Item extends Entity {
   render (store, world) {
     store.clear('entity')
     store.set("entity", "title", this.name)
-    store.add("entityCrumbs", { id: this.id, name: this.name, type: this.type })
-    this.addCrumb(store, world)
+    let crumbs = [this]
+    this.addCrumb(crumbs, store, world)
+    _.each(_.reverse(crumbs), (item) => {
+      store.add("entityCrumbs", { id: item.id, name: item.name, type: item.type })
+    })
     _.each(this.log, (text) => {
       store.add("entityItems", { text: text })
     })

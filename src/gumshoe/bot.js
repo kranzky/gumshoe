@@ -18,9 +18,9 @@ class Bot extends Entity {
   render_entity (store, world) {
     store.clear('entity')
     store.set("entity", "title", this.name)
-    store.add("entityCrumbs", { id: this.id, name: this.name, type: this.type })
     let room = world.rooms[this.roomId]
     store.add("entityCrumbs", { id: room.id, name: room.name, type: room.type })
+    store.add("entityCrumbs", { id: this.id, name: this.name, type: this.type })
     store.add("entityItems", { text: this.description })
     store.add("entityChoices", { text: `Talk to ${this.name}`, action: 'talk' })
   }
