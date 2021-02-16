@@ -148,6 +148,7 @@ class World {
     this.carried.add(item)
     item.carried = true
     item.name = `${item.original} (carrying)`
+    return `You take the "${item.original}"`
   }
 
   drop () {
@@ -159,6 +160,7 @@ class World {
     this.carried.delete(item)
     item.carried = false
     item.name = item.original
+    return `You drop the "${item.original}"`
   }
 
   spawn () {

@@ -110,10 +110,16 @@ class Game {
         setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
       },
       take: () => {
-        this.world.take()
+        let response = this.world.take()
+        if (!_.isEmpty(response)) {
+          this.$root.$emit("punk:info", response)
+        }
       },
       drop: () => {
-        this.world.drop()
+        let response = this.world.drop()
+        if (!_.isEmpty(response)) {
+          this.$root.$emit("punk:info", response)
+        }
       },
       prologue: () => {
         this.useWorld = false
