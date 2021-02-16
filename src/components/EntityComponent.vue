@@ -8,7 +8,7 @@
           </template>
           <q-breadcrumbs-el v-for="crumb in crumbs" :key="crumb.id" :label="crumb.name" @click="nav(crumb)" class="cursor-pointer" />
         </q-breadcrumbs>
-        <h4 style="margin-top: 24px;">{{ title }}</h4>
+        <h4 style="margin-top: 24px;">{{ title }}<span v-if="subtitle"><br /><small>({{ subtitle }})</small></span></h4>
         <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
           <p class="text-body1" v-for="item in items" :key="item.id">
             {{ item.text }}
@@ -28,6 +28,11 @@ export default {
     title: {
       get () {
         return this.$store.state.entity.title
+      }
+    },
+    subtitle: {
+      get () {
+        return this.$store.state.entity.subtitle
       }
     },
     items: {

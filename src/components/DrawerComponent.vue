@@ -15,7 +15,7 @@
               </q-item-section>
               <q-item-section>
                 <q-item-label>{{ item.name }}</q-item-label>
-                <q-item-label caption>{{ item.detail }}</q-item-label>
+                <q-item-label caption v-if="item.detail">({{ item.detail }})</q-item-label>
               </q-item-section>
             </q-item>
           </transition-group>

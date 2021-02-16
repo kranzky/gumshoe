@@ -1,6 +1,7 @@
 function wipe(state) {
   state.seen = true
   state.title = null
+  state.subtitle = null
 }
 
 export function reset(state) {
@@ -16,6 +17,11 @@ export function clear(state) {
 export function title(state, title) {
   state.seen = false
   state.title = title
+}
+
+export function subtitle(state, subtitle) {
+  state.seen = false
+  state.subtitle = subtitle
 }
 
 export function seen(state) {

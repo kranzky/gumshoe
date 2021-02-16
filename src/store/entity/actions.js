@@ -16,6 +16,10 @@ export function title(store, title) {
   this.commit("entity/title", title)
 }
 
+export function subtitle(store, subtitle) {
+  this.commit("entity/subtitle", subtitle)
+}
+
 export function seen(store) {
   this.commit("entity/seen")
   this.commit("entityItems/seen")

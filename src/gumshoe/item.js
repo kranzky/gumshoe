@@ -3,7 +3,6 @@ import Entity from './entity.js'
 class Item extends Entity {
   constructor (name, canGet, canPut, prep) {
     super(name, 'item')
-    this.original = name
     this.log = []
     this.items = new Set()
     this.roomId = null
@@ -13,6 +12,7 @@ class Item extends Entity {
     this.canPut = canPut
     this.prep = prep
     this.carried = false
+    this.detail = null
   }
 
   addCrumb (crumbs, store, world) {
@@ -34,6 +34,7 @@ class Item extends Entity {
   render (store, world) {
     store.clear('entity')
     store.set("entity", "title", this.name)
+    store.set("entity", "subtitle", this.detail)
     let crumbs = [this]
     this.addCrumb(crumbs, store, world)
     _.each(_.reverse(crumbs), (item) => {

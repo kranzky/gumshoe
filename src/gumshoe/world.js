@@ -43,7 +43,7 @@ class World {
     }
     store.clear('inventory')
     _.each([...this.carried], (item) => {
-      store.add("inventory", { id: item.id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
+      store.add("inventory", { id: item.id, name: item.name, detail: item.detail, type: 'item', icon: 'label', seen: item.seen })
     })
     setTimeout(() => {
       store.show('room')
@@ -147,8 +147,8 @@ class World {
     }
     this.carried.add(item)
     item.carried = true
-    item.name = `${item.original} (carrying)`
-    return `You take the "${item.original}"`
+    item.detail = "carrying"
+    return `You take the "${item.name}"`
   }
 
   drop () {
@@ -159,8 +159,8 @@ class World {
     this.rooms[this.currentRoom].addItem(item)
     this.carried.delete(item)
     item.carried = false
-    item.name = item.original
-    return `You drop the "${item.original}"`
+    item.detail = null
+    return `You drop the "${item.name}"`
   }
 
   spawn () {
