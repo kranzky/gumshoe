@@ -129,6 +129,25 @@ class Game {
     console.debug(`remove bookmark for "${entity.name}"`) // eslint-disable-line no-console
   }
 
+  triggerQuestStart (name, description) {
+    setTimeout(() => {
+      this.$root.$emit("punk:dialog", `Started Quest "${name}"`, description)
+    }, 3000)
+  }
+
+  triggerQuestDone (name, description) {
+    setTimeout(() => {
+      this.$root.$emit("punk:dialog", `Completed Quest "${name}"`, description)
+    }, 1000)
+  }
+
+  triggerTask (description) {
+    this.$root.$emit("punk:success", description)
+    this.stats.addScore()
+    this.stats.showScore()
+    this.stats.render(this.store)
+  }
+
   loadGame () {
     this.data = {
       world: () => {

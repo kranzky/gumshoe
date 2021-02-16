@@ -58,8 +58,6 @@ class World {
     _.each([...this.carried], (item) => {
       store.add("inventory", { id: item.id, name: item.name, detail: item.detail, type: 'item', icon: 'label', seen: item.seen })
     })
-    // TODO: only clear and render if new quests have become active
-    // TODO: schedule this, and a requester, in 2 seconds
     store.clear('quests')
     _.each(this.quests, (quest) => {
       if (quest.active) {
@@ -133,8 +131,8 @@ class World {
     return bot
   }
 
-  addQuest (name, description, trigger, tasks) {
-    let quest = new Quest(name, description, trigger, tasks)
+  addQuest (name, description, success, trigger, tasks) {
+    let quest = new Quest(name, description, success, trigger, tasks)
     this.quests[quest.id] = quest
   }
 
@@ -273,7 +271,7 @@ class World {
     courtyard.addBot(rob)
     alfresco.addBot(bailey)
     matthew.addItem(beer)
-    this.addQuest("Dirty Mug", "Get that filth off Jason's desk and into the sink.", { action: 'talk', entity: jason }, [
+    this.addQuest("Dirty Mug", "Get that filth off Jason's desk and into the sink.", "You casually throw the mug into the sink, where it vanishes!", { action: 'talk', entity: jason }, [
       {
         name: "Grab the coffee mug.",
         trigger: {
@@ -289,7 +287,7 @@ class World {
         }
       }
     ])
-    this.addQuest("Booze Run", "That man needs a drink!", { action: 'talk', entity: rob }, [
+    this.addQuest("Booze Run", "That man needs a drink!", "You hand Rob the beer which he eagerly consumes, can and all.", { action: 'talk', entity: rob }, [
       {
         name: "Obtain a can of beer.",
         trigger: {
@@ -305,7 +303,7 @@ class World {
         }
       }
     ])
-    this.addQuest("Feed Fido", "Get some food for that doggo.", { action: 'talk', entity: bailey }, [
+    this.addQuest("Feed Fido", "Get some food for that doggo.", "Bailey rips the bone from your hand and swallows it whole (the bone, not your hand)!", { action: 'talk', entity: bailey }, [
       {
         name: "Find something a dog would like to eat.",
         trigger: {

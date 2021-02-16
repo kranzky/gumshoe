@@ -3,9 +3,10 @@ import Task from './task.js'
 import Trigger from './trigger.js'
 
 class Quest extends Entity {
-  constructor (name, description, trigger, tasks) {
+  constructor (name, description, success, trigger, tasks) {
     super(name, 'quest')
     this.description = description
+    this.success = success
     this.trigger = new Trigger(trigger.action, trigger.entity, trigger.room)
     this.tasks = []
     _.each(tasks, (task) => {
@@ -18,14 +19,27 @@ class Quest extends Entity {
   update (action, entity, room) {
     if (!this.active) {
       this.active = this.trigger.match(action, entity, room)
-    } else {
+      if (this.active) {
+        window.game.triggerQuestStart(this.name, this.description)
+      }
+    } else if (!this.complete) {
       this.complete = true
       _.each(this.tasks, (task) => {
         if (!task.complete) {
           task.complete = task.trigger.match(action, entity, room)
+          if (task.complete) {
+            window.game.triggerTask(task.name)
+            this.seen = false
+          }
         }
         this.complete = this.complete && task.complete
       })
+      if (this.complete) {
+        entity.consume()
+        room.addLog(this.success)
+        room.seen = false
+        window.game.triggerQuestDone(this.name, this.success)
+      }
     }
   }
 

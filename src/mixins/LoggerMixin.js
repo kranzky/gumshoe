@@ -5,11 +5,19 @@ export const LoggerMixin = {
       this.$root.$on("punk:info", this.logInfo)
       this.$root.$on("punk:success", this.logSuccess)
       this.$root.$on("punk:error", this.logError)
+      this.$root.$on("punk:dialog", this.showDialog)
     },
     deregisterPunk() {
       this.$root.$off("punk:info", this.logInfo)
       this.$root.$off("punk:success", this.logSuccess)
       this.$root.$off("punk:error", this.logError)
+      this.$root.$off("punk:dialog", this.showDialog)
+    },
+    showDialog(title, message) {
+      this.$q.dialog({
+        title: title,
+        message: message
+      })
     },
     showNotification(type, message) {
       this.$q.notify({
