@@ -23,6 +23,11 @@ class Store {
     this.$store.dispatch(`${component}/append`, data)
   }
 
+  del (component, id) {
+    console.debug(`del ${component} "${id}"`) // eslint-disable-line no-console
+    this.$store.dispatch(`${component}/remove`, id)
+  }
+
   delay (action) {
     this.$store.dispatch("progress/delay", action)
   }

@@ -2,7 +2,10 @@
   <div class="row justify-center">
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
       <div style="max-width:700px; width: 100%;" v-if="!loading">
-        <h4>{{ title }}</h4>
+        <div>
+          <q-btn class="glossy float-right" round outline color="secondary" :icon="bookmarked ? 'bookmark' : 'bookmark_border'" size="sm" @click="toggleBookmark" />
+          <h4>{{ title }}</h4>
+        </div>
         <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
           <p class="text-body1" v-for="item in items" :key="item.id">
             {{ item.text }}
@@ -37,6 +40,20 @@ export default {
     current: {
       get () {
         return this.$store.state.room.current
+      }
+    },
+    bookmarked: {
+      get () {
+        return !_.isUndefined(_.find(this.$store.state.notebook.items, (item) => { return item.id == this.current }))
+      }
+    }
+  },
+  methods: {
+    toggleBookmark () {
+      if (!this.bookmarked) {
+        this.$root.$emit("game:mark", 'room', this.current)
+      } else {
+        this.$root.$emit("game:unmark", 'room', this.current)
       }
     }
   },

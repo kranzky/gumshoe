@@ -35,3 +35,7 @@ export function loading(state, loading) {
 export function current(state, id) {
   state.current = id
 }
+
+export function type(state, type) {
+  state.type = type
+}

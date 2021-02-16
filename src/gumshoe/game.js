@@ -22,6 +22,8 @@ class Game {
     this.$root.$on("game:action", this.action)
     this.$root.$on("game:view", this.view)
     this.$root.$on("game:items", this.items)
+    this.$root.$on("game:mark", this.mark)
+    this.$root.$on("game:unmark", this.unmark)
     this.loadGame()
     this.action(process.env.DEV ? 'world' : 'world')
     this.state = 'running'
@@ -93,15 +95,43 @@ class Game {
     this.world.renderItems(type, this.store)
   }
 
+  mark (type, id) {
+    if (this != window.game) {
+      window.game.mark(type, id)
+      return
+    }
+    let entity = this.world.getEntity(type, id)
+    let icon = null
+    if (type == 'room') {
+      icon = 'place'
+    }
+    if (type == 'item') {
+      icon = 'label'
+    }
+    if (type == 'bot') {
+      icon = 'face'
+    }
+    this.store.add('notebook', { id: entity.id, name: entity.name, type: entity.type, seen: entity.seen, icon: icon })
+    console.debug(`add bookmark for "${entity.name}"`) // eslint-disable-line no-console
+  }
+
+  unmark (type, id) {
+    if (this != window.game) {
+      window.game.unmark(type, id)
+      return
+    }
+    let entity = this.world.getEntity(type, id)
+    this.store.del('notebook', id)
+    console.debug(`remove bookmark for "${entity.name}"`) // eslint-disable-line no-console
+  }
+
   loadGame () {
     this.data = {
       world: () => {
         this.useWorld = true
         this.stats.clear()
         this.store.reset()
-        this.store.clear('inventory')
         this.store.clear('notebook')
-        this.store.clear('quests')
         this.world.spawn()
         this.stats.showTime()
       },
@@ -306,6 +336,8 @@ class Game {
     if (this.state !== 'running') {
       return
     }
+    this.$root.$on("game:unmark", this.unmark)
+    this.$root.$on("game:mark", this.mark)
     this.$root.$off("game:items", this.items)
     this.$root.$off("game:view", this.view)
     this.$root.$off("game:action", this.action)

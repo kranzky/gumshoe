@@ -28,3 +28,7 @@ export function seen(store) {
 export function current(store, id) {
   this.commit("entity/current", id)
 }
+
+export function type(store, type) {
+  this.commit("entity/type", type)
+}

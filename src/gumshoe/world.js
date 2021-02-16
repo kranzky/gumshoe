@@ -28,11 +28,13 @@ class World {
     room.render(store, this)
     if (!_.isNull(this.currentItem)) {
       store.set('entity', 'current', this.currentItem)
+      store.set('entity', 'type', 'item')
       let item = this.items[this.currentItem]
       item.render(store, this)
     }
     if (!_.isNull(this.currentBot)) {
       store.set('entity', 'current', this.currentBot)
+      store.set('entity', 'type', 'bot')
       let bot = this.bots[this.currentBot]
       bot.render_entity(store, this)
     }
