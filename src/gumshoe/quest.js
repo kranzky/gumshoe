@@ -1,10 +1,12 @@
 import Entity from './entity.js'
 import Task from './task.js'
+import Trigger from './trigger.js'
 
 class Quest extends Entity {
   constructor (name, description, trigger, tasks) {
     super(name, 'quest')
     this.description = description
+    this.trigger = new Trigger(trigger.action, trigger.entity, trigger.room)
     this.tasks = []
     _.each(tasks, (task) => {
       this.tasks.push(new Task(task.name, task.trigger))
@@ -13,7 +15,18 @@ class Quest extends Entity {
     this.complete = false
   }
 
-  update (world) {
+  update (action, entity, room) {
+    if (!this.active) {
+      this.active = this.trigger.match(action, entity, room)
+    } else {
+      this.complete = true
+      _.each(this.tasks, (task) => {
+        if (!task.complete) {
+          task.complete = task.trigger.match(action, entity, room)
+        }
+        this.complete = this.complete && task.complete
+      })
+    }
   }
 
   render (store, world) {

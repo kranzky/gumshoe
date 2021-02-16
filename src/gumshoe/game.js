@@ -17,7 +17,6 @@ class Game {
       return
     }
     window.game = this
-
     this.$root.$on("game:wait", this.wait)
     this.$root.$on("game:action", this.action)
     this.$root.$on("game:view", this.view)
@@ -341,8 +340,8 @@ class Game {
     if (this.state !== 'running') {
       return
     }
-    this.$root.$on("game:unmark", this.unmark)
-    this.$root.$on("game:mark", this.mark)
+    this.$root.$off("game:unmark", this.unmark)
+    this.$root.$off("game:mark", this.mark)
     this.$root.$off("game:items", this.items)
     this.$root.$off("game:view", this.view)
     this.$root.$off("game:action", this.action)

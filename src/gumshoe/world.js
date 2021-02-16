@@ -17,6 +17,12 @@ class World {
     this.carried = new Set()
   }
 
+  update (action, entity, place) {
+    _.each(this.quests, (quest) => {
+      quest.update(action, entity, place)
+    })
+  }
+
   render (store) {
     if (_.isNull(this.currentRoom)) {
       return;
@@ -52,6 +58,8 @@ class World {
     _.each([...this.carried], (item) => {
       store.add("inventory", { id: item.id, name: item.name, detail: item.detail, type: 'item', icon: 'label', seen: item.seen })
     })
+    // TODO: only clear and render if new quests have become active
+    // TODO: schedule this, and a requester, in 2 seconds
     store.clear('quests')
     _.each(this.quests, (quest) => {
       if (quest.active) {
@@ -128,8 +136,6 @@ class World {
   addQuest (name, description, trigger, tasks) {
     let quest = new Quest(name, description, trigger, tasks)
     this.quests[quest.id] = quest
-    // TODO: show new quest dialogue, displays quest on OK
-    // TODO: update quests to see if complete, and modify score etc
   }
 
   look (roomId) {
@@ -157,19 +163,9 @@ class World {
   talk () {
     this.dialogueBot = this.currentBot
     let bot = this.bots[this.dialogueBot]
+    let room = this.rooms[this.currentRoom]
     bot.seen = true
-    if (bot.name == "Jason" && _.isNull(this.quests.coffee)) {
-      setTimeout(() => {
-      }, 1000)
-    }
-    if (bot.name == "Rob" && _.isNull(this.quests.beer)) {
-      setTimeout(() => {
-      }, 1000)
-    }
-    if (bot.name == "Bailey" && _.isNull(this.quests.bone)) {
-      setTimeout(() => {
-      }, 1000)
-    }
+    this.update('talk', bot, room)
   }
 
   take () {
@@ -192,6 +188,8 @@ class World {
     this.carried.add(item)
     item.carried = true
     item.detail = "carrying"
+    let room = this.rooms[this.currentRoom]
+    this.update('take', item, room)
     return `You take the "${item.name}"`
   }
 
@@ -204,6 +202,8 @@ class World {
     this.carried.delete(item)
     item.carried = false
     item.detail = null
+    let room = this.rooms[this.currentRoom]
+    this.update('drop', item, room)
     return `You drop the "${item.name}"`
   }
 
@@ -273,51 +273,51 @@ class World {
     courtyard.addBot(rob)
     alfresco.addBot(bailey)
     matthew.addItem(beer)
-    this.addQuest("Dirty Mug", "Get that filth off Jason's desk and into the sink.", { action: 'talk', bot: jason }, [
+    this.addQuest("Dirty Mug", "Get that filth off Jason's desk and into the sink.", { action: 'talk', entity: jason }, [
       {
         name: "Grab the coffee mug.",
         trigger: {
           action: 'take',
-          item: mug
+          entity: mug
         }
       }, {
         name: "Put it in the kitchen sink.",
         trigger: {
           action: 'drop',
-          item: mug,
-          place: kitchen
+          entity: mug,
+          room: kitchen
         }
       }
     ])
-    this.addQuest("Booze Run", "That man needs a drink!", { action: 'talk', bot: rob }, [
+    this.addQuest("Booze Run", "That man needs a drink!", { action: 'talk', entity: rob }, [
       {
         name: "Obtain a can of beer.",
         trigger: {
           action: 'take',
-          item: beer
+          entity: beer
         }
       }, {
         name: "Give it to Rob!",
         trigger: {
           action: 'drop',
-          item: beer,
-          place: courtyard
+          entity: beer,
+          room: courtyard
         }
       }
     ])
-    this.addQuest("Feed Fido", "Get some food for that doggo.", { action: 'talk', bot: bailey }, [
+    this.addQuest("Feed Fido", "Get some food for that doggo.", { action: 'talk', entity: bailey }, [
       {
         name: "Find something a dog would like to eat.",
         trigger: {
           action: 'take',
-          item: bone
+          entity: bone
         }
       }, {
         name: "Feed it to Bailey.",
         trigger: {
           action: 'drop',
-          item: bone,
-          place: alfresco
+          entity: bone,
+          room: alfresco
         }
       }
     ])
