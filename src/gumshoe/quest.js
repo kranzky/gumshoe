@@ -35,10 +35,9 @@ class Quest extends Entity {
         this.complete = this.complete && task.complete
       })
       if (this.complete) {
-        entity.consume()
         room.addLog(this.success)
         room.seen = false
-        window.game.triggerQuestDone(this.name, this.success)
+        window.game.triggerQuestDone(this.name, this.success, entity)
       }
     }
   }

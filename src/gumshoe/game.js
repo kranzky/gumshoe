@@ -52,7 +52,6 @@ class Game {
       window.game.action(action)
       return
     }
-    console.debug(`action "${action}"`) // eslint-disable-line no-console
     this.data[action]()
     this.update()
   }
@@ -62,24 +61,20 @@ class Game {
       window.game.view(item)
       return
     }
-    console.debug(`view "${item.name}"`) // eslint-disable-line no-console
     if (item.type == 'room') {
       this.$root.$emit("punk:info", `You go to the "${item.name}"`)
-      console.debug(`look "${item.name}"`) // eslint-disable-line no-console
       this.world.look(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'room') }, 500)
       this.update('room')
     }
     if (item.type == 'item') {
       this.$root.$emit("punk:info", `You examine the "${item.name}"`)
-      console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
       this.world.examine(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update('entity')
     }
     if (item.type == 'bot') {
       this.$root.$emit("punk:info", `You approach "${item.name}"`)
-      console.debug(`examine "${item.name}"`) // eslint-disable-line no-console
       this.world.examine_bot(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update('dialogue')
@@ -116,7 +111,6 @@ class Game {
       icon = 'face'
     }
     this.store.add('notebook', { id: entity.id, name: entity.name, type: entity.type, seen: entity.seen, icon: icon })
-    console.debug(`add bookmark for "${entity.name}"`) // eslint-disable-line no-console
   }
 
   unmark (type, id) {
@@ -126,7 +120,6 @@ class Game {
     }
     let entity = this.world.getEntity(type, id)
     this.store.del('notebook', id)
-    console.debug(`remove bookmark for "${entity.name}"`) // eslint-disable-line no-console
   }
 
   triggerQuestStart (name, description) {
@@ -135,7 +128,8 @@ class Game {
     }, 3000)
   }
 
-  triggerQuestDone (name, description) {
+  triggerQuestDone (name, description, entity) {
+    this.world.removeItem(entity, this.store)
     setTimeout(() => {
       this.$root.$emit("punk:dialog", `Completed Quest "${name}"`, description)
     }, 1000)

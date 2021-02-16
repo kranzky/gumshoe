@@ -10,7 +10,7 @@ class Stats {
 
   render (store) {
     if (this.show.score) {
-      store.set('game', 'score', `${this.score} / 100`)
+      store.set('game', 'score', `${this.score} / 6`)
     }
 
     if (this.show.time) {
@@ -56,7 +56,6 @@ class Stats {
 
   wait () {
     this.time += 1
-    console.debug(`time passes... [${this.getDate().toISOString()}]`) // eslint-disable-line no-console
   }
 
   showPlayer() {

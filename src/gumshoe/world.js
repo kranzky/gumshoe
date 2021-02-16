@@ -71,7 +71,9 @@ class World {
     setTimeout(() => {
       store.show('room')
       store.show('places')
-      store.show('entity')
+      if (this.currentItem || this.currentBot) {
+        store.show('entity')
+      }
       store.show('dialogue')
       store.show('inventory')
       store.show('quests')
@@ -123,6 +125,17 @@ class World {
     item.addLog(description)
     this.items[item.id] = item
     return item
+  }
+
+  removeItem (item, store) {
+    let room = this.rooms[item.roomId]
+    room.removeItem(item)
+    this.currentItem = null
+    store.clear('entity')
+    store.hide('entity')
+    setTimeout(() => {
+      store.set("page", "tab", 'room')
+    }, 500)
   }
 
   addBot (name, description, lines) {

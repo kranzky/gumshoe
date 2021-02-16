@@ -55,9 +55,6 @@ class Item extends Entity {
     }
   }
 
-  consume () {
-  }
-
   addLog (text) {
     this.log.push(text)
   }
