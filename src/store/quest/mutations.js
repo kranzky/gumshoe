@@ -27,3 +27,7 @@ export function description(state, description) {
 export function seen(state) {
   state.seen = true
 }
+
+export function loading(state, loading) {
+  state.loading = loading
+}

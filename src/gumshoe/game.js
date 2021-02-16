@@ -85,6 +85,11 @@ class Game {
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update('dialogue')
     }
+    if (item.type == 'quest') {
+      this.world.examine_quest(item.id)
+      setTimeout(() => { this.store.set("page", "tab", 'quest') }, 500)
+      this.update()
+    }
   }
 
   items (type) {

@@ -1,15 +1,18 @@
 import Room from './room.js'
 import Item from './item.js'
 import Bot from './bot.js'
+import Quest from './quest.js'
 
 class World {
   constructor () {
     this.rooms = {}
     this.items = {}
     this.bots = {}
+    this.quests = {}
     this.currentRoom = null
     this.currentItem = null
     this.currentBot = null
+    this.currentQuest = null
     this.dialogueBot = null
     this.carried = new Set()
   }
@@ -23,6 +26,8 @@ class World {
     store.hide('entity')
     store.hide('dialogue')
     store.hide('inventory')
+    store.hide('quests')
+    store.hide('quest')
     store.set('room', 'current', this.currentRoom)
     let room = this.rooms[this.currentRoom]
     room.render(store, this)
@@ -47,12 +52,24 @@ class World {
     _.each([...this.carried], (item) => {
       store.add("inventory", { id: item.id, name: item.name, detail: item.detail, type: 'item', icon: 'label', seen: item.seen })
     })
+    store.clear('quests')
+    _.each(this.quests, (quest) => {
+      if (quest.active) {
+        store.add("quests", { id: quest.id, name: quest.name, type: 'quest', icon: quest.complete ? 'assignment_turned_in' : 'assignment_late', seen: quest.seen })
+      }
+    })
+    if (!_.isNull(this.currentQuest)) {
+      let quest = this.quests[this.currentQuest]
+      quest.render(store, this)
+    }
     setTimeout(() => {
       store.show('room')
       store.show('places')
       store.show('entity')
       store.show('dialogue')
       store.show('inventory')
+      store.show('quests')
+      store.show('quest')
     }, 500)
   }
 
@@ -108,6 +125,13 @@ class World {
     return bot
   }
 
+  addQuest (name, description, trigger, tasks) {
+    let quest = new Quest(name, description, trigger, tasks)
+    this.quests[quest.id] = quest
+    // TODO: show new quest dialogue, displays quest on OK
+    // TODO: update quests to see if complete, and modify score etc
+  }
+
   look (roomId) {
     this.currentRoom = roomId
     this.rooms[roomId].seen = true
@@ -125,9 +149,27 @@ class World {
     this.bots[botId].seen = true
   }
 
+  examine_quest (questId) {
+    this.currentQuest = questId
+    this.quests[questId].seen = true
+  }
+
   talk () {
     this.dialogueBot = this.currentBot
-    this.bots[this.dialogueBot].seen = true
+    let bot = this.bots[this.dialogueBot]
+    bot.seen = true
+    if (bot.name == "Jason" && _.isNull(this.quests.coffee)) {
+      setTimeout(() => {
+      }, 1000)
+    }
+    if (bot.name == "Rob" && _.isNull(this.quests.beer)) {
+      setTimeout(() => {
+      }, 1000)
+    }
+    if (bot.name == "Bailey" && _.isNull(this.quests.bone)) {
+      setTimeout(() => {
+      }, 1000)
+    }
   }
 
   take () {
@@ -231,6 +273,54 @@ class World {
     courtyard.addBot(rob)
     alfresco.addBot(bailey)
     matthew.addItem(beer)
+    this.addQuest("Dirty Mug", "Get that filth off Jason's desk and into the sink.", { action: 'talk', bot: jason }, [
+      {
+        name: "Grab the coffee mug.",
+        trigger: {
+          action: 'take',
+          item: mug
+        }
+      }, {
+        name: "Put it in the kitchen sink.",
+        trigger: {
+          action: 'drop',
+          item: mug,
+          place: kitchen
+        }
+      }
+    ])
+    this.addQuest("Booze Run", "That man needs a drink!", { action: 'talk', bot: rob }, [
+      {
+        name: "Obtain a can of beer.",
+        trigger: {
+          action: 'take',
+          item: beer
+        }
+      }, {
+        name: "Give it to Rob!",
+        trigger: {
+          action: 'drop',
+          item: beer,
+          place: courtyard
+        }
+      }
+    ])
+    this.addQuest("Feed Fido", "Get some food for that doggo.", { action: 'talk', bot: bailey }, [
+      {
+        name: "Find something a dog would like to eat.",
+        trigger: {
+          action: 'take',
+          item: bone
+        }
+      }, {
+        name: "Feed it to Bailey.",
+        trigger: {
+          action: 'drop',
+          item: bone,
+          place: alfresco
+        }
+      }
+    ])
     this.look(office.id)
   }
 }
