@@ -9,6 +9,9 @@ ruby '2.6.6'
 gem 'punk', '~> 0.3.6'
 # gem 'punk', path: '../punk'
 
+# Procedural Generation
+gem 'rndb', '~> 0.2.1'
+
 # Development
 group :development do
   gem 'gemfile_updater', '~> 0.1.0'
