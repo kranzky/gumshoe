@@ -12,7 +12,7 @@ class Game {
     this.useWorld = false
   }
 
-  run () {
+  run (scenario) {
     if (this.state !== 'waiting') {
       return
     }
@@ -24,7 +24,7 @@ class Game {
     this.$root.$on("game:mark", this.mark)
     this.$root.$on("game:unmark", this.unmark)
     this.loadGame()
-    this.action(process.env.DEV ? 'world' : 'world')
+    this.action(scenario)
     this.state = 'running'
   }
 
@@ -144,7 +144,10 @@ class Game {
 
   loadGame () {
     this.data = {
-      world: () => {
+      remote: () => {
+        // TODO: implement remote game
+      },
+      demo: () => {
         this.useWorld = true
         this.stats.clear()
         this.store.reset()
@@ -247,41 +250,41 @@ class Game {
         setTimeout(() => {
           this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
           setTimeout(() => {
-            this.store.add("roomChoices", { text: "Enter the world.", action: 'world' })
+            this.store.add("roomChoices", { text: "Enter the world.", action: 'demo' })
             this.store.add("dialogueItems", { heading: true, label: "Your Lizard Brain has disconnected." })
           }, 5000)
         }, 2000)
       },
-      demoRoom: () => {
+      testRoom: () => {
         this.store.add("roomItems", { text: "More room description." })
       },
-      demoRoomAppend: () => {
+      testRoomAppend: () => {
         this.store.add("roomItems", { text: "More room description." })
       },
-      demoRoomWait: () => {
-        this.store.delay('demoRoomAppend')
+      testRoomWait: () => {
+        this.store.delay('testRoomAppend')
       },
-      demoDialogue: () => {
+      testDialogue: () => {
         this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
         this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
       },
-      demoDialogueAppend: () => {
+      testDialogueAppend: () => {
         this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
         this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
       },
-      demoDialogueWait: () => {
-        this.store.delay('demoDialogueAppend')
+      testDialogueWait: () => {
+        this.store.delay('testDialogueAppend')
       },
-      demoEntity: () => {
+      testEntity: () => {
         this.store.add("entityItems", { text: "More entity description." })
       },
-      demoEntityAppend: () => {
+      testEntityAppend: () => {
         this.store.add("entityItems", { text: "More entity description." })
       },
-      demoEntityWait: () => {
-        this.store.delay('demoEntityAppend')
+      testEntityWait: () => {
+        this.store.delay('testEntityAppend')
       },
-      demo: () => {
+      test: () => {
         this.useWorld = false
         this.stats.clear()
         this.store.reset()
@@ -296,23 +299,23 @@ class Game {
         this.store.set('page', 'title', "Room Name")
         this.store.add('roomItems', { text: "Room description." })
         this.store.add("roomChoices", { text: "Play Game", action: 'prologue' })
-        this.store.add("roomChoices", { text: "More Content", action: 'demoRoom' })
-        this.store.add("roomChoices", { text: "Wait...", action: 'demoRoomWait', icon: 'update' })
+        this.store.add("roomChoices", { text: "More Content", action: 'testRoom' })
+        this.store.add("roomChoices", { text: "Wait...", action: 'testRoomWait', icon: 'update' })
 
         this.store.clear('entity')
         this.store.set("entity", "title", "Entity Name")
         this.store.add("entityItems", { text: "Entity description." })
         this.store.add("entityChoices", { text: "Play Game", action: 'prologue' })
-        this.store.add("entityChoices", { text: "More Content", action: 'demoEntity' })
-        this.store.add("entityChoices", { text: "Wait...", action: 'demoEntityWait', icon: 'update' })
+        this.store.add("entityChoices", { text: "More Content", action: 'testEntity' })
+        this.store.add("entityChoices", { text: "Wait...", action: 'testEntityWait', icon: 'update' })
 
         this.store.clear('dialogue')
         this.store.add("dialogueItems", { heading: true, label: "Chat with NPC" })
         this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
         this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
         this.store.add("dialogueChoices", { text: "Play Game", action: 'prologue' })
-        this.store.add("dialogueChoices", { text: "More Content", action: 'demoDialogue' })
-        this.store.add("dialogueChoices", { text: "Wait...", action: 'demoDialogueWait', icon: 'update' })
+        this.store.add("dialogueChoices", { text: "More Content", action: 'testDialogue' })
+        this.store.add("dialogueChoices", { text: "Wait...", action: 'testDialogueWait', icon: 'update' })
 
         this.store.clear('quest')
         this.store.set("quest", "title", "Quest Name")

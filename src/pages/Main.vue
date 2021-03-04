@@ -71,7 +71,24 @@ export default {
   },
   mounted () {
     this.$q.dark.set(true)
-    this.$game.run()
+    this.$q.dialog({
+      title: 'New Game',
+      message: 'Which scenario shall I load?',
+      options: {
+        type: 'radio',
+        model: 'demo',
+        items: [
+          { label: 'Remote Server', value: 'remote' },
+          { label: 'Demo Quests', value: 'demo' },
+          { label: 'Prologue WIP', value: 'prologue' },
+          { label: 'Test Content', value: 'test' }
+        ],
+      },
+      cancel: false,
+      persistent: true
+    }).onOk(data => {
+      this.$game.run(data)
+    })
   },
   beforeDestroy () {
     this.$game.stop()
