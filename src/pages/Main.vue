@@ -32,6 +32,30 @@ export default {
   methods: {
     onResize (size) {
       this.$store.commit('page/width', size.width)
+    },
+    selectScenario (scenario) {
+      if (process.env.DEV) {
+        this.$game.run('remote')
+        return
+      }
+      this.$q.dialog({
+        title: 'New Game',
+        message: 'Which scenario shall I load?',
+        options: {
+          type: 'radio',
+          model: scenario,
+          items: [
+            { label: 'Remote Server', value: 'remote' },
+            { label: 'Demo Quests', value: 'demo' },
+            { label: 'Prologue WIP', value: 'prologue' },
+            { label: 'Test Content', value: 'test' }
+          ],
+        },
+        cancel: false,
+        persistent: true
+      }).onOk(data => {
+        this.$game.run(data)
+      })
     }
   },
   computed:  {
@@ -71,24 +95,7 @@ export default {
   },
   mounted () {
     this.$q.dark.set(true)
-    this.$q.dialog({
-      title: 'New Game',
-      message: 'Which scenario shall I load?',
-      options: {
-        type: 'radio',
-        model: 'demo',
-        items: [
-          { label: 'Remote Server', value: 'remote' },
-          { label: 'Demo Quests', value: 'demo' },
-          { label: 'Prologue WIP', value: 'prologue' },
-          { label: 'Test Content', value: 'test' }
-        ],
-      },
-      cancel: false,
-      persistent: true
-    }).onOk(data => {
-      this.$game.run(data)
-    })
+    this.selectScenario('demo')
   },
   beforeDestroy () {
     this.$game.stop()
