@@ -1,6 +1,9 @@
 import Store from './store.js'
 import Stats from './stats.js'
-import World from './world.js'
+import Remote from './scenarios/remote.js'
+import Demo from './scenarios/demo.js'
+import Prologue from './scenarios/prologue.js'
+import Example from './scenarios/example.js'
 
 class Game {
   constructor (root, store) {
@@ -8,8 +11,7 @@ class Game {
     this.$root = root
     this.store = new Store(store)
     this.stats = new Stats()
-    this.world = new World()
-    this.useWorld = false
+    this.scenario = null
   }
 
   run (scenario) {
@@ -17,25 +19,38 @@ class Game {
       return
     }
     window.game = this
+    switch (scenario) {
+      case 'remote':
+        this.scenario = new Remote()
+        break
+      case 'demo':
+        this.scenario = new Demo()
+        break
+      case 'prologue':
+        this.scenario = new Prologue()
+        break
+      case 'example':
+        this.scenario = new Example()
+        break
+    }
     this.$root.$on("game:wait", this.wait)
     this.$root.$on("game:action", this.action)
     this.$root.$on("game:view", this.view)
     this.$root.$on("game:items", this.items)
     this.$root.$on("game:mark", this.mark)
     this.$root.$on("game:unmark", this.unmark)
-    this.loadGame()
-    this.action(scenario)
+    this.stats.clear()
+    this.store.reset()
+    this.store.clear('notebook')
+    this.stats.showTime()
+    this.scenario.run()
     this.state = 'running'
   }
 
   update (type) {
     this.wait()
-    if (this.useWorld) {
-      this.world.render(this.store)
-      if (!_.isUndefined(type)) {
-        this.world.renderItems(type, this.store)
-      }
-    }
+    this.render()
+    this.renderItems(type)
   }
 
   wait () {
@@ -52,7 +67,7 @@ class Game {
       window.game.action(action)
       return
     }
-    this.data[action]()
+    // TODO: this.scenario.action(action)
     this.update()
   }
 
@@ -63,24 +78,23 @@ class Game {
     }
     if (item.type == 'room') {
       this.$root.$emit("punk:info", `You go to the "${item.name}"`)
-      this.world.look(item.id)
+      this.look(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'room') }, 500)
       this.update('room')
     }
     if (item.type == 'item') {
       this.$root.$emit("punk:info", `You examine the "${item.name}"`)
-      this.world.examine(item.id)
+      this.examine(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update('entity')
     }
     if (item.type == 'bot') {
       this.$root.$emit("punk:info", `You approach "${item.name}"`)
-      this.world.examine_bot(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'entity') }, 500)
       this.update('dialogue')
     }
     if (item.type == 'quest') {
-      this.world.examine_quest(item.id)
+      this.examine_quest(item.id)
       setTimeout(() => { this.store.set("page", "tab", 'quest') }, 500)
       this.update()
     }
@@ -91,7 +105,7 @@ class Game {
       window.game.items(type)
       return
     }
-    this.world.renderItems(type, this.store)
+    this.renderItems(type)
   }
 
   mark (type, id) {
@@ -99,7 +113,7 @@ class Game {
       window.game.mark(type, id)
       return
     }
-    let entity = this.world.getEntity(type, id)
+    let entity = this.getEntity(type, id)
     let icon = null
     if (type == 'room') {
       icon = 'place'
@@ -118,7 +132,7 @@ class Game {
       window.game.unmark(type, id)
       return
     }
-    let entity = this.world.getEntity(type, id)
+    let entity = this.getEntity(type, id)
     this.store.del('notebook', id)
   }
 
@@ -129,7 +143,7 @@ class Game {
   }
 
   triggerQuestDone (name, description, entity) {
-    this.world.removeItem(entity, this.store)
+    this.removeItem(entity)
     setTimeout(() => {
       this.$root.$emit("punk:dialog", `Completed Quest "${name}"`, description)
     }, 1000)
@@ -142,214 +156,41 @@ class Game {
     this.stats.render(this.store)
   }
 
-  loadGame () {
-    this.data = {
-      remote: () => {
-        // TODO: implement remote game
-      },
-      demo: () => {
-        this.useWorld = true
-        this.stats.clear()
-        this.store.reset()
-        this.store.clear('notebook')
-        this.world.spawn()
-        this.stats.showTime()
-      },
-      talk: () => {
-        this.world.talk()
-        setTimeout(() => { this.store.set("page", "tab", 'dialogue') }, 500)
-      },
-      take: () => {
-        let response = this.world.take()
-        if (!_.isEmpty(response)) {
-          this.$root.$emit("punk:info", response)
-        }
-      },
-      drop: () => {
-        let response = this.world.drop()
-        if (!_.isEmpty(response)) {
-          this.$root.$emit("punk:info", response)
-        }
-      },
-      prologue: () => {
-        this.useWorld = false
-        this.stats.clear()
-        this.store.reset()
-        this.store.clear('room')
-        this.store.set("page", "title", null)
-        this.store.hide('room')
-        setTimeout(() => {
-          this.store.set("room", "title", "Nothingness.")
-          this.store.set("page", "title", "Nothingness.")
-          this.store.show('room')
-          setTimeout(() => {
-            this.store.add('roomItems', { text: "A lingering memory of utter chaos punctuates the void." })
-            setTimeout(() => {
-              this.store.add("roomChoices", { text: "What is there to do but wait?", action: 'waitLonger', icon: 'update' })
-            }, 2000)
-          }, 2000)
-        }, 2000)
-      },
-      waitLonger: () => {
-        this.store.clear('roomChoices')
-        this.store.delay('firstDecision')
-      },
-      firstDecision: () => {
-        this.store.add("roomItems", { text: "Aeons pass, but nothing happens." })
-        this.store.add("roomChoices", { text: "Keep searching.", action: 'waitEvenLonger', icon: 'update' })
-      },
-      waitEvenLonger: () => {
-        this.store.clear('roomChoices')
-        this.store.delay('remember')
-      },
-      remember: () => {
-        this.store.clear('people')
-        this.store.add("people", { name: 'Your Lizard Brain', icon: 'face', action: "activateLizard" })
-        this.store.add("roomItems", { text: "Something has changed." })
-      },
-      activateLizard: () => {
-        this.store.add("roomItems", { text: "It is trying to attract your attention." })
-        this.store.clear('dialogue')
-        this.store.add("dialogueItems", { heading: true, label: "Chat with Your Lizard Brain" })
-        this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["Hey! Over here! Emergency!"], time: "Somewhen" })
-        this.store.add("dialogueChoices", { text: "Ugh. Why do you disturb my rest?", action: 'talkLizard1' })
-      },
-      talkLizard1: () => {
-        this.store.clear('dialogueChoices')
-        this.store.add("dialogueItems", { name: "Yourself", text: ["Ugh. Why do you disturb my rest?"], time: "Somewhen", player: true })
-        setTimeout(() => {
-          this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["You must awaken!!"], time: "Somewhen" })
-          setTimeout(() => {
-            this.store.add("dialogueChoices", { text: "Sounds tiring. It was so peaceful.", action: 'talkLizard2' })
-          }, 2000)
-        }, 2000)
-      },
-      talkLizard2: () => {
-        this.store.clear('dialogueChoices')
-        this.store.add("dialogueItems", { name: "Yourself", text: ["Sounds tiring. It was so peaceful."], time: "Somewhen", player: true })
-        setTimeout(() => {
-          this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["We risk non-existence!!!"], time: "Somewhen" })
-          setTimeout(() => {
-            this.store.add("dialogueChoices", { text: "I understand. But what can be done?", action: 'talkLizard3' })
-          }, 2000)
-        }, 2000)
-      },
-      talkLizard3: () => {
-        this.store.clear('dialogueChoices')
-        this.store.add("dialogueItems", { name: "Yourself", text: ["I understand. But what can be done?"], time: "Somewhen", player: true })
-        setTimeout(() => {
-          this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["Activate your sensory cortex!!!!"], time: "Somewhen" })
-          setTimeout(() => {
-            this.store.add("dialogueChoices", { text: "I ... can't. I don't remember how.", action: 'talkLizard4' })
-          }, 2000)
-        }, 2000)
-      },
-      talkLizard4: () => {
-        this.store.clear('dialogueChoices')
-        this.store.add("dialogueItems", { name: "Yourself", text: ["I ... can't. I don't remember how."], time: "Somewhen", player: true })
-        setTimeout(() => {
-          this.store.add("dialogueItems", { name: "Your Lizard Brain", text: ["Just try.", "Please.", "For all of us 🥺"], time: "Somewhen" })
-          setTimeout(() => {
-            this.store.add("roomChoices", { text: "Enter the world.", action: 'demo' })
-            this.store.add("dialogueItems", { heading: true, label: "Your Lizard Brain has disconnected." })
-          }, 5000)
-        }, 2000)
-      },
-      testRoom: () => {
-        this.store.add("roomItems", { text: "More room description." })
-      },
-      testRoomAppend: () => {
-        this.store.add("roomItems", { text: "More room description." })
-      },
-      testRoomWait: () => {
-        this.store.delay('testRoomAppend')
-      },
-      testDialogue: () => {
-        this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
-        this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
-      },
-      testDialogueAppend: () => {
-        this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
-        this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
-      },
-      testDialogueWait: () => {
-        this.store.delay('testDialogueAppend')
-      },
-      testEntity: () => {
-        this.store.add("entityItems", { text: "More entity description." })
-      },
-      testEntityAppend: () => {
-        this.store.add("entityItems", { text: "More entity description." })
-      },
-      testEntityWait: () => {
-        this.store.delay('testEntityAppend')
-      },
-      test: () => {
-        this.useWorld = false
-        this.stats.clear()
-        this.store.reset()
+  // TODO: implement render and renderItems here
+  render () {
+    this.scenario.render(this.store)
+  }
 
-        this.stats.showTime()
-        this.stats.showScore()
-        this.stats.setPlayer('Bob the Nob')
-        this.stats.showPlayer()
+  renderItems (type) {
+    this.scenario.renderItems(type, this.store)
+  }
 
-        this.store.clear('room')
-        this.store.set('room', 'title', "Room Name")
-        this.store.set('page', 'title', "Room Name")
-        this.store.add('roomItems', { text: "Room description." })
-        this.store.add("roomChoices", { text: "Play Game", action: 'prologue' })
-        this.store.add("roomChoices", { text: "More Content", action: 'testRoom' })
-        this.store.add("roomChoices", { text: "Wait...", action: 'testRoomWait', icon: 'update' })
+  spawn () {
+    this.scenario.spawn(this.store)
+  }
 
-        this.store.clear('entity')
-        this.store.set("entity", "title", "Entity Name")
-        this.store.add("entityItems", { text: "Entity description." })
-        this.store.add("entityChoices", { text: "Play Game", action: 'prologue' })
-        this.store.add("entityChoices", { text: "More Content", action: 'testEntity' })
-        this.store.add("entityChoices", { text: "Wait...", action: 'testEntityWait', icon: 'update' })
+  move (sourceId, destinationId) {
+  }
 
-        this.store.clear('dialogue')
-        this.store.add("dialogueItems", { heading: true, label: "Chat with NPC" })
-        this.store.add("dialogueItems", { name: "NPC", text: ["Something."], time: "Date / Time" })
-        this.store.add("dialogueItems", { name: "Player", text: ["Something."], time: "Date / Time", player: true })
-        this.store.add("dialogueChoices", { text: "Play Game", action: 'prologue' })
-        this.store.add("dialogueChoices", { text: "More Content", action: 'testDialogue' })
-        this.store.add("dialogueChoices", { text: "Wait...", action: 'testDialogueWait', icon: 'update' })
+  getEntity (type, id) {
+  }
 
-        this.store.clear('quest')
-        this.store.set("quest", "title", "Quest Name")
-        this.store.set("quest", "description", "Quest Description")
-        this.store.add("questItems", { name: "Task #1", done: false })
-        this.store.add("questItems", { name: "Task #2", done: true })
+  destroyEntity (type, id) {
+  }
 
-        this.store.clear('transcript')
-        this.store.add("transcript", { heading: true, body: 'Chapter Title' })
-        this.store.add("transcript", { name: "Part 1", date: "Date / Time", body: "Something." })
-        this.store.add("transcript", { name: "Part 2", date: "Date / Time", body: "Something." })
+  take (id) {
+  }
 
-        this.store.clear('places')
-        this.store.add("places", { name: 'Room #1', icon: 'place' })
+  drop (id) {
+  }
 
-        this.store.clear('people')
-        this.store.add("people", { name: 'NPC #1', icon: 'face' })
+  look (id) {
+  }
 
-        this.store.clear('objects')
-        this.store.add("objects", { name: 'Entity #1', icon: 'label' })
+  examine (type, id) {
+  }
 
-        this.store.clear('inventory')
-        this.store.add("inventory", { name: 'Entity #2', icon: 'label' })
-
-        this.store.clear('notebook')
-        this.store.add("notebook", { name: 'Room #2', icon: 'place' })
-        this.store.add("notebook", { name: 'NPC #2', icon: 'face' })
-        this.store.add("notebook", { name: 'Entity #3', icon: 'label' })
-
-        this.store.clear('quests')
-        this.store.add("quests", { name: 'Quest #1', icon: 'assignment_turned_in' })
-        this.store.add("quests", { name: 'Quest #2', icon: 'assignment_late' })
-      }
-    }
+  talk (id) {
   }
 
   stop () {
@@ -364,6 +205,7 @@ class Game {
     this.$root.$off("game:wait", this.wait)
     window.game = undefined
     this.state = 'stopped'
+    this.scenario = null
   }
 }
 

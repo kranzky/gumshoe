@@ -10,7 +10,7 @@ gem 'punk', '~> 0.3.6'
 # gem 'punk', path: '../punk'
 
 # Procedural Generation
-gem 'rndb', '~> 0.2.1'
+gem "weld", git: "https://github.com/jackcasey/weld.git", branch: "main"
 
 # Development
 group :development do

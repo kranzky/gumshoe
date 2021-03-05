@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/jackcasey/weld.git
+  revision: 7f91b787c3320e098429997025a4389c822879b8
+  branch: main
+  specs:
+    weld (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -89,7 +96,7 @@ GEM
     msgpack (1.4.2)
     multipart-post (2.1.1)
     netrc (0.11.0)
-    nio4r (2.5.5)
+    nio4r (2.5.7)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
@@ -177,9 +184,6 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.4)
-    rndb (0.2.1)
-      rdoc (~> 6.3)
-      yard (~> 0.9)
     roda (3.41.0)
       rack
     roda-route_list (2.1.0)
@@ -307,7 +311,6 @@ DEPENDENCIES
   launchy (~> 2.5.0)
   punk (~> 0.3.6)
   rack-test (~> 1.1.0)
-  rndb (~> 0.2.1)
   rspec (~> 3.10.0)
   rspec-its (~> 1.3.0)
   rubocop (~> 1.11.0)
@@ -318,6 +321,7 @@ DEPENDENCIES
   timecop (~> 0.9.4)
   vcr (~> 6.0.0)
   webmock (~> 3.12.0)
+  weld!
 
 RUBY VERSION
    ruby 2.6.6p146

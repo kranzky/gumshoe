@@ -1,9 +1,9 @@
-import Room from './room.js'
-import Item from './item.js'
-import Bot from './bot.js'
-import Quest from './quest.js'
+import Room from './demo/room.js'
+import Item from './demo/item.js'
+import Bot from './demo/bot.js'
+import Quest from './demo/quest.js'
 
-class World {
+class Demo {
   constructor () {
     this.rooms = {}
     this.items = {}
@@ -15,6 +15,10 @@ class World {
     this.currentQuest = null
     this.dialogueBot = null
     this.carried = new Set()
+  }
+
+  run () {
+    this.spawn()
   }
 
   update (action, entity, place) {
@@ -336,4 +340,4 @@ class World {
   }
 }
 
-export default World
+export default Demo

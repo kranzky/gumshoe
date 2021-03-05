@@ -35,7 +35,7 @@ export default {
     },
     selectScenario (scenario) {
       if (process.env.DEV) {
-        this.$game.run('remote')
+        this.$game.run(scenario)
         return
       }
       this.$q.dialog({
@@ -48,7 +48,7 @@ export default {
             { label: 'Remote Server', value: 'remote' },
             { label: 'Demo Quests', value: 'demo' },
             { label: 'Prologue WIP', value: 'prologue' },
-            { label: 'Test Content', value: 'test' }
+            { label: 'Example Content', value: 'example' }
           ],
         },
         cancel: false,
