@@ -1,59 +1,34 @@
-import Store from './store.js'
-import Stats from './stats.js'
-import Remote from './scenarios/remote.js'
-import Demo from './scenarios/demo.js'
-import Prologue from './scenarios/prologue.js'
-import Example from './scenarios/example.js'
+import World from './world.js'
+import Scenario from './scenario.js'
 
 class Game {
   constructor (root, store) {
     this.state = 'waiting'
     this.$root = root
-    this.store = new Store(store)
-    this.stats = new Stats()
+    this.world = new World(store)
     this.scenario = null
   }
 
-  run (scenario) {
+  run (name) {
     if (this.state !== 'waiting') {
       return
     }
     window.game = this
-    switch (scenario) {
-      case 'remote':
-        this.scenario = new Remote()
-        break
-      case 'demo':
-        this.scenario = new Demo()
-        break
-      case 'prologue':
-        this.scenario = new Prologue()
-        break
-      case 'example':
-        this.scenario = new Example()
-        break
-    }
-    this.$root.$on("game:wait", this.wait)
-    this.$root.$on("game:action", this.action)
-    this.$root.$on("game:view", this.view)
-    this.$root.$on("game:items", this.items)
-    this.$root.$on("game:mark", this.mark)
-    this.$root.$on("game:unmark", this.unmark)
-    this.stats.clear()
-    this.store.reset()
-    this.store.clear('notebook')
-    this.stats.showTime()
+    this.scenario = Scenario(name, this.world)
     this.scenario.run()
+    this.startEvents()
     this.state = 'running'
   }
 
   update (type) {
+    console.error('update')
     this.wait()
     this.render()
     this.renderItems(type)
   }
 
   wait () {
+    console.error('wait')
     if (this != window.game) {
       window.game.wait()
       return
@@ -63,6 +38,7 @@ class Game {
   }
 
   action (action) {
+    console.error('action')
     if (this != window.game) {
       window.game.action(action)
       return
@@ -72,6 +48,7 @@ class Game {
   }
 
   view (item) {
+    console.error('view')
     if (this != window.game) {
       window.game.view(item)
       return
@@ -101,6 +78,7 @@ class Game {
   }
 
   items (type) {
+    console.error(`items ${type}`)
     if (this != window.game) {
       window.game.items(type)
       return
@@ -158,14 +136,17 @@ class Game {
 
   // TODO: implement render and renderItems here
   render () {
+    console.error('render')
     this.scenario.render(this.store)
   }
 
   renderItems (type) {
+    console.error('renderItems')
     this.scenario.renderItems(type, this.store)
   }
 
   spawn () {
+    console.error('spawn')
     this.scenario.spawn(this.store)
   }
 
@@ -197,15 +178,28 @@ class Game {
     if (this.state !== 'running') {
       return
     }
-    this.$root.$off("game:unmark", this.unmark)
-    this.$root.$off("game:mark", this.mark)
-    this.$root.$off("game:items", this.items)
-    this.$root.$off("game:view", this.view)
-    this.$root.$off("game:action", this.action)
-    this.$root.$off("game:wait", this.wait)
+    this.stopEvents()
+    this.scenario = null
     window.game = undefined
     this.state = 'stopped'
-    this.scenario = null
+  }
+
+  startEvents () {
+//  this.$root.$on("game:wait", this.wait)
+//  this.$root.$on("game:action", this.action)
+//  this.$root.$on("game:view", this.view)
+//  this.$root.$on("game:items", this.items)
+//  this.$root.$on("game:mark", this.mark)
+//  this.$root.$on("game:unmark", this.unmark)
+  }
+
+  stopEvents () {
+//  this.$root.$off("game:unmark", this.unmark)
+//  this.$root.$off("game:mark", this.mark)
+//  this.$root.$off("game:items", this.items)
+//  this.$root.$off("game:view", this.view)
+//  this.$root.$off("game:action", this.action)
+//  this.$root.$off("game:wait", this.wait)
   }
 }
 

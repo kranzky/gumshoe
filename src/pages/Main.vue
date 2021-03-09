@@ -74,7 +74,7 @@ export default {
           time: this.$store.getters['game/showTime'],
           player: this.$store.getters['game/showPlayer'],
           score: this.$store.getters['game/showScore'],
-          room: this.$store.state.room.show,
+          room: this.$store.state.room.visible,
           entity: this.$store.state.entity.show,
           dialogue: this.$store.state.dialogue.show,
           quest: this.$store.state.quest.show,
@@ -95,7 +95,7 @@ export default {
   },
   mounted () {
     this.$q.dark.set(true)
-    this.selectScenario('demo')
+    this.selectScenario('remote')
   },
   beforeDestroy () {
     this.$game.stop()

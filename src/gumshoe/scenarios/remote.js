@@ -8,7 +8,7 @@ import Dexie from 'dexie'
 // render current state to the store
 
 class Remote {
-  constructor () {
+  constructor (world) {
     const db = new Dexie('Gumshoe')
   	db.version(1).stores({
       rooms: 'id',
@@ -16,60 +16,20 @@ class Remote {
       items: 'id, roomId, botId, containerId',
       bots: 'id, roomId'
     })
+    this.world = world
   }
 
-  run () {
-  }
-
-  update (action, entity, place) {
-  }
-
-  render (store) {
-  }
-
-  renderItems (type, store) {
-  }
-
-  getEntity (type, id) {
-  }
-
-  addRoom (name, description) {
-  }
-
-  addItem (name, description, canGet, canPut, prep) {
-  }
-
-  removeItem (item, store) {
-  }
-
-  addBot (name, description, lines) {
-  }
-
-  addQuest (name, description, success, trigger, tasks) {
-  }
-
-  look (roomId) {
-  }
-
-  examine (itemId) {
-  }
-
-  examine_bot (botId) {
-  }
-
-  examine_quest (questId) {
-  }
-
-  talk () {
-  }
-
-  take () {
-  }
-
-  drop () {
-  }
-
-  spawn () {
+  run (world) {
+    console.debug('run remote')
+    this.world.player.setName('Meesta Collecta')
+    this.world.room.setTitle('Some Place')
+    this.world.room.addText('Yeah this is the description.')
+    this.world.room.addText('And another line right thar.')
+    this.world.room.show()
+    // this.world.wait(callback)
+    // initialize state
+    // register callbacks
+    // render to store
   }
 }
 

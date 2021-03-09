@@ -119,7 +119,7 @@ export default {
         return {
           world: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
           player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
-          room: this.$store.state.room.show,
+          room: this.$store.state.room.visible,
           entity: this.$store.state.entity.show,
           dialogue: this.$store.state.dialogue.show,
           quest: this.$store.state.quest.show,

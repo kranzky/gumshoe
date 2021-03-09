@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-center">
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <div style="max-width:700px; width: 100%;" v-if="!loading">
+      <div style="max-width:700px; width: 100%;" v-if="visible">
         <div>
           <q-btn class="glossy float-right" round outline color="secondary" :icon="bookmarked ? 'bookmark' : 'bookmark_border'" size="sm" @click="toggleBookmark" />
           <h4>{{ title }}</h4>
@@ -32,9 +32,9 @@ export default {
         return this.$store.state.roomItems.items
       }
     },
-    loading: {
+    visible: {
       get () {
-        return this.$store.state.room.loading
+        return this.$store.state.room.visible && !_.isNull(this.$store.state.room.title)
       }
     },
     current: {
