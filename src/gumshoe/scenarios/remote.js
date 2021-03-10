@@ -31,6 +31,9 @@ class Remote {
     // register callbacks
     // render to store
   }
+
+  stop () {
+  }
 }
 
 export default Remote

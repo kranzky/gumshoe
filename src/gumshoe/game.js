@@ -20,6 +20,36 @@ class Game {
     this.state = 'running'
   }
 
+  stop () {
+    if (this.state !== 'running') {
+      return
+    }
+    this.stopEvents()
+    this.scenario.stop()
+    this.scenario = null
+    this.world.clear()
+    window.game = undefined
+    this.state = 'stopped'
+  }
+
+  startEvents () {
+//  this.$root.$on("game:wait", this.wait)
+//  this.$root.$on("game:action", this.action)
+//  this.$root.$on("game:view", this.view)
+//  this.$root.$on("game:items", this.items)
+//  this.$root.$on("game:mark", this.mark)
+//  this.$root.$on("game:unmark", this.unmark)
+  }
+
+  stopEvents () {
+//  this.$root.$off("game:unmark", this.unmark)
+//  this.$root.$off("game:mark", this.mark)
+//  this.$root.$off("game:items", this.items)
+//  this.$root.$off("game:view", this.view)
+//  this.$root.$off("game:action", this.action)
+//  this.$root.$off("game:wait", this.wait)
+  }
+
   update (type) {
     console.error('update')
     this.wait()
@@ -174,33 +204,6 @@ class Game {
   talk (id) {
   }
 
-  stop () {
-    if (this.state !== 'running') {
-      return
-    }
-    this.stopEvents()
-    this.scenario = null
-    window.game = undefined
-    this.state = 'stopped'
-  }
-
-  startEvents () {
-//  this.$root.$on("game:wait", this.wait)
-//  this.$root.$on("game:action", this.action)
-//  this.$root.$on("game:view", this.view)
-//  this.$root.$on("game:items", this.items)
-//  this.$root.$on("game:mark", this.mark)
-//  this.$root.$on("game:unmark", this.unmark)
-  }
-
-  stopEvents () {
-//  this.$root.$off("game:unmark", this.unmark)
-//  this.$root.$off("game:mark", this.mark)
-//  this.$root.$off("game:items", this.items)
-//  this.$root.$off("game:view", this.view)
-//  this.$root.$off("game:action", this.action)
-//  this.$root.$off("game:wait", this.wait)
-  }
 }
 
 export default Game

@@ -8,6 +8,18 @@ class Entity {
     this.$store.dispatch(`${this.component}/clear`)
   }
 
+  _reset () {
+    this.$store.dispatch(`${this.component}/reset`)
+  }
+
+  _show () {
+    this.$store.dispatch(`${this.component}/show`)
+  }
+
+  _hide () {
+    this.$store.dispatch(`${this.component}/hide`)
+  }
+
   _set (name, value) {
     this.$store.dispatch(`${this.component}/${name}`, value)
   }
@@ -18,14 +30,6 @@ class Entity {
 
   _remove (id) {
     this.$store.dispatch(`${this.component}/remove`, id)
-  }
-
-  _show () {
-    this.$store.dispatch(`${this.component}/show`)
-  }
-
-  _hide () {
-    this.$store.dispatch(`${this.component}/hide`)
   }
 }
 

@@ -7,6 +7,10 @@ class World {
     this.player = new Player(store, 'game')
     this.room = new Room(store, 'room')
   }
+
+  clear () {
+    this.$store.dispatch('game/reset')
+  }
 }
 
 export default World

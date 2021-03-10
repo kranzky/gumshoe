@@ -1,6 +1,6 @@
 export default {
+  visible: false,
   seen: true,
   title: null,
-  visible: false,
   current: null
 }

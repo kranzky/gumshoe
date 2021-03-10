@@ -7,8 +7,6 @@ export function reset(store) {
   this.commit("page/player", false)
   store.dispatch("entity/reset", null, { root: true })
   store.dispatch("room/reset", null, { root: true })
-  store.dispatch("roomItems/reset", null, { root: true })
-  store.dispatch("roomChoices/reset", null, { root: true })
   store.dispatch("entity/reset", null, { root: true })
   store.dispatch("dialogue/reset", null, { root: true })
   store.dispatch("dialogueItems/reset", null, { root: true })

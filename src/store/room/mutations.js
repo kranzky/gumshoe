@@ -3,22 +3,21 @@ export function clear(state) {
   state.title = null
 }
 
-export function title(state, title) {
-  state.seen = false
-  state.title = title
+export function hide(state) {
+  state.visible = false
+}
+
+export function show(state) {
+  state.visible = true
 }
 
 export function seen(state) {
   state.seen = true
 }
 
-export function show(state) {
-  state.visible = true
-  console.log(state.visible)
-}
-
-export function hide(state) {
-  state.visible = false
+export function title(state, title) {
+  state.seen = false
+  state.title = title
 }
 
 export function current(state, id) {
