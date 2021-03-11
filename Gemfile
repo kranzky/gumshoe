@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 
 # Framework
-gem 'punk', '~> 0.3.6'
+gem 'punk', '~> 0.4.1'
 # gem 'punk', path: '../punk'
 
 # Procedural Generation
@@ -33,12 +33,12 @@ group :test do
   gem 'selenium-webdriver', '~> 3.142.7'
   gem 'timecop', '~> 0.9.4'
   gem 'vcr', '~> 6.0.0'
-  gem 'webmock', '~> 3.12.0'
+  gem 'webmock', '~> 3.12.1'
 end
 
 # Non-production
 group :development, :test do
-  gem 'amazing_print', '~> 1.2.2'
+  gem 'amazing_print', '~> 1.3.0'
   gem 'byebug', '~> 11.1.3'
   gem 'launchy', '~> 2.5.0'
 end
