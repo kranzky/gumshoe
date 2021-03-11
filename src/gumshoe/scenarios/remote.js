@@ -21,10 +21,12 @@ class Remote {
 
   run (world) {
     console.debug('run remote')
-    this.world.player.setName('Meesta Collecta')
-    this.world.room.setTitle('Some Place')
+    this.world.status.setPlayer('Meesta Collecta')
+    this.world.status.setLocation('Some Place Dude')
+    this.world.room.setTitle('Some Place Dude')
     this.world.room.addText('Yeah this is the description.')
     this.world.room.addText('And another line right thar.')
+    // this.world.location.exits.add({ id: 1, name: 'whatever' })
     this.world.room.show()
     // this.world.wait(callback)
     // initialize state

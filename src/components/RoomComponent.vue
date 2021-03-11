@@ -34,6 +34,7 @@ export default {
     },
     visible: {
       get () {
+        // TODO: make this a getter on the store instead
         return this.$store.state.room.visible && !_.isNull(this.$store.state.room.title)
       }
     },

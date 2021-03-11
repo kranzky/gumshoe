@@ -11,6 +11,7 @@
       <q-toolbar>
         <transition-group appear enter-active-class="animated zoomIn" leave-active-class="animated zoomOut" style="--animate-duration: 0.5s;">
           <q-chip icon="today" color="primary" v-if="show.time" key="1">{{ game.time }}</q-chip>
+          <q-chip icon="home" color="primary" v-if="show.location" key="2">{{ game.location }}</q-chip>
           <q-chip icon="face" color="primary" v-if="show.player" key="2">{{ game.player }}</q-chip>
           <q-chip icon="star" color="primary" v-if="show.score" key="3">{{ game.score }}</q-chip>
         </transition-group>
@@ -64,6 +65,7 @@ export default {
         return {
           time: this.$store.state.game.time,
           player: this.$store.state.game.player,
+          location: this.$store.state.game.location,
           score: this.$store.state.game.score
         }
       }
@@ -73,6 +75,7 @@ export default {
         return {
           time: this.$store.getters['game/showTime'],
           player: this.$store.getters['game/showPlayer'],
+          location: this.$store.getters['game/showLocation'],
           score: this.$store.getters['game/showScore'],
           room: this.$store.state.room.visible,
           entity: this.$store.state.entity.show,

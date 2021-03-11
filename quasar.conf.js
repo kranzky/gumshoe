@@ -55,6 +55,7 @@ module.exports = function(ctx) {
     },
 
     build: {
+      devtool: 'source-map',
       distDir: "www",
       publicPath: "/",
       scopeHoisting: true,

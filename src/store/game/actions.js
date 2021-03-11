@@ -1,6 +1,7 @@
 export function reset(store) {
   this.commit("game/time", null)
   this.commit("game/player", null)
+  this.commit("game/location", null)
   this.commit("game/score", null)
   this.commit("page/tab", 'room')
   this.commit("page/world", false)
@@ -28,6 +29,10 @@ export function time(store, time) {
 
 export function player(store, player) {
   this.commit("game/player", player)
+}
+
+export function location(store, location) {
+  this.commit("game/location", location)
 }
 
 export function score(store, score) {
