@@ -1,12 +1,20 @@
 import Entity from './entity.js'
 
 class Status extends Entity {
-  setPlayer (name) {
-    this._set('player', name)
+  setTime (time) {
+    this._set('time', time)
   }
 
-  setLocation (name) {
-    this._set('location', name)
+  setPlayer (player) {
+    this._set('player', player)
+  }
+
+  setLocation (location) {
+    this._set('location', location)
+  }
+
+  setScore (score) {
+    this._set('score', score)
   }
 }
 

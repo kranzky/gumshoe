@@ -69,7 +69,7 @@ export default {
       get () {
         return {
           room: this.$store.state.room.visible,
-          entity: this.$store.state.entity.show,
+          entity: this.$store.state.entity.visible,
           dialogue: this.$store.state.dialogue.show,
           quest: this.$store.state.quest.show,
           transcript: this.$store.state.transcript.show

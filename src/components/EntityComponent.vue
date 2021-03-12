@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-center">
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <div style="max-width:700px; width: 100%;" v-if="!loading">
+      <div style="max-width:700px; width: 100%;" v-if="visible">
         <q-breadcrumbs active-color="secondary">
           <template v-slot:separator>
             <q-icon size="1.2em" name="arrow_forward" />
@@ -43,9 +43,10 @@ export default {
         return this.$store.state.entityItems.items
       }
     },
-    loading: {
+    visible: {
       get () {
-        return this.$store.state.entity.loading
+        // TODO: make this a getter on the store instead
+        return this.$store.state.entity.visible && !_.isNull(this.$store.state.entity.title)
       }
     },
     crumbs: {

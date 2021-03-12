@@ -1,9 +1,8 @@
 export default {
-  show: false,
+  visible: false,
   seen: true,
   title: null,
   subtitle: null,
-  loading: false,
   current: null,
   type: null
 }

@@ -1,15 +1,26 @@
-export function reset(store) {
-  this.commit("entityCrumbs/reset")
-  this.commit("entityChoices/reset")
-  this.commit("entityItems/reset")
-  this.commit("entity/reset")
-}
-
 export function clear(store) {
   this.commit("entity/clear")
-  this.commit("entityItems/clear")
-  this.commit("entityChoices/clear")
-  this.commit("entityCrumbs/clear")
+  this.dispatch("entityItems/clear")
+  this.dispatch("entityChoices/clear")
+  this.dispatch("entityCrumbs/clear")
+}
+
+export function reset(store) {
+  this.dispatch("entity/hide")
+  this.dispatch("entity/clear")
+}
+
+export function show(store) {
+  this.commit("entity/show")
+}
+
+export function hide(store) {
+  this.commit("entity/hide")
+}
+
+export function seen(store) {
+  this.commit("entity/seen")
+  this.commit("entityItems/seen")
 }
 
 export function title(store, title) {
@@ -18,11 +29,6 @@ export function title(store, title) {
 
 export function subtitle(store, subtitle) {
   this.commit("entity/subtitle", subtitle)
-}
-
-export function seen(store) {
-  this.commit("entity/seen")
-  this.commit("entityItems/seen")
 }
 
 export function current(store, id) {
