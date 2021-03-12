@@ -5,16 +5,16 @@ class Item extends Entity {
     this._show()
   }
 
+  setType (type) {
+    this._set('type', type)
+  }
+
   setTitle (title) {
     this._set('title', title)
   }
 
   setSubtitle (subtitle) {
     this._set('subtitle', subtitle)
-  }
-
-  setType (type) {
-    this._set('type', type)
   }
 
   addText (text) {

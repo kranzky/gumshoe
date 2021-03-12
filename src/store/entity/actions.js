@@ -23,6 +23,10 @@ export function seen(store) {
   this.commit("entityItems/seen")
 }
 
+export function type(store, type) {
+  this.commit("entity/type", type)
+}
+
 export function title(store, title) {
   this.commit("entity/title", title)
 }
@@ -31,10 +35,10 @@ export function subtitle(store, subtitle) {
   this.commit("entity/subtitle", subtitle)
 }
 
-export function current(store, id) {
-  this.commit("entity/current", id)
+export function append(store, data) {
+  this.dispatch("entityItems/append", data)
 }
 
-export function type(store, type) {
-  this.commit("entity/type", type)
+export function current(store, id) {
+  this.commit("entity/current", id)
 }

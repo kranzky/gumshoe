@@ -68,6 +68,10 @@ export default {
       switch (type) {
         case 'room':
           return 'place'
+        case 'bot':
+          return 'face'
+        case 'item':
+          return 'label'
       }
     }
   }
