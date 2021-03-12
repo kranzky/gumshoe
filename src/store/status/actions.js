@@ -1,10 +1,10 @@
 export function reset(store) {
-  this.commit("game/time", null)
-  this.commit("game/player", null)
-  this.commit("game/location", null)
-  this.commit("game/score", null)
+  this.commit("status/time", null)
+  this.commit("status/player", null)
+  this.commit("status/location", null)
+  this.commit("status/score", null)
   this.commit("page/tab", 'room')
-  this.commit("page/world", false)
+  this.commit("page/location", false)
   this.commit("page/player", false)
   store.dispatch("entity/reset", null, { root: true })
   store.dispatch("room/reset", null, { root: true })
@@ -24,17 +24,17 @@ export function reset(store) {
 }
 
 export function time(store, time) {
-  this.commit("game/time", time)
+  this.commit("status/time", time)
 }
 
 export function player(store, player) {
-  this.commit("game/player", player)
+  this.commit("status/player", player)
 }
 
 export function location(store, location) {
-  this.commit("game/location", location)
+  this.commit("status/location", location)
 }
 
 export function score(store, score) {
-  this.commit("game/score", score)
+  this.commit("status/score", score)
 }

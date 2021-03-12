@@ -21,7 +21,7 @@ class Remote {
 
   run (world) {
     console.debug('run remote')
-    this.world.status.setPlayer('Meesta Collecta')
+    this.world.status.setPlayer('Whatever Dude')
     this.world.status.setLocation('Some Place Dude')
     this.world.room.setTitle('Some Place Dude')
     this.world.room.addText('Yeah this is the description.')

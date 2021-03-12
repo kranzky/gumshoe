@@ -4,19 +4,18 @@ import Room from './world/room.js'
 class World {
   constructor (store) {
     this.$store = store
-    // TODO: rename to this.status
-    this.status = new Status(store, 'game')
+    this.status = new Status(store, 'status')
     this.room = new Room(store, 'room')
-    // TODO: add remaining objects:
-    // item
-    // chat
-    // task
+    // entity
+    // dialogue
+    // quest
+    // transcript
     // player -> inventory, notes, quests
     // location -> items, characters, exits
   }
 
   clear () {
-    this.$store.dispatch('game/reset')
+    this.$store.dispatch('status/reset')
   }
 }
 

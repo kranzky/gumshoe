@@ -7,7 +7,7 @@ import room from "./room"
 import entity from "./entity"
 import dialogue from "./dialogue"
 import quest from "./quest"
-import game from "./game"
+import status from "./status"
 import progress from "./progress"
 
 Vue.use(Vuex)
@@ -16,6 +16,8 @@ export default function() {
   const Store = new Vuex.Store({
     modules: {
       page,
+      status,
+      progress,
       places: list('places'),
       people: list('people'),
       objects: list('objects'),
@@ -34,9 +36,7 @@ export default function() {
       dialogueItems: list('dialogueItems'),
       dialogueChoices: list('dialogueChoices'),
       quest,
-      questItems: list('questItems'),
-      game,
-      progress
+      questItems: list('questItems')
     },
     strict: process.env.DEV
   })

@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: "WorldComponent",
+  name: "LocationComponent",
   data () {
     return {
       tab: 'objects'

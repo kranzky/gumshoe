@@ -11,8 +11,8 @@ export function tab(state, name) {
   state.tab = name
 }
 
-export function world(state, open) {
-  state.world = open
+export function location(state, open) {
+  state.location = open
 }
 
 export function player(state, open) {

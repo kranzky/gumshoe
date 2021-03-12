@@ -4,9 +4,9 @@
     <q-layout view="lHr LpR fFf" v-else>
       <q-header elevated>
         <q-toolbar>
-          <q-btn dense flat icon="public" :label="headerLabel ? 'World' : ''" @click="world = !world" v-if="show.world">
-            <q-badge class="absolute-top-left" color="negative" transparent v-if="badge.world > 0 && !world">
-              {{ badge.world }}
+          <q-btn dense flat icon="public" :label="headerLabel ? 'Location' : ''" @click="location = !location" v-if="show.location">
+            <q-badge class="absolute-top-left" color="negative" transparent v-if="badge.location > 0 && !location">
+              {{ badge.location }}
             </q-badge>
           </q-btn>
           <q-toolbar-title class="text-center">{{ pageTitle }}</q-toolbar-title>
@@ -17,8 +17,8 @@
           </q-btn>
         </q-toolbar>
       </q-header>
-      <q-drawer no-swipe-open no-swipe-close v-model="world" side="left" elevated>
-        <world />
+      <q-drawer no-swipe-open no-swipe-close v-model="location" side="left" elevated>
+        <location />
       </q-drawer>
       <q-drawer no-swipe-open no-swipe-close v-model="player" side="right" elevated>
         <player />
@@ -75,7 +75,7 @@ export default {
   methods: {
     hide () {
       if (this.$q.screen.lt.md) {
-        this.world = false
+        this.location = false
         this.player = false
       }
     }
@@ -104,7 +104,7 @@ export default {
     badge: {
       get () {
         return {
-          world: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
+          location: this.$store.getters['places/badgeCount'] + this.$store.getters['people/badgeCount'] + this.$store.getters['objects/badgeCount'],
           player: this.$store.getters['inventory/badgeCount'] + this.$store.getters['notebook/badgeCount'] + this.$store.getters['quests/badgeCount'],
           room: this.$store.getters['room/showBadge'] && this.$store.state.page.tab != 'room',
           entity: this.$store.getters['entity/showBadge'] && this.$store.state.page.tab != 'entity',
@@ -117,7 +117,7 @@ export default {
     show: {
       get () {
         return {
-          world: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
+          location: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
           player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
           room: this.$store.state.room.visible,
           entity: this.$store.state.entity.show,
@@ -137,12 +137,12 @@ export default {
         return this.$store.state.page.width > 400
       }
     },
-    world: {
+    location: {
       get () {
-        return this.$store.state.page.world
+        return this.$store.state.page.location
       },
       set (open) {
-        this.$store.commit("page/world", open)
+        this.$store.commit("page/location", open)
       }
     },
     player: {
@@ -156,7 +156,7 @@ export default {
   },
   components: {
     'splash': () => import("components/SplashComponent.vue"),
-    'world': () => import("components/WorldComponent.vue"),
+    'location': () => import("components/LocationComponent.vue"),
     'player': () => import("components/PlayerComponent.vue")
   }
 }
