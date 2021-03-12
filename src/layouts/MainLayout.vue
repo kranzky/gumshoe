@@ -117,7 +117,7 @@ export default {
     show: {
       get () {
         return {
-          location: this.$store.state.places.show || this.$store.state.people.show ||this.$store.state.objects.show,
+          location: this.$store.state.places.visible || this.$store.state.people.visible || this.$store.state.objects.visible,
           player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
           room: this.$store.state.room.visible,
           entity: this.$store.state.entity.visible,

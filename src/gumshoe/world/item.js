@@ -16,6 +16,10 @@ class Item extends Entity {
   setType (type) {
     this._set('type', type)
   }
+
+  addText (text) {
+    this._append({ text: text })
+  }
 }
 
 export default Item

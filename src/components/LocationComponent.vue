@@ -46,9 +46,9 @@ export default {
     show: {
       get () {
         return {
-          places: this.$store.state.places.show,
-          people: this.$store.state.people.show,
-          objects: this.$store.state.objects.show
+          places: this.$store.state.places.visible,
+          people: this.$store.state.people.visible,
+          objects: this.$store.state.objects.visible
         }
       }
     }

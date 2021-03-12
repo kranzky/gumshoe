@@ -1,5 +1,5 @@
 export default {
-visible: false,
+  visible: false,
   seen: true,
   title: null,
   current: null

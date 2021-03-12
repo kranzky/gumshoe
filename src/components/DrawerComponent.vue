@@ -4,12 +4,12 @@
       <q-toolbar-title>{{ title }}</q-toolbar-title>
     </q-toolbar>
     <transition appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-      <div v-if="!loading">
+      <div v-if="visible">
         <q-list separator v-if="items.length > 0" class="rounded-borders text-primary">
           <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item.id)">
               <q-item-section avatar>
-                <q-icon :name="item.icon">
+                <q-icon :name="icon(item.type)">
                   <q-badge color="negative" floating class="gumshoe-badge" v-if="!item.seen" />
                 </q-icon>
               </q-item-section>
@@ -46,9 +46,9 @@ export default {
         return this.$store.state[this.module].items
       }
     },
-    loading: {
+    visible: {
       get () {
-        return this.$store.state[this.module].loading
+        return this.$store.state[this.module].visible
       }
     }
   },
@@ -63,6 +63,12 @@ export default {
       }
       this.$store.dispatch(`${this.module}/seen`, id)
       this.$root.$emit("game:view", item)
+    },
+    icon (type) {
+      switch (type) {
+        case 'room':
+          return 'place'
+      }
     }
   }
 }
