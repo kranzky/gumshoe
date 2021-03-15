@@ -43,6 +43,10 @@ export function appendChoice(store, data) {
   this.dispatch("entityChoices/append", data)
 }
 
+export function appendCrumb(store, data) {
+  this.dispatch("entityCrumbs/append", data)
+}
+
 export function current(store, id) {
   this.commit("entity/current", id)
 }

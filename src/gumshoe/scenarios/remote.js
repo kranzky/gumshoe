@@ -36,6 +36,9 @@ class Remote {
     this.world.item.addText('And some moar.')
     this.world.item.setSubtitle('Whatever')
     this.world.item.addChoice('Do Something', 'test')
+    this.world.item.addCrumb('One', 'test')
+    this.world.item.addCrumb('Two', 'test')
+    this.world.item.addCrumb('Three', 'test')
     this.world.item.show()
 
     this.world.dialogue.start("you", "npc")

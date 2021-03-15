@@ -47,6 +47,14 @@ class Entity {
   _removeChoice (data) {
     this.$store.dispatch(`${this.component}/removeChoice`, data)
   }
+
+  _appendCrumb (data) {
+    this.$store.dispatch(`${this.component}/appendCrumb`, data)
+  }
+
+  _removeCrumb (data) {
+    this.$store.dispatch(`${this.component}/removeCrumb`, data)
+  }
 }
 
 export default Entity

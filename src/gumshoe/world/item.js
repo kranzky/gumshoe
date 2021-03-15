@@ -27,6 +27,13 @@ class Item extends Entity {
     }
     this._appendChoice({ text: text, action: action, data: data })
   }
+
+  addCrumb (name, action, data) {
+    if (_.isUndefined(data)) {
+      data = {}
+    }
+    this._appendCrumb({ name: name, action: action, data: data })
+  }
 }
 
 export default Item
