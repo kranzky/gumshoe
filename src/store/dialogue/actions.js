@@ -1,17 +1,25 @@
-export function reset(store) {
-  this.commit("dialogueChoices/reset")
-  this.commit("dialogueItems/reset")
-  this.commit("dialogue/reset")
-}
-
 export function clear(store) {
   this.commit("dialogue/clear")
-  this.commit("dialogueItems/clear")
-  this.commit("dialogueChoices/clear")
+  this.dispatch("dialogueItems/clear")
+  this.dispatch("dialogueChoices/clear")
+}
+
+export function reset(store) {
+  this.dispatch("dialogue/hide")
+  this.dispatch("dialogue/clear")
+}
+
+export function show(store) {
+  this.commit("dialogue/show")
+}
+
+export function hide(store) {
+  this.commit("dialogue/hide")
 }
 
 export function seen(store) {
   this.commit("dialogue/seen")
+  this.dispatch("dialogueItems/seen")
 }
 
 export function current(store, id) {

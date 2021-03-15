@@ -1,7 +1,6 @@
 export default {
-  show: false,
+  visible: false,
   seen: true,
   title: null,
   description: null,
-  loading: false
 }

@@ -1,23 +1,17 @@
-function wipe(state) {
+function clear(state) {
   state.seen = true
 }
 
-export function reset(state) {
-  state.show = false
-  wipe(state)
+export function hide(state) {
+  state.visible = false
 }
 
-export function clear(state) {
-  wipe(state)
-  state.show = true
+export function show(state) {
+  state.visible = true
 }
 
 export function seen(state) {
   state.seen = true
-}
-
-export function loading(state, loading) {
-  state.loading = loading
 }
 
 export function current(state, id) {

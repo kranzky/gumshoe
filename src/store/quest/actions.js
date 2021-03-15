@@ -1,11 +1,24 @@
-export function reset(store) {
-  this.commit("questItems/reset")
-  this.commit("quest/reset")
-}
-
 export function clear(store) {
   this.commit("quest/clear")
-  this.commit("questItems/clear")
+  this.dispatch("questItems/clear")
+}
+
+export function reset(store) {
+  this.dispatch("quest/hide")
+  this.dispatch("quest/clear")
+}
+
+export function show(store) {
+  this.commit("quest/show")
+}
+
+export function hide(store) {
+  this.commit("quest/hide")
+}
+
+export function seen(store) {
+  this.commit("quest/seen")
+  this.dispatch("questItems/seen")
 }
 
 export function title(store, title) {
@@ -14,9 +27,4 @@ export function title(store, title) {
 
 export function description(store, description) {
   this.commit("quest/description", description)
-}
-
-export function seen(store) {
-  this.commit("quest/seen")
-  this.commit("questItems/seen")
 }

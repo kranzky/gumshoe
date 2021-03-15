@@ -121,9 +121,9 @@ export default {
           player: this.$store.state.inventory.visible || this.$store.state.notebook.visible || this.$store.state.quests.visible,
           room: this.$store.state.room.visible,
           entity: this.$store.state.entity.visible,
-          dialogue: this.$store.state.dialogue.show,
-          quest: this.$store.state.quest.show,
-          transcript: this.$store.state.transcript.show
+          dialogue: this.$store.state.dialogue.visible,
+          quest: this.$store.state.quest.visible,
+          transcript: this.$store.state.transcript.visible
         }
       }
     },
