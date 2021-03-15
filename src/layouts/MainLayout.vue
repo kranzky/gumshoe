@@ -118,7 +118,7 @@ export default {
       get () {
         return {
           location: this.$store.state.places.visible || this.$store.state.people.visible || this.$store.state.objects.visible,
-          player: this.$store.state.inventory.show || this.$store.state.notebook.show || this.$store.state.quests.show,
+          player: this.$store.state.inventory.visible || this.$store.state.notebook.visible || this.$store.state.quests.visible,
           room: this.$store.state.room.visible,
           entity: this.$store.state.entity.visible,
           dialogue: this.$store.state.dialogue.show,

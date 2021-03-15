@@ -9,7 +9,7 @@
           <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
             <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item.id)">
               <q-item-section avatar>
-                <q-icon :name="icon(item.type)">
+                <q-icon :name="icon(item)">
                   <q-badge color="negative" floating class="gumshoe-badge" v-if="!item.seen" />
                 </q-icon>
               </q-item-section>
@@ -64,15 +64,25 @@ export default {
       this.$store.dispatch(`${this.module}/seen`, id)
       this.$root.$emit("game:view", item)
     },
-    icon (type) {
-      switch (type) {
+    icon (item) {
+      if (!_.isUndefined(item.icon)) {
+        return item.icon
+      }
+      switch (item.type) {
         case 'room':
           return 'place'
         case 'bot':
           return 'face'
         case 'item':
           return 'label'
+        case 'task':
+          if (item.complete) {
+            return 'assignment_turned_in'
+          } else {
+            return 'assignment_late'
+          }
       }
+      return 'help'
     }
   }
 }

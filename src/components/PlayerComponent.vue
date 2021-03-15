@@ -46,9 +46,9 @@ export default {
     show: {
       get () {
         return {
-          inventory: this.$store.state.inventory.show,
-          notebook: this.$store.state.notebook.show,
-          quests: this.$store.state.quests.show
+          inventory: this.$store.state.inventory.visible,
+          notebook: this.$store.state.notebook.visible,
+          quests: this.$store.state.quests.visible
         }
       }
     }

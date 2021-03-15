@@ -12,9 +12,8 @@ class List extends Entity {
 
   append (item) {
     if (_.isUndefined(item.type)) {
-      this.defaultType
+      item.type = this.defaultType
     }
-    item.type = this.defaultType
     this._append(item)
   }
 

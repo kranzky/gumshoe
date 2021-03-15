@@ -1,12 +1,6 @@
 import { LocalStorage, SessionStorage } from 'quasar'
 import Dexie from 'dexie'
 
-// store player id and current room, item, bot etc in localstorage
-// exits have name, origin id and destination id
-// send actions to the server
-// server returns events that mutate state
-// render current state to the store
-
 class Remote {
   constructor (world) {
     const db = new Dexie('Gumshoe')
@@ -38,12 +32,18 @@ class Remote {
     this.world.location.places.show()
     this.world.location.objects.append({ name: 'spatula' })
     this.world.location.objects.show()
+    this.world.player.inventory.append({ name: 'widget' })
+    this.world.player.inventory.show()
+    this.world.player.notebook.append({ name: 'michael', type: 'bot' })
+    this.world.player.notebook.append({ name: 'garage', type: 'room' })
+    this.world.player.notebook.append({ name: 'toolbag', type: 'item' })
+    this.world.player.notebook.append({ name: 'mystery', type: 'task' })
+    this.world.player.notebook.show()
+    this.world.player.quests.append({ name: 'solved', complete: true })
+    this.world.player.quests.append({ name: 'unsolved', complete: false })
+    this.world.player.quests.show()
     this.world.room.show()
     this.world.item.show()
-    // this.world.wait(callback)
-    // initialize state
-    // register callbacks
-    // render to store
   }
 
   stop () {
