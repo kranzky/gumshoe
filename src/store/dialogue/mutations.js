@@ -1,4 +1,4 @@
-function clear(state) {
+export function clear(state) {
   state.seen = true
 }
 

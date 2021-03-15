@@ -22,6 +22,10 @@ export function seen(store) {
   this.dispatch("dialogueItems/seen")
 }
 
+export function append(store, data) {
+  this.dispatch("dialogueItems/append", data)
+}
+
 export function current(store, id) {
   this.commit("dialogue/current", id)
 }

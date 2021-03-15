@@ -1,5 +1,5 @@
 export const showBadge = (state, getters, rootState, rootGetters) => {
-  return !state.seen || rootGetters['entityItems/showBadge']
+  return !state.seen || rootGetters['questItems/showBadge']
 }
 
 export const contentVisible = (state) => {
