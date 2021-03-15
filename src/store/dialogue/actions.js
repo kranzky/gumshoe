@@ -22,8 +22,12 @@ export function seen(store) {
   this.dispatch("dialogueItems/seen")
 }
 
-export function append(store, data) {
+export function appendItem(store, data) {
   this.dispatch("dialogueItems/append", data)
+}
+
+export function appendChoice(store, data) {
+  this.dispatch("dialogueChoices/append", data)
 }
 
 export function current(store, id) {

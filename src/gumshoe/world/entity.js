@@ -31,6 +31,22 @@ class Entity {
   _remove (id) {
     this.$store.dispatch(`${this.component}/remove`, id)
   }
+
+  _appendItem (data) {
+    this.$store.dispatch(`${this.component}/appendItem`, data)
+  }
+
+  _removeItem (id) {
+    this.$store.dispatch(`${this.component}/removeItem`, id)
+  }
+
+  _appendChoice (data) {
+    this.$store.dispatch(`${this.component}/appendChoice`, data)
+  }
+
+  _removeChoice (data) {
+    this.$store.dispatch(`${this.component}/removeChoice`, data)
+  }
 }
 
 export default Entity

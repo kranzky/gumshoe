@@ -18,7 +18,14 @@ class Item extends Entity {
   }
 
   addText (text) {
-    this._append({ text: text })
+    this._appendItem({ text: text })
+  }
+
+  addChoice (text, action, data) {
+    if (_.isUndefined(data)) {
+      data = {}
+    }
+    this._appendChoice({ text: text, action: action, data: data })
   }
 }
 

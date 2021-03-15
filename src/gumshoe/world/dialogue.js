@@ -13,19 +13,26 @@ class Dialogue extends Entity {
     this.playerName = playerName
     this.botName = botName
     this.lines = []
-    this._append({ heading: true, label: `Chat with ${this.botName}` })
+    this._appendItem({ heading: true, label: `Chat with ${this.botName}` })
   }
 
   player (line) {
-    this._append({ text: [line], name: this.playerName, time: this.time, player: true })
+    this._appendItem({ text: [line], name: this.playerName, time: this.time, player: true })
   }
 
   bot (line) {
-    this._append({ text: [line], name: this.botName, time: this.time })
+    this._appendItem({ text: [line], name: this.botName, time: this.time })
   }
 
   stop () {
-    this._append({ heading: true, label: `${this.botName} has disconnected.` })
+    this._appendItem({ heading: true, label: `${this.botName} has disconnected.` })
+  }
+
+  addChoice (text, action, data) {
+    if (_.isUndefined(data)) {
+      data = {}
+    }
+    this._appendChoice({ text: text, action: action, data: data })
   }
 }
 

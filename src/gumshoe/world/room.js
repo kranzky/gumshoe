@@ -1,3 +1,4 @@
+import { _ } from 'core-js'
 import Entity from './entity.js'
 
 // need to have exits, items, bots
@@ -15,7 +16,14 @@ class Room extends Entity {
   }
 
   addText (text) {
-    this._append({ text: text })
+    this._appendItem({ text: text })
+  }
+
+  addChoice (text, action, data) {
+    if (_.isUndefined(data)) {
+      data = {}
+    }
+    this._appendChoice({ text: text, action: action, data: data })
   }
 }
 

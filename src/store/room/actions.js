@@ -26,8 +26,12 @@ export function title(store, title) {
   this.commit("room/title", title)
 }
 
-export function append(store, data) {
+export function appendItem(store, data) {
   this.dispatch("roomItems/append", data)
+}
+
+export function appendChoice(store, data) {
+  this.dispatch("roomChoices/append", data)
 }
 
 export function current(store, id) {

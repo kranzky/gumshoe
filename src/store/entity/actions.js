@@ -35,8 +35,12 @@ export function subtitle(store, subtitle) {
   this.commit("entity/subtitle", subtitle)
 }
 
-export function append(store, data) {
+export function appendItem(store, data) {
   this.dispatch("entityItems/append", data)
+}
+
+export function appendChoice(store, data) {
+  this.dispatch("entityChoices/append", data)
 }
 
 export function current(store, id) {

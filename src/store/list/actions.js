@@ -19,7 +19,7 @@ export default (namespace) => {
     append (store, item) {
       this.commit(`${namespace}/append`, item)
     },
-    remove(store, id) {
+    remove (store, id) {
       this.commit(`${namespace}/remove`, id)
     }
   }

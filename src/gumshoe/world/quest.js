@@ -17,7 +17,7 @@ class Quest extends Entity {
     if (_.isUndefined(done)) {
       done = false
     }
-    this._append({ name: name, done: done })
+    this._appendItem({ name: name, done: done })
   }
 }
 

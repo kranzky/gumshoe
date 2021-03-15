@@ -29,6 +29,6 @@ export function description(store, description) {
   this.commit("quest/description", description)
 }
 
-export function append(store, data) {
+export function appendItem(store, data) {
   this.dispatch("questItems/append", data)
 }
