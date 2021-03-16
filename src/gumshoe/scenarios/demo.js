@@ -26,6 +26,13 @@ class Demo {
   stop () {
   }
 
+  move (id, data) {
+    this.look(id)
+    let room = this.rooms[this.currentRoom]
+    this.world.notify(`You go to the "${room.name}"`)
+    room.render(this.world, this)
+  }
+
   update (action, entity, place) {
     _.each(this.quests, (quest) => {
       quest.update(action, entity, place)

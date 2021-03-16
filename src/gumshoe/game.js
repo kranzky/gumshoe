@@ -5,7 +5,7 @@ class Game {
   constructor (root, store) {
     this.state = 'waiting'
     this.$root = root
-    this.world = new World(store)
+    this.world = new World(root, store)
     this.scenario = null
   }
 
@@ -34,7 +34,7 @@ class Game {
 
   startEvents () {
 //  this.$root.$on("game:wait", this.wait)
-//  this.$root.$on("game:action", this.action)
+    this.$root.$on("game:action", this.action)
 //  this.$root.$on("game:view", this.view)
 //  this.$root.$on("game:items", this.items)
 //  this.$root.$on("game:mark", this.mark)
@@ -46,7 +46,7 @@ class Game {
 //  this.$root.$off("game:mark", this.mark)
 //  this.$root.$off("game:items", this.items)
 //  this.$root.$off("game:view", this.view)
-//  this.$root.$off("game:action", this.action)
+    this.$root.$off("game:action", this.action)
 //  this.$root.$off("game:wait", this.wait)
   }
 
@@ -65,13 +65,12 @@ class Game {
     this.stats.render(this.store)
   }
 
-  action (action) {
+  action (payload) {
     if (this != window.game) {
-      window.game.action(action)
+      window.game.action(payload)
       return
     }
-    // TODO: this.scenario.action(action)
-    this.update()
+    this.scenario[payload.action](payload.id, payload.data)
   }
 
   view (item) {

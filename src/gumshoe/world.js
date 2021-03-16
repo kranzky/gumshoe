@@ -8,7 +8,8 @@ import Dialogue from './world/dialogue.js'
 import Quest from './world/quest.js'
 
 class World {
-  constructor (store) {
+  constructor (root, store) {
+    this.$root = root
     this.$store = store
     this.status = new Status(store, 'status')
     this.location = new Location(store)
@@ -30,6 +31,10 @@ class World {
     this.item._reset()
     this.dialogue._reset()
     this.quest._reset()
+  }
+
+  notify (message) {
+    this.$root.$emit("punk:info", message)
   }
 }
 

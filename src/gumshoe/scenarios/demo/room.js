@@ -18,12 +18,12 @@ class Room extends Entity {
     world.location.people._clear()
     _.each([...this.bots], (id) => {
       let bot = scenario.bots[id]
-      world.location.people.append({ id: id, name: bot.name, type: 'bot', icon: 'face', seen: bot.seen })
+      world.location.people.append({ id: id, name: bot.name, type: 'bot', seen: bot.seen, action: 'talk' })
     })
     world.location.places._clear()
     _.each([...this.exits], (id) => {
       let exit = scenario.rooms[id]
-      world.location.places.append({ id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
+      world.location.places.append({ id: id, name: exit.name, type: 'room', seen: exit.seen, action: 'move' })
     })
     world.room.show()
     world.location.places.show()

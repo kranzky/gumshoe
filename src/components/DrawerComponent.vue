@@ -7,7 +7,7 @@
       <div v-if="visible">
         <q-list separator v-if="items.length > 0" class="rounded-borders text-primary">
           <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-            <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="show(item.id)">
+            <q-item clickable v-ripple v-for="item in items" :key="item.id" @click="action(item)">
               <q-item-section avatar>
                 <q-icon :name="icon(item)">
                   <q-badge color="negative" floating class="gumshoe-badge" v-if="!item.seen" />
@@ -53,18 +53,18 @@ export default {
     }
   },
   methods: {
-    find (id) {
-      return _.find(this.items, (item) => { return item.id == id })
-    },
-    show (id) {
-      let item = this.find(id)
-      if (item.action && !item.seen) {
-        this.$root.$emit("game:action", item.action)
+    action (item) {
+      if (!_.isUndefined(item.action)) {
+        let payload = {
+          id: item.id,
+          action: item.action,
+          data: item.data || {}
+        }
+        this.$root.$emit("game:action", payload)
       }
-      this.$store.dispatch(`${this.module}/seen`, id)
-      this.$root.$emit("game:view", item)
     },
     icon (item) {
+      // TODO: dry
       if (!_.isUndefined(item.icon)) {
         return item.icon
       }
