@@ -51,14 +51,12 @@ class Game {
   }
 
   update (type) {
-    console.error('update')
     this.wait()
     this.render()
     this.renderItems(type)
   }
 
   wait () {
-    console.error('wait')
     if (this != window.game) {
       window.game.wait()
       return
@@ -68,7 +66,6 @@ class Game {
   }
 
   action (action) {
-    console.error('action')
     if (this != window.game) {
       window.game.action(action)
       return
@@ -78,7 +75,6 @@ class Game {
   }
 
   view (item) {
-    console.error('view')
     if (this != window.game) {
       window.game.view(item)
       return
@@ -108,7 +104,6 @@ class Game {
   }
 
   items (type) {
-    console.error(`items ${type}`)
     if (this != window.game) {
       window.game.items(type)
       return
@@ -166,17 +161,14 @@ class Game {
 
   // TODO: implement render and renderItems here
   render () {
-    console.error('render')
     this.scenario.render(this.store)
   }
 
   renderItems (type) {
-    console.error('renderItems')
     this.scenario.renderItems(type, this.store)
   }
 
   spawn () {
-    console.error('spawn')
     this.scenario.spawn(this.store)
   }
 

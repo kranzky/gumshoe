@@ -40,6 +40,10 @@ class Stats {
     return date
   }
 
+  getElapsed (timestamp) {
+    return "moments ago"
+  }
+
   showScore () {
     this.show.score = true
   }

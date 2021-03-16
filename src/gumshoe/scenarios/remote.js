@@ -14,9 +14,7 @@ class Remote {
   }
 
   run (world) {
-    console.debug('run remote')
-
-    this.world.status.setTime("Thu 17:27")
+    this.world.status.setTime(1)
     this.world.status.setPlayer('Whatever Dude')
     this.world.status.setLocation('Some Place Dude')
     this.world.status.setScore(137)

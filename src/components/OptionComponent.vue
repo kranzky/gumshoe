@@ -24,9 +24,9 @@ export default {
   methods: {
     action (option) {
       // TODO
-      console.log(option.action)
     },
     icon (option) {
+      // TODO: dry
       if (!_.isUndefined(option.icon)) {
         return option.icon
       }
