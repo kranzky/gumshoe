@@ -4,7 +4,7 @@ import Bot from './demo/bot.js'
 import Quest from './demo/quest.js'
 
 class Demo {
-  constructor () {
+  constructor (world) {
     this.rooms = {}
     this.items = {}
     this.bots = {}
@@ -15,10 +15,15 @@ class Demo {
     this.currentQuest = null
     this.dialogueBot = null
     this.carried = new Set()
+    this.world = world
   }
 
   run () {
     this.spawn()
+    this.render()
+  }
+
+  stop () {
   }
 
   update (action, entity, place) {
@@ -27,20 +32,13 @@ class Demo {
     })
   }
 
-  render (store) {
+  render () {
     if (_.isNull(this.currentRoom)) {
       return;
     }
-    store.hide('room')
-    store.hide('places')
-    store.hide('entity')
-    store.hide('dialogue')
-    store.hide('inventory')
-    store.hide('quests')
-    store.hide('quest')
-    store.set('room', 'current', this.currentRoom)
     let room = this.rooms[this.currentRoom]
-    room.render(store, this)
+    room.render(this.world, this)
+    return
     if (!_.isNull(this.currentItem)) {
       store.set('entity', 'current', this.currentItem)
       store.set('entity', 'type', 'item')

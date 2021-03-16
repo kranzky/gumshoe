@@ -13,7 +13,7 @@ class Remote {
     this.world = world
   }
 
-  run (world) {
+  run () {
     this.world.status.setTime(1)
     this.world.status.setPlayer('Whatever Dude')
     this.world.status.setLocation('Some Place Dude')

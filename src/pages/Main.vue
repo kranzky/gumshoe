@@ -90,7 +90,7 @@ export default {
   },
   mounted () {
     this.$q.dark.set(true)
-    this.selectScenario('remote')
+    this.selectScenario('demo')
   },
   beforeDestroy () {
     this.$game.stop()

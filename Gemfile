@@ -10,7 +10,7 @@ gem 'punk', '~> 0.4.1'
 # gem 'punk', path: '../punk'
 
 # Procedural Generation
-gem "weld", git: "https://github.com/jackcasey/weld.git", branch: "main"
+# gem "weld", git: "https://github.com/jackcasey/weld.git", branch: "main"
 
 # Development
 group :development do
@@ -22,7 +22,7 @@ group :test do
   gem 'capybara', '~> 3.35.3'
   gem 'coveralls_reborn', '~> 0.20.0'
   gem 'factory_bot', '~> 6.1.0'
-  gem 'faker', '~> 2.16.0'
+  gem 'faker', '~> 2.17.0'
   gem 'rack-test', '~> 1.1.0'
   gem 'rspec', '~> 3.10.0'
   gem 'rspec-its', '~> 1.3.0'

@@ -9,22 +9,25 @@ class Room extends Entity {
     this.bots = new Set()
   }
 
-  render (store, world) {
-    store.clear('room')
-    store.set("room", "title", this.name)
+  render (world, scenario) {
+    world.room._clear()
+    world.room.setTitle(this.name)
     _.each(this.log, (text) => {
-      store.add("roomItems", { text: text })
+      world.room.addText(text)
     })
-    store.clear('people')
-    store.clear('places')
+    world.location.people._clear()
     _.each([...this.bots], (id) => {
-      let bot = world.bots[id]
-      store.add("people", { id: id, name: bot.name, type: 'bot', icon: 'face', seen: bot.seen })
+      let bot = scenario.bots[id]
+      world.location.people.append({ id: id, name: bot.name, type: 'bot', icon: 'face', seen: bot.seen })
     })
+    world.location.places._clear()
     _.each([...this.exits], (id) => {
-      let exit = world.rooms[id]
-      store.add("places", { id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
+      let exit = scenario.rooms[id]
+      world.location.places.append({ id: id, name: exit.name, type: 'room', icon: 'place', seen: exit.seen })
     })
+    world.room.show()
+    world.location.places.show()
+    world.location.people.show()
   }
 
   addLog (text) {
