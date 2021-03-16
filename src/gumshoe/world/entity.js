@@ -40,6 +40,14 @@ class Entity {
     this.$store.dispatch(`${this.component}/removeItem`, id)
   }
 
+  _appendOption (data) {
+    this.$store.dispatch(`${this.component}/appendOption`, data)
+  }
+
+  _removeOption (data) {
+    this.$store.dispatch(`${this.component}/removeOption`, data)
+  }
+
   _appendChoice (data) {
     this.$store.dispatch(`${this.component}/appendChoice`, data)
   }

@@ -18,7 +18,7 @@
           </p>
         </transition-group>
         <choices label="What now?" icon="construction" module="entityChoices" />
-        <options :id="current" />
+        <options module="entityOptions" />
       </div>
     </transition>
   </div>

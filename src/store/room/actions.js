@@ -1,6 +1,7 @@
 export function clear(store) {
   this.commit("room/clear")
   this.dispatch("roomItems/clear")
+  this.dispatch("roomOptions/clear")
   this.dispatch("roomChoices/clear")
 }
 
@@ -28,6 +29,10 @@ export function title(store, title) {
 
 export function appendItem(store, data) {
   this.dispatch("roomItems/append", data)
+}
+
+export function appendOption(store, data) {
+  this.dispatch("roomOptions/append", data)
 }
 
 export function appendChoice(store, data) {

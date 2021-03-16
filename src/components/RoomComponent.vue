@@ -12,7 +12,7 @@
           </p>
         </transition-group>
         <choices label="What now?" icon="keyboard_arrow_right" module="roomChoices" />
-        <options :id="current" showPeople="true" showPlaces="true" />
+        <options module="roomOptions" />
       </div>
     </transition>
   </div>

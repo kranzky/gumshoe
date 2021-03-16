@@ -6,7 +6,7 @@
           <message v-for="message in messages" :message="message" :key="message.id" />
         </transition-group>
         <choices label="What now?" icon="textsms" module="dialogueChoices" style="margin-top: 18px;" />
-        <options :id="current" />
+        <options module="dialogueOptions" />
       </div>
     </transition>
   </div>

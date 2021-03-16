@@ -28,6 +28,13 @@ class Dialogue extends Entity {
     this._appendItem({ heading: true, label: `${this.botName} has disconnected.` })
   }
 
+  addOption (type, name, action, data) {
+    if (_.isUndefined(data)) {
+      data = {}
+    }
+    this._appendOption({ type: type, name: name, action: action, data: data })
+  }
+
   addChoice (text, action, data) {
     if (_.isUndefined(data)) {
       data = {}

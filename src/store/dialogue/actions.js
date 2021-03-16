@@ -1,6 +1,7 @@
 export function clear(store) {
   this.commit("dialogue/clear")
   this.dispatch("dialogueItems/clear")
+  this.dispatch("dialogueOptions/clear")
   this.dispatch("dialogueChoices/clear")
 }
 
@@ -24,6 +25,10 @@ export function seen(store) {
 
 export function appendItem(store, data) {
   this.dispatch("dialogueItems/append", data)
+}
+
+export function appendOption(store, data) {
+  this.dispatch("dialogueOptions/append", data)
 }
 
 export function appendChoice(store, data) {

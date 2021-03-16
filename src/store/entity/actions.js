@@ -1,6 +1,7 @@
 export function clear(store) {
   this.commit("entity/clear")
   this.dispatch("entityItems/clear")
+  this.dispatch("entityOptions/clear")
   this.dispatch("entityChoices/clear")
   this.dispatch("entityCrumbs/clear")
 }
@@ -37,6 +38,10 @@ export function subtitle(store, subtitle) {
 
 export function appendItem(store, data) {
   this.dispatch("entityItems/append", data)
+}
+
+export function appendOption(store, data) {
+  this.dispatch("entityOptions/append", data)
 }
 
 export function appendChoice(store, data) {

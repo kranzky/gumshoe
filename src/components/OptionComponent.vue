@@ -1,29 +1,15 @@
 <template>
   <q-list dense>
-    <q-item clickable v-for="object in objects" :key="object.id" @click="nav(object)" class="text-secondary">
-      <q-item-section avatar>
-        <q-icon name="label" />
-      </q-item-section>
-      <q-item-section>
-        <q-item-label>{{ object.name }}</q-item-label>
-      </q-item-section>
-    </q-item>
-    <q-item clickable v-for="npc in npcs" :key="npc.id" @click="nav(npc)" class="text-secondary">
-      <q-item-section avatar>
-        <q-icon name="face" />
-      </q-item-section>
-      <q-item-section>
-        <q-item-label>{{ npc.name }}</q-item-label>
-      </q-item-section>
-    </q-item>
-    <q-item clickable v-for="exit in exits" :key="exit.id" @click="nav(exit)" class="text-secondary">
-      <q-item-section avatar>
-        <q-icon name="place" />
-      </q-item-section>
-      <q-item-section>
-        <q-item-label>{{ exit.name }}</q-item-label>
-      </q-item-section>
-    </q-item>
+    <transition-group appear enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
+      <q-item clickable v-for="option in options" :key="option.id" @click="action(option)" class="text-secondary">
+        <q-item-section avatar>
+          <q-icon :name="icon(option)" />
+        </q-item-section>
+        <q-item-section>
+          <q-item-label>{{ option.name }}</q-item-label>
+        </q-item-section>
+      </q-item>
+    </transition-group>
   </q-list>
 </template>
 
@@ -31,41 +17,40 @@
 export default {
   name: "OptionComponent",
   props: {
-    id: {
-      default: null
-    },
-    showPeople: {
-      default: false
-    },
-    showPlaces: {
-      default: false
+    module: {
+      default: "undefined"
     }
   },
   methods: {
-    nav (crumb) {
-      this.$root.$emit("game:view", crumb)
+    action (option) {
+      // TODO
+      console.log(option.action)
+    },
+    icon (option) {
+      if (!_.isUndefined(option.icon)) {
+        return option.icon
+      }
+      switch (option.type) {
+        case 'room':
+          return 'place'
+        case 'bot':
+          return 'face'
+        case 'item':
+          return 'label'
+        case 'task':
+          if (option.complete) {
+            return 'assignment_turned_in'
+          } else {
+            return 'assignment_late'
+          }
+      }
+      return 'help'
     }
   },
   computed: {
-    objects: {
+    options: {
       get () {
-        return _.filter(this.$store.state.objects.items, (item) => {
-          return item.id != this.id
-        })
-      }
-    },
-    npcs: {
-      get () {
-        return _.filter(this.$store.state.people.items, (item) => {
-          return this.showPeople && item.id != this.id
-        })
-      }
-    },
-    exits: {
-      get () {
-        return _.filter(this.$store.state.places.items, (item) => {
-          return this.showPlaces && item.id != this.id
-        })
+        return this.$store.state[this.module].items
       }
     }
   }
