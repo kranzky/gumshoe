@@ -40,11 +40,10 @@ class Demo {
   }
 
   render () {
-    if (_.isNull(this.currentRoom)) {
-      return;
+    if (!_.isNull(this.currentRoom)) {
+      let room = this.rooms[this.currentRoom]
+      room.render(this.world, this)
     }
-    let room = this.rooms[this.currentRoom]
-    room.render(this.world, this)
     return
     if (!_.isNull(this.currentItem)) {
       store.set('entity', 'current', this.currentItem)
@@ -228,18 +227,18 @@ class Demo {
   }
 
   spawn () {
-    let office = this.addRoom("Jason's Office", "You stand in a cosy home office, sunlight streaming in the window.")
-    let hallway = this.addRoom("Hallway", "You find yourself in a long, black-tiled hallway running the length of the house.")
+    let office = this.addRoom("Jason's Office", "A cosy home office, sunlight streaming in the window.")
+    let hallway = this.addRoom("Hallway", "A long, black-tiled hallway running the length of the house.")
     let entrance = this.addRoom("Entrance", "A small alcove near the bright red front door.")
     let courtyard = this.addRoom("Courtyard", "A tiny outdoor space, flanked by glass and a red-brick wall, utterly devoid of plants.")
     let bathroom = this.addRoom("Bathroom", "A tiled area for ablutions.")
     let dining = this.addRoom("Dining Room", "The main space for eating meals.")
     let music = this.addRoom("Music Room", "A sunken room dedicated to the pursuit of music. And lego.")
-    let hobbit = this.addRoom("Hobbit Hole", "You squeeze yourself into a narrow opening.")
+    let hobbit = this.addRoom("Hobbit Hole", "A narrow opening.")
     let kitchen = this.addRoom("Kitchen", "The mess of a recent meal pollutes all surfaces here.")
     let pantry = this.addRoom("Pantry", "Wire mesh drawers filled to overflowing with various tins and other items.")
     let family = this.addRoom("Family Room", "The main space for relaxing and entertainment.")
-    let alfresco = this.addRoom("Alfresco Area", "You are now outside the house.")
+    let alfresco = this.addRoom("Alfresco Area", "An outside undercover area.")
     office.addExit(hallway)
     entrance.addExit(hallway)
     courtyard.addExit(hallway)
