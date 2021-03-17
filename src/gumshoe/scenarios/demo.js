@@ -20,6 +20,7 @@ class Demo {
 
   run () {
     this.spawn()
+    // TODO: display status items
     this.render()
   }
 
@@ -27,10 +28,12 @@ class Demo {
   }
 
   move (id, data) {
-    this.look(id)
-    let room = this.rooms[this.currentRoom]
+    let room = this.rooms[id]
+    room.seen = true
     this.world.notify(`You go to the "${room.name}"`)
+    // TODO: set location name in status
     room.render(this.world, this)
+    this.currentRoom = id
   }
 
   update (action, entity, place) {
@@ -44,24 +47,19 @@ class Demo {
       let room = this.rooms[this.currentRoom]
       room.render(this.world, this)
     }
-    return
     if (!_.isNull(this.currentItem)) {
-      store.set('entity', 'current', this.currentItem)
-      store.set('entity', 'type', 'item')
       let item = this.items[this.currentItem]
-      item.render(store, this)
+      item.render(this.world, this)
     }
     if (!_.isNull(this.currentBot)) {
-      store.set('entity', 'current', this.currentBot)
-      store.set('entity', 'type', 'bot')
       let bot = this.bots[this.currentBot]
-      bot.render_entity(store, this)
+      bot.render_entity(this.world, this)
     }
     if (!_.isNull(this.dialogueBot)) {
-      store.set('dialogue', 'current', this.dialogueBot)
       let bot = this.bots[this.dialogueBot]
-      bot.render(store, this)
+      bot.render(this.world, this)
     }
+    return
     store.clear('inventory')
     _.each([...this.carried], (item) => {
       store.add("inventory", { id: item.id, name: item.name, detail: item.detail, type: 'item', icon: 'label', seen: item.seen })
@@ -155,11 +153,6 @@ class Demo {
   addQuest (name, description, success, trigger, tasks) {
     let quest = new Quest(name, description, success, trigger, tasks)
     this.quests[quest.id] = quest
-  }
-
-  look (roomId) {
-    this.currentRoom = roomId
-    this.rooms[roomId].seen = true
   }
 
   examine (itemId) {
@@ -340,7 +333,8 @@ class Demo {
         }
       }
     ])
-    this.look(office.id)
+    this.currentRoom = office.id
+    office.seen = true
   }
 }
 

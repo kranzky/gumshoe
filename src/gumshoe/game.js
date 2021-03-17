@@ -71,6 +71,7 @@ class Game {
       return
     }
     // TODO: advance time
+
     this.scenario[payload.action](payload.id, payload.data)
   }
 
