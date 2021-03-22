@@ -36,6 +36,33 @@ class Demo {
     this.currentRoom = id
   }
 
+  examine (id, data) {
+    let item = this.items[id]
+    item.seen = true
+    this.world.notify(`You examine the "${item.name}"`)
+    item.render(this.world, this)
+    this.currentItem = id
+    this.currentBot = null
+  }
+
+  approach (id, data) {
+    let bot = this.bots[id]
+    bot.seen = true
+    this.world.notify(`You approach "${bot.name}"`)
+    bot.render(this.world, this)
+    this.currentItem = null
+    this.currentBot = id
+  }
+
+  talk (id, data) {
+    this.dialogueBot = this.currentBot
+    let bot = this.bots[this.dialogueBot]
+    let room = this.rooms[this.currentRoom]
+    bot.seen = true
+    this.update('talk', bot, room)
+  }
+
+
   update (action, entity, place) {
     _.each(this.quests, (quest) => {
       quest.update(action, entity, place)
@@ -87,25 +114,6 @@ class Demo {
     }, 500)
   }
 
-  renderItems (type, store) {
-    store.hide('objects')
-    if (type == 'room' && !_.isNull(this.currentRoom)) {
-      let room = this.rooms[this.currentRoom]
-      room.renderItems(store, this)
-    }
-    if (type == 'entity' && !_.isNull(this.currentItem)) {
-      let item = this.items[this.currentItem]
-      item.renderItems(store, this)
-    }
-    if (type == 'dialogue' && !_.isNull(this.currentBot)) {
-      let bot = this.bots[this.currentBot]
-      bot.renderItems(store, this)
-    }
-    setTimeout(() => {
-      store.show('objects')
-    }, 500)
-  }
-
   getEntity (type, id) {
     if (type == 'room') {
       return this.rooms[id]
@@ -153,31 +161,6 @@ class Demo {
   addQuest (name, description, success, trigger, tasks) {
     let quest = new Quest(name, description, success, trigger, tasks)
     this.quests[quest.id] = quest
-  }
-
-  examine (itemId) {
-    this.currentBot = null
-    this.currentItem = itemId
-    this.items[itemId].seen = true
-  }
-
-  examine_bot (botId) {
-    this.currentItem = null
-    this.currentBot = botId
-    this.bots[botId].seen = true
-  }
-
-  examine_quest (questId) {
-    this.currentQuest = questId
-    this.quests[questId].seen = true
-  }
-
-  talk () {
-    this.dialogueBot = this.currentBot
-    let bot = this.bots[this.dialogueBot]
-    let room = this.rooms[this.currentRoom]
-    bot.seen = true
-    this.update('talk', bot, room)
   }
 
   take () {

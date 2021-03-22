@@ -1,3 +1,4 @@
+import { _ } from 'core-js'
 import Entity from './entity.js'
 
 class Room extends Entity {
@@ -17,17 +18,20 @@ class Room extends Entity {
     })
     world.location.people._clear()
     _.each([...this.bots], (id) => {
-      let bot = scenario.bots[id]
-      world.location.people.append({ id: id, name: bot.name, type: 'bot', seen: bot.seen, action: 'talk' })
+      this._append(world.location.people, scenario.bots[id], { action: 'approach' })
     })
     world.location.places._clear()
     _.each([...this.exits], (id) => {
-      let exit = scenario.rooms[id]
-      world.location.places.append({ id: id, name: exit.name, type: 'room', seen: exit.seen, action: 'move' })
+      this._append(world.location.places, scenario.rooms[id], { action: 'move' })
+    })
+    world.location.objects._clear()
+    _.each([...this.items], (id) => {
+      this._append(world.location.objects, scenario.items[id], { action: 'examine' })
     })
     world.room.show()
     world.location.places.show()
     world.location.people.show()
+    world.location.objects.show()
   }
 
   addLog (text) {
@@ -64,6 +68,10 @@ class Room extends Entity {
 
   getBots () {
     return this.bots
+  }
+
+  _append (list, data, options) {
+    list.append(_.merge(options || {}, _.pick(data, ['id', 'name', 'type', 'seen'])))
   }
 }
 

@@ -36,7 +36,6 @@ class Game {
 //  this.$root.$on("game:wait", this.wait)
     this.$root.$on("game:action", this.action)
 //  this.$root.$on("game:view", this.view)
-//  this.$root.$on("game:items", this.items)
 //  this.$root.$on("game:mark", this.mark)
 //  this.$root.$on("game:unmark", this.unmark)
   }
@@ -44,7 +43,6 @@ class Game {
   stopEvents () {
 //  this.$root.$off("game:unmark", this.unmark)
 //  this.$root.$off("game:mark", this.mark)
-//  this.$root.$off("game:items", this.items)
 //  this.$root.$off("game:view", this.view)
     this.$root.$off("game:action", this.action)
 //  this.$root.$off("game:wait", this.wait)
@@ -71,7 +69,6 @@ class Game {
       return
     }
     // TODO: advance time
-
     this.scenario[payload.action](payload.id, payload.data)
   }
 
@@ -102,14 +99,6 @@ class Game {
       setTimeout(() => { this.store.set("page", "tab", 'quest') }, 500)
       this.update()
     }
-  }
-
-  items (type) {
-    if (this != window.game) {
-      window.game.items(type)
-      return
-    }
-    this.renderItems(type)
   }
 
   mark (type, id) {
@@ -160,13 +149,8 @@ class Game {
     this.stats.render(this.store)
   }
 
-  // TODO: implement render and renderItems here
   render () {
     this.scenario.render(this.store)
-  }
-
-  renderItems (type) {
-    this.scenario.renderItems(type, this.store)
   }
 
   spawn () {
