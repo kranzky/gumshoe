@@ -36,6 +36,11 @@ class World {
   notify (message) {
     this.$root.$emit("punk:info", message)
   }
+
+  focus (payload) {
+    // TODO: broadcast event to do that thing
+    console.log(payload)
+  }
 }
 
 export default World

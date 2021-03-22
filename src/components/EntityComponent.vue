@@ -6,7 +6,7 @@
           <template v-slot:separator>
             <q-icon size="1.2em" name="arrow_forward" />
           </template>
-          <q-breadcrumbs-el v-for="crumb in crumbs" :key="crumb.id" :label="crumb.name" @click="nav(crumb)" class="cursor-pointer" />
+          <q-breadcrumbs-el v-for="crumb in crumbs" :key="crumb.id" :label="crumb.name" @click="action(crumb)" class="cursor-pointer" />
         </q-breadcrumbs>
         <div>
           <q-btn class="glossy float-right" round outline color="secondary" :icon="bookmarked ? 'bookmark' : 'bookmark_border'" size="sm" @click="toggleBookmark" />
@@ -25,8 +25,11 @@
 </template>
 
 <script>
+import { ActionMixin } from "../mixins/ActionMixin.js"
+
 export default {
   name: "EntityComponent",
+  mixins: [ActionMixin],
   computed: {
     title: {
       get () {
@@ -71,9 +74,6 @@ export default {
     }
   },
   methods: {
-    nav (crumb) {
-      this.$root.$emit("game:view", crumb)
-    },
     toggleBookmark () {
       if (!this.bookmarked) {
         this.$root.$emit("game:mark", this.type, this.current)

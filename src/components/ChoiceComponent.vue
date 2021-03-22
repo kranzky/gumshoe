@@ -24,12 +24,11 @@
 </template>
 
 <script>
-import { IconMixin } from "../mixins/IconMixin.js"
 import { ActionMixin } from "../mixins/ActionMixin.js"
 
 export default {
   name: "ChoiceComponent",
-  mixins: [IconMixin, ActionMixin],
+  mixins: [ActionMixin],
   props: {
     label: {
       default: "Untitled"

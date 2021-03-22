@@ -15,34 +15,41 @@ class Item extends Entity {
     this.detail = null
   }
 
-  addCrumb (crumbs, store, world) {
+  addCrumb (crumbs, scenario) {
     if (!_.isNull(this.containerId)) {
-      crumbs.push(world.items[this.containerId])
-      _.last(crumbs).addCrumb(crumbs, store, world)
+      crumbs.push(scenario.items[this.containerId])
+      _.last(crumbs).addCrumb(crumbs, scenario)
     } else {
       if (!_.isNull(this.botId)) {
-        crumbs.push(world.bots[this.botId])
-        crumbs.push(world.rooms[_.last(crumbs).roomId])
+        crumbs.push(scenario.bots[this.botId])
+        crumbs.push(scenario.rooms[_.last(crumbs).roomId])
       } else if (this.carried) {
-        crumbs.push(world.rooms[world.currentRoom])
+        crumbs.push(scenario.rooms[scenario.currentRoom])
       } else {
-        crumbs.push(world.rooms[this.roomId])
+        crumbs.push(scenario.rooms[this.roomId])
       }
     }
   }
 
-  render (store, world) {
-    store.clear('entity')
-    store.set("entity", "title", this.name)
-    store.set("entity", "subtitle", this.detail)
+  render (world, scenario) {
+    world.item._clear()
+    world.item.setType('item')
+    world.item.setTitle(this.name)
+    world.item.setSubtitle(this.detail)
     let crumbs = [this]
-    this.addCrumb(crumbs, store, world)
+    this.addCrumb(crumbs, scenario)
     _.each(_.reverse(crumbs), (item) => {
-      store.add("entityCrumbs", { id: item.id, name: item.name, type: item.type })
+      world.item.addCrumb(item, this._action(item.type))
     })
     _.each(this.log, (text) => {
-      store.add("entityItems", { text: text })
+      world.item.addText(text)
     })
+    _.each([...this.items], (id) => {
+      let item = scenario.items[id]
+      world.item.addOption(item, 'examine')
+    })
+    world.item.show()
+    return
     if (!this.carried) {
       if (this.canGet) {
         store.add("entityChoices", { text: `Take the ${this.name}`, action: 'take' })
@@ -85,6 +92,18 @@ class Item extends Entity {
 
   getItems () {
     return this.items
+  }
+
+  _action (type) {
+    switch (type) {
+      case 'room':
+        return 'move'
+      case 'item':
+        return 'examine'
+      case 'bot':
+        return 'approach'
+    }
+    return 'unknown'
   }
 }
 

@@ -1,5 +1,6 @@
 import World from './world.js'
 import Scenario from './scenario.js'
+import { _ } from 'core-js'
 
 class Game {
   constructor (root, store) {
@@ -68,7 +69,14 @@ class Game {
       window.game.action(payload)
       return
     }
-    console.debug(payload)
+    if (payload.action == 'focus') {
+      this.world.focus(payload.data)  
+      return
+    }
+    if (!_.isFunction(this.scenario[payload.action])) {
+      this.$root.$emit("punk:error", `No handler for "${payload.action}"`)
+      return
+    }
     // TODO: advance time
     this.scenario[payload.action](payload.id, payload.data)
   }

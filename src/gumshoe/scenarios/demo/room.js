@@ -28,9 +28,9 @@ class Room extends Entity {
     _.each([...this.items], (id) => {
       this._append(world.location.objects, scenario.items[id], { action: 'examine' })
     })
-    world.room.addOption('room', 'Two Exits', 'world', { view: 'exits' })
-    world.room.addOption('bot', 'One NPC', 'world', { view: 'bots' })
-    world.room.addOption('item', 'Three Items', 'world', { view: 'objects' })
+    world.room.addOption('room', 'Two Exits', 'focus', { view: 'exits' })
+    world.room.addOption('bot', 'One NPC', 'focus', { view: 'bots' })
+    world.room.addOption('item', 'Three Items', 'focus', { view: 'objects' })
     world.room.addChoice('Wait...', 'wait', {})
     world.room.show()
     world.location.places.show()

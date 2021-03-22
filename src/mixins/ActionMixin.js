@@ -11,6 +11,7 @@ export const ActionMixin = {
         action: item.action,
         data: item.data || {}
       }
+      console.log(payload)
       this.$root.$emit("game:action", payload)
     }
   }
