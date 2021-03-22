@@ -115,8 +115,6 @@ class Game {
       window.game.mark(type, id)
       return
     }
-    console.log(type)
-    console.log(id)
     let entity = this.getEntity(type, id)
     let icon = null
     if (type == 'room') {
