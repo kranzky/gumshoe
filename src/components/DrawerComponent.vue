@@ -27,8 +27,12 @@
 </template>
 
 <script>
+import { IconMixin } from "../mixins/IconMixin.js"
+import { ActionMixin } from "../mixins/ActionMixin.js"
+
 export default {
   name: "DrawerComponent",
+  mixins: [IconMixin, ActionMixin],
   props: {
     title: {
       default: "Untitled"
@@ -50,39 +54,6 @@ export default {
       get () {
         return this.$store.state[this.module].visible
       }
-    }
-  },
-  methods: {
-    action (item) {
-      if (!_.isUndefined(item.action)) {
-        let payload = {
-          id: item.id,
-          action: item.action,
-          data: item.data || {}
-        }
-        this.$root.$emit("game:action", payload)
-      }
-    },
-    icon (item) {
-      // TODO: dry
-      if (!_.isUndefined(item.icon)) {
-        return item.icon
-      }
-      switch (item.type) {
-        case 'room':
-          return 'place'
-        case 'bot':
-          return 'face'
-        case 'item':
-          return 'label'
-        case 'task':
-          if (item.complete) {
-            return 'assignment_turned_in'
-          } else {
-            return 'assignment_late'
-          }
-      }
-      return 'help'
     }
   }
 }

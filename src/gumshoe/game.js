@@ -68,6 +68,7 @@ class Game {
       window.game.action(payload)
       return
     }
+    console.debug(payload)
     // TODO: advance time
     this.scenario[payload.action](payload.id, payload.data)
   }

@@ -14,37 +14,15 @@
 </template>
 
 <script>
+import { IconMixin } from "../mixins/IconMixin.js"
+import { ActionMixin } from "../mixins/ActionMixin.js"
+
 export default {
   name: "OptionComponent",
+  mixins: [IconMixin, ActionMixin],
   props: {
     module: {
       default: "undefined"
-    }
-  },
-  methods: {
-    action (option) {
-      // TODO
-    },
-    icon (option) {
-      // TODO: dry
-      if (!_.isUndefined(option.icon)) {
-        return option.icon
-      }
-      switch (option.type) {
-        case 'room':
-          return 'place'
-        case 'bot':
-          return 'face'
-        case 'item':
-          return 'label'
-        case 'task':
-          if (option.complete) {
-            return 'assignment_turned_in'
-          } else {
-            return 'assignment_late'
-          }
-      }
-      return 'help'
     }
   },
   computed: {

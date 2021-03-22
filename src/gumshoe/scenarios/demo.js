@@ -62,7 +62,6 @@ class Demo {
     this.update('talk', bot, room)
   }
 
-
   update (action, entity, place) {
     _.each(this.quests, (quest) => {
       quest.update(action, entity, place)

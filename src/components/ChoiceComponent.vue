@@ -8,7 +8,7 @@
         </q-badge>
         <q-menu content-class="bg-primary" transition-show="fade" transition-hide="fade" @show="seen">
           <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="select(choice.id)">
+            <q-item clickable v-close-popup v-for="choice in choices" :key="choice.id" @click="action(choice)">
               <q-item-section>
                 {{ choice.text }}
               </q-item-section>
@@ -24,8 +24,12 @@
 </template>
 
 <script>
+import { IconMixin } from "../mixins/IconMixin.js"
+import { ActionMixin } from "../mixins/ActionMixin.js"
+
 export default {
   name: "ChoiceComponent",
+  mixins: [IconMixin, ActionMixin],
   props: {
     label: {
       default: "Untitled"
@@ -65,15 +69,6 @@ export default {
     }
   },
   methods: {
-    find (id) {
-      return _.find(this.choices, (choice) => { return choice.id == id })
-    },
-    select (id) {
-      let choice = this.find(id)
-      if (choice.action) {
-        this.$root.$emit("game:action", choice.action)
-      }
-    },
     seen () {
       this.$store.dispatch(`${this.module}/seen`)
     }
