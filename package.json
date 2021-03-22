@@ -17,6 +17,8 @@
     "core-js": "^3.9.1",
     "dexie": "^3.0.3",
     "lodash": "^4.17.21",
+    "pluralize": "^8.0.0",
+    "number-to-words": "^1.2.4",
     "quasar": "^1.15.5"
   },
   "devDependencies": {

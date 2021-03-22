@@ -38,8 +38,7 @@ class World {
   }
 
   focus (payload) {
-    // TODO: broadcast event to do that thing
-    console.log(payload)
+    // TODO: broadcast event to show the requested UI element
   }
 }
 

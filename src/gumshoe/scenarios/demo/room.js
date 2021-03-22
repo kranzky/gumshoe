@@ -1,3 +1,5 @@
+import pluralize from 'pluralize'
+import converter from 'number-to-words'
 import { _ } from 'core-js'
 import Entity from './entity.js'
 
@@ -28,9 +30,9 @@ class Room extends Entity {
     _.each([...this.items], (id) => {
       this._append(world.location.objects, scenario.items[id], { action: 'examine' })
     })
-    world.room.addOption('room', 'Two Exits', 'focus', { view: 'exits' })
-    world.room.addOption('bot', 'One NPC', 'focus', { view: 'bots' })
-    world.room.addOption('item', 'Three Items', 'focus', { view: 'objects' })
+    this._renderOption(world, this.exits, 'room', 'Exit')
+    this._renderOption(world, this.bots, 'bot', 'NPC')
+    this._renderOption(world, this.items, 'item', 'Item')
     world.room.addChoice('Wait...', 'wait', {})
     world.room.show()
     world.location.places.show()
@@ -76,6 +78,14 @@ class Room extends Entity {
 
   _append (list, data, options) {
     list.append(_.merge(options || {}, _.pick(data, ['id', 'name', 'type', 'seen'])))
+  }
+
+  _renderOption (world, list, icon, name, data) {
+    if (list.size == 0) {
+      return
+    }
+    name = `${_.capitalize(converter.toWords(list.size))} ${pluralize(name, list.size)}`
+    world.room.addOption(icon, name, 'focus', data)
   }
 }
 

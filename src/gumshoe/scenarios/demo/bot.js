@@ -15,14 +15,20 @@ class Bot extends Entity {
     store.add("dialogueItems", { name: this.name, text: this.lines, time: "Fri 17:38" })
   }
 
-  render_entity (store, world) {
-    store.clear('entity')
-    store.set("entity", "title", this.name)
-    let room = world.rooms[this.roomId]
-    store.add("entityCrumbs", { id: room.id, name: room.name, type: room.type })
-    store.add("entityCrumbs", { id: this.id, name: this.name, type: this.type })
-    store.add("entityItems", { text: this.description })
-    store.add("entityChoices", { text: `Talk to ${this.name}`, action: 'talk' })
+  // TODO: detect if we are already displaying this entity
+  render_entity (world, scenario) {
+    world.item._clear()
+    world.item.setType('bot')
+    world.item.setTitle(this.name)
+    let room = scenario.rooms[this.roomId]
+    world.item.addCrumb({ id: room.id, name: room.name, type: room.type }, 'move')
+    world.item.addCrumb({ id: this.id, name: this.name, type: this.type })
+    world.item.addText(this.description)
+    _.each([...this.items], (id) => {
+      let item = scenario.items[id]
+      world.item.addOption(item, 'examine')
+    })
+    world.item.show()
   }
 
   setRoomId (id) {

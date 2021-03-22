@@ -49,7 +49,7 @@ class Demo {
     let bot = this.bots[id]
     bot.seen = true
     this.world.notify(`You approach "${bot.name}"`)
-    bot.render(this.world, this)
+    bot.render_entity(this.world, this)
     this.currentItem = null
     this.currentBot = id
   }
