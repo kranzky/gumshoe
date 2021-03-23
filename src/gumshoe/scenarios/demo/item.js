@@ -34,6 +34,7 @@ class Item extends Entity {
   render (world, scenario) {
     world.item._clear()
     world.item.setType('item')
+    world.item.setId(this.id)
     world.item.setTitle(this.name)
     world.item.setSubtitle(this.detail)
     let crumbs = [this]

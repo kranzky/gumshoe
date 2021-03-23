@@ -14,6 +14,8 @@ class Room extends Entity {
 
   render (world, scenario) {
     world.room._clear()
+    world.room.setType('room')
+    world.room.setId(this.id)
     world.room.setTitle(this.name)
     _.each(this.log, (text) => {
       world.room.addText(text)

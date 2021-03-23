@@ -27,6 +27,18 @@ class Demo {
   stop () {
   }
 
+  getEntity (type, id) {
+    switch (type) {
+      case 'room':
+        return this.rooms[id].toEntity()
+      case 'item':
+        return this.items[id].toEntity()
+      case 'bot':
+        return this.bots[id].toEntity()
+    }
+    return null
+  }
+
   move (id, data) {
     let room = this.rooms[id]
     room.seen = true
@@ -111,19 +123,6 @@ class Demo {
       store.show('quests')
       store.show('quest')
     }, 500)
-  }
-
-  getEntity (type, id) {
-    if (type == 'room') {
-      return this.rooms[id]
-    }
-    if (type == 'item') {
-      return this.items[id]
-    }
-    if (type == 'bot') {
-      return this.bots[id]
-    }
-    return null
   }
 
   addRoom (name, description) {

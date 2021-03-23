@@ -23,6 +23,14 @@ export function seen(store) {
   this.dispatch("roomItems/seen")
 }
 
+export function type(store, type) {
+  this.commit("room/type", type)
+}
+
+export function id(store, id) {
+  this.commit("room/id", id)
+}
+
 export function title(store, title) {
   this.commit("room/title", title)
 }
@@ -38,8 +46,3 @@ export function appendOption(store, data) {
 export function appendChoice(store, data) {
   this.dispatch("roomChoices/append", data)
 }
-
-export function current(store, id) {
-  this.commit("room/current", id)
-}
-

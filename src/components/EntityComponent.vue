@@ -57,9 +57,9 @@ export default {
         return this.$store.state.entityCrumbs.items
       }
     },
-    current: {
+    id: {
       get () {
-        return this.$store.state.entity.current
+        return this.$store.state.entity.id
       }
     },
     type: {
@@ -76,9 +76,9 @@ export default {
   methods: {
     toggleBookmark () {
       if (!this.bookmarked) {
-        this.$root.$emit("game:mark", this.type, this.current)
+        this.$root.$emit("game:mark", this.type, this.id)
       } else {
-        this.$root.$emit("game:unmark", this.type, this.current)
+        this.$root.$emit("game:unmark", this.type, this.id)
       }
     }
   },

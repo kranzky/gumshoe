@@ -28,6 +28,10 @@ export function type(store, type) {
   this.commit("entity/type", type)
 }
 
+export function id(store, id) {
+  this.commit("entity/id", id)
+}
+
 export function title(store, title) {
   this.commit("entity/title", title)
 }
@@ -50,8 +54,4 @@ export function appendChoice(store, data) {
 
 export function appendCrumb(store, data) {
   this.dispatch("entityCrumbs/append", data)
-}
-
-export function current(store, id) {
-  this.commit("entity/current", id)
 }

@@ -49,12 +49,14 @@ class Game {
 //  this.$root.$off("game:wait", this.wait)
   }
 
+  // TODO: delete
   update (type) {
     this.wait()
     this.render()
     this.renderItems(type)
   }
 
+  // TODO: delete
   wait () {
     if (this != window.game) {
       window.game.wait()
@@ -77,10 +79,11 @@ class Game {
       this.$root.$emit("punk:error", `No handler for "${payload.action}"`)
       return
     }
-    // TODO: advance time
+    // TODO: advance time, like wait above
     this.scenario[payload.action](payload.id, payload.data)
   }
 
+  // TODO: delete
   view (item) {
     if (this != window.game) {
       window.game.view(item)
@@ -115,18 +118,8 @@ class Game {
       window.game.mark(type, id)
       return
     }
-    let entity = this.getEntity(type, id)
-    let icon = null
-    if (type == 'room') {
-      icon = 'place'
-    }
-    if (type == 'item') {
-      icon = 'label'
-    }
-    if (type == 'bot') {
-      icon = 'face'
-    }
-    this.store.add('notebook', { id: entity.id, name: entity.name, type: entity.type, seen: entity.seen, icon: icon })
+    let item = this.scenario.getEntity(type, id)
+    this.world.player.notebook.append(this.scenario.getEntity(type, id))
   }
 
   unmark (type, id) {
@@ -134,8 +127,7 @@ class Game {
       window.game.unmark(type, id)
       return
     }
-    let entity = this.getEntity(type, id)
-    this.store.del('notebook', id)
+    this.world.player.notebook.remove(id)
   }
 
   triggerQuestStart (name, description) {

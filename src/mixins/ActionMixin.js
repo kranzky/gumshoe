@@ -11,6 +11,8 @@ export const ActionMixin = {
         action: item.action,
         data: item.data || {}
       }
+      // TODO: also perhaps a default UI action for the component
+      //       (e.g. selecting a different tab)
       this.$root.$emit("game:action", payload)
     }
   }

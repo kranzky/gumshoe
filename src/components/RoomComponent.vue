@@ -37,9 +37,9 @@ export default {
         return this.$store.getters['room/contentVisible']
       }
     },
-    current: {
+    id: {
       get () {
-        return this.$store.state.room.current
+        return this.$store.state.room.id
       }
     },
     bookmarked: {
@@ -51,9 +51,9 @@ export default {
   methods: {
     toggleBookmark () {
       if (!this.bookmarked) {
-        this.$root.$emit("game:mark", 'room', this.current)
+        this.$root.$emit("game:mark", 'room', this.id)
       } else {
-        this.$root.$emit("game:unmark", 'room', this.current)
+        this.$root.$emit("game:unmark", 'room', this.id)
       }
     }
   },

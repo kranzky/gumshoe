@@ -18,6 +18,15 @@ class Entity {
       store.add("objects", { id: id, name: item.name, type: 'item', icon: 'label', seen: item.seen })
     })
   }
+
+  toEntity () {
+    return {
+      id: this.id,
+      type: this.type,
+      name: this.name,
+      seen: this.seen
+    }
+  }
 }
 
 export default Entity

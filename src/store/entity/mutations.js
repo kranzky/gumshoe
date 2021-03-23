@@ -26,10 +26,10 @@ export function subtitle(state, subtitle) {
   state.subtitle = subtitle
 }
 
-export function current(state, id) {
-  state.current = id
-}
-
 export function type(state, type) {
   state.type = type
+}
+
+export function id(state, id) {
+  state.id = id
 }

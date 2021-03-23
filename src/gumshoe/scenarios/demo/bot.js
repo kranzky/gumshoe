@@ -19,6 +19,7 @@ class Bot extends Entity {
   render_entity (world, scenario) {
     world.item._clear()
     world.item.setType('bot')
+    world.item.setId(this.id)
     world.item.setTitle(this.name)
     let room = scenario.rooms[this.roomId]
     world.item.addCrumb({ id: room.id, name: room.name, type: room.type }, 'move')

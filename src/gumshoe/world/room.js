@@ -5,6 +5,14 @@ class Room extends Entity {
     this._show()
   }
 
+  setType (type) {
+    this._set('type', type)
+  }
+
+  setId (id) {
+    this._set('id', id)
+  }
+
   setTitle (title) {
     this._set('title', title)
   }

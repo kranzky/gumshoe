@@ -4,5 +4,6 @@ export default {
   title: null,
   subtitle: null,
   current: null,
-  type: null
+  type: null,
+  id: null
 }
